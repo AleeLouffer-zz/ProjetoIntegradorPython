@@ -8,6 +8,10 @@ class TesteFuncionario(unittest.TestCase):
         funcionario = Funcionario("Fulano")
         assert funcionario.nome == "Fulano"
 
+    def test_Nao_deve_criar_um_funcionario_sem_nome(self):
+        with self.assertRaises(ValueError):
+            funcionario = Funcionario("")
+
 
 if __name__ == '__main__':
     unittest.main()
