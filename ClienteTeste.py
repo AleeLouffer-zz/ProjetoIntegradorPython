@@ -2,7 +2,7 @@ import unittest
 from Cliente import * 
 
 
-class TesteFuncionario(unittest.TestCase):
+class TesteCliente(unittest.TestCase):
    def test_deve_criar_um_cliente(self):
     cliente = Cliente("kaique","12345")
   
