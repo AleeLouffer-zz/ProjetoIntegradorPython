@@ -12,6 +12,5 @@ class Funcionario:
         return self.__Nome
 
     @nome.setter
-    def nome(self, novo):
-        self.__Nome = novo
-        return self.__Nome
+    def nome(self, nome):
+        self.__Nome = nome
