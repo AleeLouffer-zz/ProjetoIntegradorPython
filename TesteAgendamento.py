@@ -3,7 +3,7 @@ from datetime import datetime
 from Agendamento import Agendamento
 #Adicionar importação das classes de Servico, ....
 
-class TesteFuncionario(unittest.TestCase):
+class TesteAgendamento(unittest.TestCase):
   def test_Deve_criar_um_agendamento(self):
     servico = Servico()
     funcionario = Funcionario()
