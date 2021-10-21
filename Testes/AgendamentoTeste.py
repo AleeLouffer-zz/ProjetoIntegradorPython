@@ -1,9 +1,9 @@
 import unittest
 from datetime import datetime
-from Agendamento import Agendamento
+from Models.Agendamento import Agendamento
 #Adicionar importação das classes de Servico, ....
 
-class TesteAgendamento(unittest.TestCase):
+class AgendamentoTeste(unittest.TestCase):
   def test_Deve_criar_um_agendamento(self):
     servico = Servico()
     funcionario = Funcionario()
