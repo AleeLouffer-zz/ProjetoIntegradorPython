@@ -10,8 +10,7 @@ class Empresa:
         self.__email = email
         self.__senha = senha
 
-    @staticmethod
-    def Validar(nomeFantasia, razaoSocial, cnpj, email, senha):
+    def Validar(self, nomeFantasia, razaoSocial, cnpj, email, senha):
         if not nomeFantasia or nomeFantasia.isspace():
             raise ValueError("Nome Fantasia da empresa vazio ou nulo")
         if not razaoSocial or razaoSocial.isspace():
