@@ -1,3 +1,6 @@
+from validate_docbr import CNPJ
+
+
 class Empresa:
     def __init__(self, nomeFantasia, razaoSocial, cnpj, agendamentos, servicos, funcionarios, email, senha):
         self.Validar(nomeFantasia, razaoSocial, cnpj, agendamentos, servicos, funcionarios, email, senha)
@@ -15,7 +18,7 @@ class Empresa:
             raise ValueError("Nome Fantasia da empresa invalido")
         if not razaoSocial or razaoSocial.isspace():
             raise ValueError("Razao Social da empresa invalida")
-        if not __cnpj__ or __cnpj__.isspace():
+        if not __cnpj__ or __cnpj__.isspace() or not CNPJ().validate(__cnpj__):
             raise ValueError("CNPJ da empresa invalido")
         if not agendamentos:
             raise ValueError("Agendamento Invalido")

@@ -4,10 +4,10 @@ from Models.Empresa import Empresa
 
 class TesteEmpresa(unittest.TestCase):
     def test_Deve_criar_uma_empresa(self):
-        empresa = Empresa("Dell", "DellComputadores", "21032193210", "agendamentos", "servicos", "funcionarios", "Dell@gmail.com", "EuOdeioPython")
+        empresa = Empresa("Dell", "DellComputadores", "06868396000170", "agendamentos", "servicos", "funcionarios", "Dell@gmail.com", "EuOdeioPython")
         assert empresa.nomeFantasia == "Dell"
         assert empresa.razaoSocial == "DellComputadores"
-        assert empresa.cnpj == "21032193210"
+        assert empresa.cnpj == "06868396000170"
         assert empresa.agendamentos == "agendamentos"
         assert empresa.servicos == "servicos"
         assert empresa.funcionarios == "funcionarios"
@@ -23,9 +23,14 @@ class TesteEmpresa(unittest.TestCase):
         with self.assertRaises(ValueError):
             empresa = Empresa("Dell", None, "21032193210", "agendamentos", "servicos", "funcionarios", "Dell@gmail.com", "EuOdeioPython")
 
-    def test_Nao_deve_criar_uma_empresa_com_CNPJ_invalido(self):
+    def test_Nao_deve_criar_uma_empresa_com_CNPJ_vazio(self):
         with self.assertRaises(ValueError):
             empresa = Empresa("Dell", "DellComputadores", None, "agendamentos", "servicos", "funcionarios", "Dell@gmail.com", "EuOdeioPython")
+
+    def test_Nao_deve_criar_uma_empresa_com_CNPJ_invalido(self):
+        with self.assertRaises(ValueError):
+            empresa = Empresa("Dell", "DellComputadores", "89493000117", "agendamentos", "servicos", "funcionarios", "Dell@gmail.com", "EuOdeioPython")
+
 
     def test_Nao_deve_criar_uma_empresa_com_agendamentos_invalidos(self):
         with self.assertRaises(ValueError):
