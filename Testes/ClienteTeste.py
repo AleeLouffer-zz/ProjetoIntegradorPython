@@ -1,8 +1,8 @@
 import unittest
-from Cliente import * 
+from Models.Cliente import *
 
 
-class TesteCliente(unittest.TestCase):
+class ClienteTeste(unittest.TestCase):
    def test_deve_criar_um_cliente(self):
     cliente = Cliente("kaique","12345")
   
