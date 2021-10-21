@@ -11,7 +11,7 @@ class Agendamento:
     if not servico:
         raise ValueError("O agendamento precisa de um serviço válido")
     if not funcionario:
-        raise ValueError("O agendamento precisa de um funcionario válido")
+        raise ValueError("O agendamento precisa de um funcionário válido")
     if not cliente:
         raise ValueError("O agendamento precisa de um cliente válido")
     if not empresa:
