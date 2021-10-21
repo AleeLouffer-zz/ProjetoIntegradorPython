@@ -11,7 +11,6 @@ class Cliente:
   @Nome.setter
   def Nome(self, novoNome):
     self.__Nome = novoNome
-    return self.__Nome
 
   @property
   def Telefone(self):
@@ -20,7 +19,6 @@ class Cliente:
   @Telefone.setter
   def Telefone(self, novoTelefone):
     self.__Telefone = novoTelefone
-    return self.__Telefone
   
   def validar(self, nome, telefone):
     if not nome or nome.isspace():
