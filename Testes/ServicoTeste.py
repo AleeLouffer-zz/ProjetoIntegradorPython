@@ -1,8 +1,8 @@
-from Servico import Servico
+from Models.Servico import Servico
 import unittest
 
 
-class TesteServico(unittest.TestCase):
+class ServicoTeste(unittest.TestCase):
   def test_Deve_criar_um_servico_valido(self):
     nome = "Corte de Cabelo"
     descricao = "Corte Simples"
