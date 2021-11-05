@@ -1,0 +1,37 @@
+.editar__agendamento--titulo{
+    font-size: 28px;
+    margin: 16px 0;
+}
+
+.agendamento__cabecalho{
+    position: relative;
+}
+
+.agendamento__cabecalho--edicoes{
+    position: absolute;
+    right: 0;
+}
+
+
+.editar-cliente, .editar-funcionario, .editar-servico, .editar-horario{
+    width: 80%;
+    margin: 0 auto;
+    max-width: 200px;
+    background-color: transparent;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 1px solid black;
+    margin: 16px 0;
+    padding: 16px;
+}
+
+.editar-cliente::placeholder{
+    color:black;
+}
+
+@media screen and (min-width: 780px){
+    .editar-cliente, .editar-funcionario, .editar-servico, .editar-horario{
+        display: block;
+    }
+}

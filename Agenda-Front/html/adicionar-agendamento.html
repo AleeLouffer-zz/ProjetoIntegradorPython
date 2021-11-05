@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/globalcss.css">
+	<link rel="stylesheet" type="text/css" href="/css/agenda.css">
+    <link rel="stylesheet" href="/css/adicionar-agendamento.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <title>Adicionar agendamento</title>
+</head>
+<body>
+    <div class="corpo">
+        <h1 class="adicionar_agendamento-titulo">Adicionar agendamento</h1>
+        <div class="novo_agendamento">
+            <input class="adicionar_agendamento-input" type="text" placeholder="Cliente">
+            <input class="adicionar_agendamento-input" type="date">
+            <input class="adicionar_agendamento-input" type="time">
+            <select class="adicionar_agendamento-input" name="funcionario" id="select-func">
+                <option value="funcionario--valor">Funcionário</option>
+            </select>
+            <select class="adicionar_agendamento-input" id="select-serv">
+                <option value="servico--valor">Serviço</option>
+            </select>
+            <button class="adicionar_agendamento-botao" id="add-agend">Adicionar</button>
+        </div>
+	</div>
+</body>
+</html>
