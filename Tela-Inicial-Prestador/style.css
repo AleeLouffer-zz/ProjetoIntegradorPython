@@ -1,0 +1,193 @@
+body {
+    background: whitesmoke;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+.corpo {
+    width: 60%;
+    margin: 200px auto;
+    background: white;
+    border-radius: 30px;
+    padding: 30px;
+    box-shadow: 2px 2px 40px gray;
+}
+
+.infos {
+    display: flex;
+    position: relative;
+    margin-bottom: 100px;
+}
+
+
+    .infos button {
+        background: none;
+        border: 0;
+        cursor: pointer;
+    }
+
+    .infos-img {
+        margin: 10px;
+    }
+
+img {
+    max-width:200px;
+    max-height:150px;
+    width: auto;
+    height: auto;
+    border-radius: 100%;
+}
+
+.infos-txt {
+    margin: 30px;
+    display: inline-block;
+    
+}
+
+@media screen and (max-width: 640px){
+    .infos {
+        display: block;
+    }
+}
+
+    .infos-txt h1 {
+        font-size: 45px;
+        font-weight: bold;
+    }
+
+    .infos-txt p {
+        font-size: 25px;
+    }
+
+    .infos-txt :nth-child(3) {
+        margin-top: 10px;
+    }
+
+.botao {
+    position: absolute;
+    margin: 30px;
+    top: 0;
+    right: 0;
+}
+
+.func-cadastrados, .serv-cadastrados{
+    margin-top: 50px;
+}
+
+    .func-cadastrados h1, .serv-cadastrados h1, .fotos h1 {
+        font-size: 25px;
+        margin-left: 5px;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+    
+.caixa-func-cadastrados, .caixa-serv-cadastrados{
+    background: whitesmoke;
+    padding: 15px;
+    border-radius: 20px;
+    box-shadow: 0px 2px 5px gray;
+    transition: width 2s;
+}
+    .caixa-func-cadastrados button, .caixa-serv-cadastrados button{
+        padding: 5px 20px;
+        border: 0;
+        background: white;
+        border-radius: 100px;
+        margin: 5px 5px;
+        cursor: pointer;
+        font-size: 20px;
+        box-shadow: 0px 2px 5px gray;
+        transition: 1s;
+    }
+
+        .caixa-func-cadastrados button:hover {
+            transform: scale(1.05);
+        }
+
+        .caixa-serv-cadastrados button:hover {
+            transform: scale(1.05);
+        }
+
+        .imgs-fotos .mais {
+        position: absolute;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        top: 70%;
+        left: calc(50% - 40px);
+        padding: 0;
+    }
+
+.adiciona-servico, .funcionario-informacoes {
+    margin-left:0;
+    -webkit-transition: 1s;
+    transition: 1s;
+    display: flex;
+    margin: 5px;
+    border-radius: 5px;
+}
+
+.col-1{
+    width: 100%;
+    margin: 5px auto;   
+    display: block
+}
+.col-2{
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+}
+    .col-2 .btn-confirmar{
+        text-align: center;
+        width: 100%;
+        bottom: 2px;
+        padding: 5px 15px;
+        border: 0;
+        font-size: 15px;
+        color: white;
+        background-color: rgb(26, 51, 196);
+        border-radius: 100px;
+        cursor: pointer;
+        box-shadow: none;
+        transition: none;
+    }
+
+.col-3{
+    position: relative;
+    width: 100%;
+    margin: 0;
+    display: block;
+}
+    
+    .col-3 .btn-confirmar{
+        text-align: center;
+        width: 100%;
+        bottom: 2px;
+        padding: 5px 15px;
+        border: 0;
+        font-size: 15px;
+        color: white;
+        background-color: rgb(26, 51, 196);
+        border-radius: 100px;
+        cursor: pointer;
+        box-shadow: none;
+        transition: none;
+    }
+
+input{
+    padding: 5px;
+    border-radius: 10px;
+    font-size: 15px;
+    border: 1px solid gray;
+}
+.col-1 .valor{
+    width: 10%;
+}
+.col-2 .descricao{
+    padding: 20px;
+    width: 70%;
+}
+.opcoes select {
+    border-radius: 150px;
+    margin-top: 15px;
+}
