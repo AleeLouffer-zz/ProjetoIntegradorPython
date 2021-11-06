@@ -1,0 +1,79 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Corpo pi</title>
+        <link rel="stylesheet" type="text/css" href="adicionar.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200&display=swap" rel="stylesheet">
+    </head>
+    
+    <body>
+        <div class="corpo">
+            <header>
+                <h1> Contas a Receber </h1>
+            </header>
+            <form action="">
+                <div class="informacoes-gerais">
+                    <div class="informacoes-emissao">
+                        <h1> Informações Gerais </h1>
+                        <input type="text" class="data-emissao" placeholder="Data de Emissão">
+                    </div>      
+                    <input type="text" class="informacoes-gerais-input-text" placeholder="Servico">
+                    <input type="text" class="informacoes-gerais-input-text" placeholder="Cliente">
+                    <select class="informacoes-gerais-funcionario">
+                        <option value="status"> Funcionário </option>
+                        <option value="status"> Cleide </option>
+                        <option value="Pendente"> Peggy </option>
+                        <option value="Quitado"> Ravona </option>
+                    </select>
+                </div>
+                <div class="informacoes-pagamento">
+                    <h1> Informações de Pagamento </h1>
+                    <div class="flex-row-item">
+                        <select class="informacoes-pagamento-forma-de-pagamento">
+                            <option value="Pendente"> Forma de pagamento </option>
+                            <option value="Pendente"> Cartão de Crédito </option>
+                            <option value="Quitado"> Cartão de Débito </option>
+                            <option value="status"> A Vista </option>
+                            <option value="Quitado"> Boleto </option>
+                            <option value="Quitado"> Pix </option>
+                        </select>
+                        <input type="text" class="informacoes-pagamento-input-text" placeholder="Valor">
+                    </div>
+                    <div class="container-datas flex-row-item">
+                        <div class="data data-pagamento">
+                            <label for="data-inicio"> Data de pagamento: </label>
+                            <input id="data-inicio" type="date">
+                        </div>
+                        <div class="data data-vencimento">
+                            <label for="data-fim"> Data de Vencimento: </label>
+                            <input id="data-fim" type="date">
+                        </div>
+                    </div>
+                    <div class="informacoes-pagamento-adicionais flex-row-item">
+                        <input type="text" class="informacoes-pagamento-input-text" placeholder="Desconto">
+                        <input type="text" class="informacoes-pagamento-input-text" placeholder="Juros">
+                    </div>
+                    
+                    <div class="informacoes-pagamento-pago">
+                        <label for="pago"> Pago </label>
+                        <label id="pago" class="switch">
+                            <input type="checkbox">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="botoes">
+                    <button class="botao btn-adicionar" type="submit"> Adicionar </button>
+                    <button class="botao btn-cancelar" type="submit"> Cancelar </button>
+                </div>
+            </form>
+            
+        </div>
+            
+    </body>
+
+</html>
