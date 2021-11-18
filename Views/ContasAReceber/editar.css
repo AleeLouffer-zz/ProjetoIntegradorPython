@@ -3,7 +3,7 @@
     --cinza-claro: #E5E5E5;
     --verde: #46B93C;
     --vermelho: #F83A3A;
-    --fonte-Source-Sans-Pro: 'Source Sans Pro', sans-serif;
+    --fonte-Source-Sans-Pro: 'Helvetica', sans-serif;
 }
 
 body {
@@ -16,6 +16,10 @@ body {
     margin: 40px auto;
     padding: 10px;
     font-family: var(--fonte-Source-Sans-Pro);
+}
+
+input::placeholder{
+    color:black;
 }
 
 body .corpo h1{
@@ -31,16 +35,13 @@ body .corpo h1{
 
 .data-emissao{
     font-family: var(--fonte-Source-Sans-Pro);
-    background-color: var(--cor-fundo);
-
-    border: 1px solid var(--cinza-claro);
     border-radius: 5px;
-
-    min-width: 120px;
-    max-width: 120px;
-    height: 30px;
-
-    padding-left: 14px;
+    padding: 8px;
+}
+.data-emissao p{
+    font-size: 16px;
+    margin: 0px;
+    font-weight: bold;
 }
 
 .informacoes-emissao{
@@ -237,6 +238,7 @@ input:checked + .slider:before {
     }
     .informacoes-gerais-input-text, .informacoes-gerais-funcionario {
         min-width: 600px;
+        margin-right:0;
     }
 
     .flex-row-item{
@@ -244,7 +246,6 @@ input:checked + .slider:before {
         flex-direction: row;
         justify-content: space-between;
         min-width: 680px;
-        margin-right: 10px;
     }
 
     .informacoes-pagamento-input-text, .informacoes-pagamento-forma-de-pagamento {
@@ -255,13 +256,18 @@ input:checked + .slider:before {
     .container-datas{
         min-width: 400px;
     }
+    
+    .sem-margem{
+        margin-right: 0px;
+    }
 
     .data{
-        margin-right: 5px;
         min-width: 322px;
         width: 100%;
     }
-
+    .data-pagamento{
+        margin-right: 5px;
+    }
     .botoes{
         display: flex;
         flex-direction: row;
