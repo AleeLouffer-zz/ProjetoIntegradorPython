@@ -1,7 +1,7 @@
 :root {
     --cor-fundo: whitesmoke;
     --cinza-claro: #E5E5E5;
-    --fonte-Source-Sans-Pro: 'Source Sans Pro', sans-serif
+    --fonte-Source-Sans-Pro: 'Helvetica Neue', sans-serif;
 }
 
 body {
@@ -31,7 +31,9 @@ body .corpo h1{
     margin-bottom: 8px;
     min-width: 400px;
 }
-
+.campo-pesquisa ::placeholder{
+    color:black;
+}
 .campo-pesquisa, .container-linha1 input{
     background-color: var(--cinza-claro);
     min-width: 180px;
@@ -67,14 +69,14 @@ body .corpo h1{
     text-decoration: none;
     font-weight: bold;
     font-size: 10px;
-    color: blue;
+    color: #3071c7;
     margin: 2px;
 }
 
 .btn-relatorio{
     font-weight: bold;
     font-size: 10px;
-    color: red;
+    color: #b62d2d;
     margin: 2px;
 }
 
@@ -135,6 +137,8 @@ section .total h3 {
 section .total p{
     padding-right: 5px;
     margin: 5px;
+    font-size: 16px;
+    font-weight: bold;
 }
 
 details{
@@ -160,6 +164,7 @@ details > summary::-webkit-details-marker{
 
 .servico-e-valor p {
     font-size: 20px;
+    font-weight: bold;
 }
 
 .servico-editar-icone{
@@ -182,15 +187,21 @@ details > summary::-webkit-details-marker{
     margin-bottom: 20px;
     padding: 5px;
     font-size: 12px;
-    width: 3rem;
+    width: 3.5rem;
     text-align: center;
 }
 
 .status-quitado{
-    background-color: #46B93C;
+    background-color: #3c8f34;
+}
+.recebidas{
+    color: #3071c7;
+}
+.a-receber{
+    color: #b62d2d;
 }
 .status-pendente{
-    background-color: #F83A3A;
+    background-color: #b62d2d;
 }
 
 .servico-paragrafo, .servico-cabecalho h1{
@@ -230,7 +241,9 @@ details > summary::-webkit-details-marker{
         background-color: white;
         cursor: pointer;
         margin-bottom: 5px;
+        font-size: 12px;
     }
+
     .linha-opcoes{
         display: flex;
         align-items: center;
@@ -240,5 +253,17 @@ details > summary::-webkit-details-marker{
     }
     .linha-opcoes .container-datas, .linha-opcoes .filtros{
         min-width: 200px;
+    }
+    .section-total{
+        display: flex;
+        align-items: center;
+       
+    }
+    section .total{
+        min-width: 270px;
+    }
+
+    .total h3 {
+        padding-right: 20px;
     }
 }
