@@ -3,7 +3,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Corpo pi</title>
+        <title> Contas a Receber - Adicionar </title>
         <link rel="stylesheet" type="text/css" href="adicionar.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,9 +19,11 @@
                 <div class="informacoes-gerais">
                     <div class="informacoes-emissao">
                         <h1> Informações Gerais </h1>
-                        <input type="text" class="data-emissao" placeholder="Data de Emissão">
+                        <div class="data-emissao">
+                            <p>Data de Emissão: 18/11/2021</p>
+                        </div>
                     </div>      
-                    <input type="text" class="informacoes-gerais-input-text" placeholder="Servico">
+                    <input type="text" class="informacoes-gerais-input-text" placeholder="Serviço">
                     <input type="text" class="informacoes-gerais-input-text" placeholder="Cliente">
                     <select class="informacoes-gerais-funcionario">
                         <option value="status"> Funcionário </option>
@@ -34,28 +36,28 @@
                     <h1> Informações de Pagamento </h1>
                     <div class="flex-row-item">
                         <select class="informacoes-pagamento-forma-de-pagamento">
-                            <option value="Pendente"> Forma de pagamento </option>
+                            <option value="Pendente"> Forma de Pagamento </option>
                             <option value="Pendente"> Cartão de Crédito </option>
                             <option value="Quitado"> Cartão de Débito </option>
-                            <option value="status"> A Vista </option>
+                            <option value="status"> À Vista </option>
                             <option value="Quitado"> Boleto </option>
                             <option value="Quitado"> Pix </option>
                         </select>
-                        <input type="text" class="informacoes-pagamento-input-text" placeholder="Valor">
+                        <input type="text" class="informacoes-pagamento-input-text sem-margem" placeholder="Valor">
                     </div>
                     <div class="container-datas flex-row-item">
                         <div class="data data-pagamento">
-                            <label for="data-inicio"> Data de pagamento: </label>
+                            <label for="data-inicio"> Data de Pagamento: </label>
                             <input id="data-inicio" type="date">
                         </div>
-                        <div class="data data-vencimento">
+                        <div class="data data-vencimento sem-margem">
                             <label for="data-fim"> Data de Vencimento: </label>
                             <input id="data-fim" type="date">
                         </div>
                     </div>
                     <div class="informacoes-pagamento-adicionais flex-row-item">
                         <input type="text" class="informacoes-pagamento-input-text" placeholder="Desconto">
-                        <input type="text" class="informacoes-pagamento-input-text" placeholder="Juros">
+                        <input type="text" class="informacoes-pagamento-input-text sem-margem" placeholder="Juros">
                     </div>
                     
                     <div class="informacoes-pagamento-pago">
