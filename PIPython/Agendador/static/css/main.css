@@ -1,0 +1,11 @@
+.input{
+    border: none;
+    background-color: var(--cinza-claro);
+    min-width: 40px;
+    font-family: var(--fonte-Source-Sans-Pro);
+}
+.label{
+    font-size: 14px;
+    padding-right: 4px;
+    padding-left: 2px;
+}

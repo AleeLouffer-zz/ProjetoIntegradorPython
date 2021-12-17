@@ -1,0 +1,39 @@
+.novo_agendamento{
+    display: flex;
+    flex-direction: column;
+}
+
+.adicionar_agendamento-titulo{
+    text-align: center;
+    font-size: 25px;
+}
+
+input{
+    width: 50%;
+    margin: 16px auto;
+    padding: 0;
+}
+
+select{
+    width: 50%;
+    margin: 16px auto;
+    height: 30px;
+}
+
+.adicionar_agendamento-botao{
+    margin: 0 auto;
+    color: white;
+    background-color: #46B93C;
+    padding: 8px;
+    border:0;
+    border-radius: 5px;
+}
+
+.adicionar_agendamento-input{
+    background-color: whitesmoke;
+    border: 1px solid whitesmoke;
+    width: 90%;
+	max-width: 350px;
+    border-radius: 5px;
+    height: 30px;
+}

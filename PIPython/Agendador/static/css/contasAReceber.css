@@ -1,0 +1,273 @@
+:root {
+    --cor-fundo: whitesmoke;
+    --cinza-claro: #E5E5E5;
+    font-family: 'Montserrat', sans-serif;
+}
+
+body {
+    background:  white;
+    font-family: 'Montserrat', sans-serif;
+}
+
+section{
+    font-family: 'Montserrat', sans-serif;
+}
+.corpo {
+    width: 90vw;
+    margin: 40px auto;
+    padding: 10px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+body .corpo h1{
+    font-size: 32px;
+    text-align: left;
+}
+
+.container-linha1, .container-datas, .filtros {
+    display: flex;
+    align-items: center;
+    margin: 5px;
+    margin-bottom: 8px;
+    min-width: 400px;
+}
+.campo-pesquisa ::placeholder{
+    color:black;
+}
+.campo-pesquisa, .container-linha1 input{
+    background-color: var(--cor-fundo);
+    min-width: 180px;
+    height: 25px;
+    border: none;
+    border-radius: 5px;
+    margin-right:10px; 
+    font-family: 'Montserrat', sans-serif;
+    height: 30px;
+}
+
+.campo-pesquisa{
+    border: 1px solid var(--cinza-claro);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 200px;
+}
+
+.campo-pesquisa svg{
+    width: 10px;
+    margin-left: 8px;
+    margin-right: 4px;
+}
+
+.container_botoes_finais{
+    border: none;
+    background-color: var(--cor-fundo);
+    cursor: pointer;
+    margin-bottom: 5px;
+}
+
+.btn-adicionar{
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 10px;
+    color: #3071c7;
+    margin: 2px;
+}
+
+.btn-relatorio{
+    font-weight: bold;
+    font-size: 10px;
+    color: #b62d2d;
+    margin: 2px;
+}
+
+.data{
+    border: 1px solid var(--cinza-claro);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--cor-fundo);
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.data label {
+    font-size: 14px;
+    padding-right: 4px;
+    padding-left: 2px;
+}
+
+.data input{
+    border: none;
+    background-color: var(--cor-fundo);
+    min-width: 40px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.inicio{
+    margin-right: 5px;
+}
+
+.status, .funcionario{
+    text-align: center;
+    background-color: var(--cor-fundo);
+    border: 1px solid var(--cinza-claro);
+    border-radius: 5px;
+    margin-right:10px;
+    margin-top: 2px;
+    height: 25px;
+    min-width: 100px;
+    height: 30px;
+}
+
+section .total{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 5px;
+    margin-bottom: 10px;
+    background-color: var(--cor-fundo);
+    border-radius: 5px;
+    min-width: 370px;
+    border: 1px solid var(--cinza-claro);
+}
+
+section .total h3 {
+    padding-left: 5px;
+    margin: 5px;
+    font-weight: normal;
+}
+
+section .total p{
+    padding-right: 5px;
+    margin: 5px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+details{
+    background-color: var(--cor-fundo);
+    padding: 8px;
+    border-radius: 5px;
+    min-width: 370px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+details > summary {
+    list-style: none;
+}
+
+details > summary::-webkit-details-marker{
+    display: none;
+}
+
+.servico-editar{
+    text-align: right;
+}
+
+.servico-e-valor p {
+    font-size: 20px;
+}
+
+.servico-editar-icone{
+    display: inline-block;
+}
+
+.servico-e-valor{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: -15px;
+    margin-bottom: -15px;
+}
+
+
+.status-quitado, .status-pendente{
+    border-radius: 8px;
+    margin: 5px;
+    margin-bottom: 20px;
+    padding: 5px;
+    font-size: 12px;
+    width: 3.5rem;
+    text-align: center;
+}
+
+.status-quitado{
+    background-color: #3c8f34;
+}
+.recebidas{
+    color: #3071c7;
+}
+.a-receber{
+    color: #b62d2d;
+}
+.status-pendente{
+    background-color: #b62d2d;
+}
+
+.servico-paragrafo, .servico-cabecalho h1{
+    margin: 5px;
+    font-weight: normal;
+}
+
+.pago-e-editar{
+    margin-top: -5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+@media screen and (min-width: 780px) {
+    .corpo {
+        max-width: 60vw;
+        min-width: 680px;
+        margin: 40px auto;
+        background: white;
+        border-radius: 30px;
+        padding: 30px;
+        box-shadow: 2px 2px 40px gray;
+    }
+
+    .container-datas, .filtros{
+        margin-top:0px;
+        margin-bottom:0px;
+        align-items: center;
+    }
+    .container-datas{
+        margin-left: 0px;
+    }
+
+    .container_botoes_finais{
+        border: none;
+        background-color: white;
+        cursor: pointer;
+        margin-bottom: 5px;
+        font-size: 12px;
+    }
+
+    .linha-opcoes{
+        display: flex;
+        align-items: center;
+        margin: 5px;
+        margin-bottom: 8px;
+        min-width: 400px;
+    }
+    .linha-opcoes .container-datas, .linha-opcoes .filtros{
+        min-width: 200px;
+    }
+    .section-total{
+        display: flex;
+        align-items: center;
+       
+    }
+    section .total{
+        min-width: 270px;
+    }
+
+    .total h3 {
+        padding-right: 20px;
+    }
+}
