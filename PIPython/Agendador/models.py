@@ -1,4 +1,5 @@
 from django.db import models
+from django import forms
 
 class Agendamento(models.Model):
     id = models.AutoField(primary_key=True)
@@ -17,10 +18,15 @@ class Cliente(models.Model):
 
 class Empresa(models.Model):      
     id = models.AutoField(primary_key=True)
-    razaoSocial = models.CharField(max_length=100)
-    cnpj = models.IntegerField(max_length=15)
+    razao_social = models.CharField(max_length=100, null=True)
+    nome_fantasia = models.CharField(max_length=100)
+    cnpj = models.IntegerField(unique=True)
     email = models.CharField(max_length=40)
     senha = models.CharField(max_length=20)
+
+    def salvar_no_banco(self, razao_social):
+        self.razao_social = razao_social
+        self.save()
 
 
 class Funcionario(models.Model):

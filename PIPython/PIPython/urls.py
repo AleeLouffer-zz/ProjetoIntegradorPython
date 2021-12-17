@@ -15,7 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from Agendador import views
 
 urlpatterns = [
+    path('agendador/criar_empresa/', views.criar_empresa, name="criar_empresa"),
     path('admin/', admin.site.urls),
 ]
