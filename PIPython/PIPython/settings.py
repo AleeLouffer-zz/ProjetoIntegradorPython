@@ -42,7 +42,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'Login.url'
+ROOT_URLCONF = 'PIPython.urls'
 
 TEMPLATES = [
     {

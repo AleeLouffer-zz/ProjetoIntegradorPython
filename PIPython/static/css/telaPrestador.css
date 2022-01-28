@@ -3,6 +3,11 @@ body {
     font-family: 'Source Sans Pro', sans-serif;
 }
 
+.empresa__email{
+    text-align: center;
+    font-size:16px;
+}
+
 .corpo {
     box-shadow: 2px 2px 40px grey;
     width: 60%;
