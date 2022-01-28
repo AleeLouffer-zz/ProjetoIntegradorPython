@@ -1,0 +1,25 @@
+{% extends 'index.html' %}
+
+{% block content %}
+	<div class="corpo">
+		<section class="data__agenda">
+			<label for="data__agenda--input" class="data__agenda--titulo">Selecione a data</label>
+			<input type="date" id="data__agenda--input">
+		</section>
+		<select id="funcionario">
+			<option value="func">Funcionario</option>
+		</select>
+		<a class="adicionar__agendamento" href="adicionar-agendamento.html" class="adicionar__agendamento">Adicionar agendamento</a>
+		<div class="agendamento">
+			<div class="agendamento__cabecalho">
+				<h1 class="horario">9:30</h1>
+				<a href="editar-agendamento.html" class="agendamento__cabecalho--editar"><img src="/Icones/editar.svg" alt="" class="agendamento__cabecalho--icone"></a>
+			</div>
+			<h2 class="servico">Corte de cabelo</h2>
+			<p class="cliente">Cleide</p>
+			<p class="funcionario">Funcionario: Ravona</p>
+			<button class="agendamento__deletar">Exlcuir agendamento</button>
+		</div>
+	</div>
+
+{% endblock %}

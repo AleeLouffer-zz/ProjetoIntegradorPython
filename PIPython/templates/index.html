@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale='1.0'">
+
+    <title>Agendador</title>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/globalcss.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/agenda.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/adicionar-agendamento.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/adicionar.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/editar.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/editar-agenamento.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/contasAReceber.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/telaPrestador.css' %}">
+
+
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    {% block content %} {% endblock %}
+
+    <script src="{% static 'js/telaPrestador.js' %}"></script>
+</body>
+</html>
