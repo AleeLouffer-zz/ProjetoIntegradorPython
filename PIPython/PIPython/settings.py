@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'Agendador',
     'Login',
+    'ContasAReceber',
 ]
 
 MIDDLEWARE = [
