@@ -3,20 +3,35 @@
 
 {% block content %}
 
+<form action="{% url 'agendador:adicionar_agendamento' %}" method="POST">
+    {% csrf_token %}
     <div class="corpo">
+        <input type="hidden" name="id_empresa" value="{{id_empresa}}">
         <h1 class="adicionar_agendamento-titulo">Adicionar agendamento</h1>
         <div class="novo_agendamento">
-            <input class="adicionar_agendamento-input" type="text" placeholder="Cliente">
-            <input class="adicionar_agendamento-input" type="date">
-            <input class="adicionar_agendamento-input" type="time">
-            <select class="adicionar_agendamento-input" name="funcionario" id="select-func">
-                <option value="funcionario--valor">Funcionário</option>
+            <select class="adicionar_agendamento-input" name="cliente" id="select-func" required>
+                <option value="None">Selecionar Cliente</option> <!-- adicionar verificacao se ele nao selecionar uma opcao-->
+                {% for cliente in clientes %}
+                <option value="{{cliente.id}}">{{cliente.nome}}</option>
+                {% endfor %}
             </select>
-            <select class="adicionar_agendamento-input" id="select-serv">
-                <option value="servico--valor">Serviço</option>
+            <input name="data_agendamento" class="adicionar_agendamento-input" type="date">
+            <input name="hora_agendamento" class="adicionar_agendamento-input" type="time">
+            <select class="adicionar_agendamento-input" name="funcionario" id="select-func" required>
+                <option value="None">Selecionar Funcionario</option> <!-- adicionar verificacao se ele nao selecionar uma opcao-->
+                {% for funcionario in funcionarios %}
+                <option value="{{funcionario.id}}">{{funcionario.nome}}</option>
+                {% endfor %}
             </select>
-            <button class="adicionar_agendamento-botao" id="add-agend">Adicionar</button>
+            <select class="adicionar_agendamento-input" name="servico" id="select-serv" required>
+                <option value="None">Selecionar Servico</option> <!-- adicionar verificacao se ele nao selecionar uma opcao-->
+                {% for servico in servicos %}
+                <option value="{{servico.id}}">{{servico.nome}}</option>
+                {% endfor %}
+            </select>
+            <button type="submit" class="adicionar_agendamento-botao" id="add-agend">Adicionar</button>
         </div>
 	</div>
+</form>
 
 {% endblock %}

@@ -6,18 +6,34 @@
 		<div class="agendamento">
 			<div class="agendamento__cabecalho">
 				<div class="agendamento__cabecalho--edicoes">
-					<a href="agenda.html" class="agendamento__cabecalho--confirmar"><img src="../icones/confirmar.svg" alt="" class="agendamento__cabecalho--icone"></a>
-                    <a href="agenda.html" class="agendamento__cabecalho--cancelar"><img src="/icones/cancelar.svg" alt="" class="agendamento__cabecalho--icone"></a>
+					<a href="agenda.html" class="agendamento__cabecalho--confirmar"><img src="/static/icones/confirmar.svg" alt="" class="agendamento__cabecalho--icone"></a>
+                    <a href="agenda.html" class="agendamento__cabecalho--cancelar"><img src="/static//icones/cancelar.svg" alt="" class="agendamento__cabecalho--icone"></a>
                 </div>
 			</div>
-			<input type="datetime-local" class="editar-horario">
-			<select class="editar-servico">
-				<option>Servico</option>
-			</select>
-			<input type="text" placeholder="Cliente" class="editar-cliente">
-			<select class="editar-funcionario">
-				<option>Funcionario</option>
-			</select>
+			<form action="{% url 'agendador:editar_agendamento' %}" method="POST">
+				{% csrf_token %}
+				<input type="hidden" name="id_agendamento" value="{{agendamento.id}}">
+				<input name="dataEHora" type="date" class="editar-horario" value="{{agendamento.dataEHora}}">
+				<select class="editar-servico" name="id_servico">
+					<option value="{{agendamento.servico.id}}">{{agendamento.servico.nome}}</option>
+					{% for servico in servicos %}
+						<option value="{{servico.id}}">{{servico.nome}}</option>
+					{% endfor %}
+				</select>
+				<select class="editar-servico" name="id_cliente"> <!-- alterar para editar cliente -->
+					<option value="{{agendamento.cliente.id}}">{{agendamento.cliente.nome}}</option>
+					{% for cliente in clientes %}
+						<option value="{{cliente.id}}">{{cliente.nome}}</option>
+					{% endfor %}
+				</select>
+				<select class="editar-funcionario" name="id_funcionario">
+					<option value="{{agendamento.funcionario.id}}">{{agendamento.funcionario.nome}}</option>
+					{% for funcionario in funcionarios %}
+						<option value="{{funcionario.id}}">{{funcionario.nome}}</option>
+					{% endfor %}
+				</select>
+				<button type="submit">Salvar Alteracoes</button> <!-- Arrumar isso -->
+			</form>
 		</div>
 	</div>
 {% endblock %}
