@@ -46,8 +46,30 @@ def editar_servico(requisicao):
     servico.nome = nome_servico
     servico.descricao = descricao_servico
     servico.preco = float(valor_servico)
+    
     servico.save()
 
     return redirect('tela_inicial_prestador', id_empresa = id_empresa)
 
+def criar_funcionario(requisicao):
+    id_empresa = requisicao.POST['id_empresa']
+    nome_funcionario = requisicao.POST['nome_funcionario']
 
+    empresa_a_adicionar = Empresa.objects.get(id=id_empresa)
+
+    Funcionario.objects.create(nome = nome_funcionario, empresa = empresa_a_adicionar)
+
+    return redirect('tela_inicial_prestador', id_empresa = id_empresa)
+
+
+def criar_servico(requisicao):
+    id_empresa = requisicao.POST['id_empresa']
+    nome_servico = requisicao.POST['nome_servico']
+    valor_servico = requisicao.POST['valor_servico']
+    descricao_servico = requisicao.POST['descricao_servico']
+
+    empresa_a_adicionar = Empresa.objects.get(id=id_empresa)
+
+    Servico.objects.create(nome = nome_servico, descricao = descricao_servico, preco = valor_servico, empresa = empresa_a_adicionar)
+
+    return redirect('tela_inicial_prestador', id_empresa = id_empresa)

@@ -40,14 +40,21 @@
       {% endfor%}
 
       <button onclick="ExibirCadastroFuncionario()" class="mais">+</button>
-      <form action="">
+      <form action="{% url 'criar_funcionario' %}" method="post">
+        {% csrf_token %}
         <div
           id="checkBoxFunc"
           style="display: none"
           class="funcionario-informacoes"
         >
           <div class="col-1">
-            <input type="text" class="Nome" placeholder="Nome Completo" />
+            <input
+            type="text"
+            name="id_empresa"
+            value="{{empresa.id}}"
+            hidden
+          />
+            <input type="text" name="nome_funcionario" class="Nome" placeholder="Nome Completo" />
             <button type="submit" class="btn-confirmar">Confirmar</button>
           </div>
         </div>
@@ -96,11 +103,13 @@
       {% endfor%}
 
       <button onclick="ExibirCadastroServico()" class="mais">+</button>
-      <form action="">
+      <form action="{%url 'criar_servico' %}" method="post">
+        {% csrf_token %}
         <div id="checkBoxServ" style="display: none" class="adiciona-servico">
           <div class="col-1">
-            <input type="text" placeholder="Nome do Serviço" />
+            <input name="nome_servico" type="text" placeholder="Nome do Serviço" />
             <input
+              name="valor_servico"
               type="text"
               cols="30"
               rows="5"
@@ -108,8 +117,14 @@
               placeholder="Valor"
             />
           </div>
+          <input
+          type="text"
+          name="id_empresa"
+          value="{{empresa.id}}"
+          hidden
+        />
           <div class="col-2">
-            <input type="text" class="descricao" placeholder="Descrição" />
+            <input name="descricao_servico" type="text" class="descricao" placeholder="Descrição" />
             <button type="submit" class="btn-confirmar">Confirmar</button>
           </div>
         </div>

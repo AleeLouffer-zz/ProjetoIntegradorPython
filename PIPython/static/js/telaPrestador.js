@@ -16,6 +16,7 @@ function ExibirCadastroServico() {
     x.style.display = "none";
   }
 }
+
 function ExibirEditarFuncionario(nomeFuncionario, idFuncionario) {
   document.getElementById("checkBoxFunc").style.display = "none";
   var boxEditFunc= document.getElementById("checkBoxFuncEdit"); 
