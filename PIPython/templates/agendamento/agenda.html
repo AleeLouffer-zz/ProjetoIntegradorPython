@@ -1,6 +1,6 @@
 {% extends 'index.html' %} {% block content %}
 <div class="corpo">
-  <form action="{% url 'agendador:tela_agenda' %}" method="POST">
+  <form action="{% url 'tela_agenda' %}" method="POST">
     {% csrf_token %}
     <section class="data__agenda">
       <label for="data__agenda--input" class="data__agenda--titulo">Selecione a data</label>
@@ -8,20 +8,21 @@
       <input type="hidden" name="id_empresa" value="{{id_empresa}}" />
     </section>
     <select id="funcionario" name="id_funcionario">
-      <option value="None" value="todos">Todos</option>
+      <option>Todos</option>
       {% for funcionario in funcionarios %}
       	<option value="{{funcionario.id}}">{{funcionario.nome}}</option>
       {% endfor %}
     </select>
     <button type="submit">Enviar</button>
   </form>
-  <form action="{% url 'agendador:tela_adicionar_agendamento' %}" method="POST">
+  <form action="{% url 'tela_adicionar_agendamento' %}" method="POST">
     {% csrf_token %}
     <input type="hidden" name="id_empresa" value="{{id_empresa}}" />
     <button type="submit" class="adicionar__agendamento">Adicionar Agendamento</button>
     <!-- <a type="submit" class="adicionar__agendamento">Adicionar agendamento</a> -->
   </form>
-  {% for agendamento in agendamentos %}
+  <div class="agendamentos">
+    {% for agendamento in agendamentos %}
     <div class="agendamento">
       <div class="agendamento__cabecalho">
         <h1 class="horario">{{agendamento.dataEHora}}</h1>
@@ -35,14 +36,16 @@
       <h2 class="servico">{{agendamento.servico.nome}}</h2>
       <p class="cliente">{{agendamento.cliente.nome}}</p>
       <p class="funcionario">{{agendamento.funcionario.nome}}</p>
-	  <form action="{% url 'agendador:verifica_botoes_agendamento' %}" method="POST">
+	  <form action="{% url 'verifica_botoes_agendamento' %}" method="POST">
 		{% csrf_token %}
       <button type="submit" name="excluir_agendamento" class="agendamento__deletar">Excluir agendamento</button>
 		  <input type="hidden" name="id_agendamento" value="{{agendamento.id}}">
 		  <input type="hidden" name="id_empresa" value="{{id_empresa}}">
 		  <button type="submit" name="editar_agendamento" class="agendamento__deletar">Editar Agendamento</button>
 	  </form>
+  </div>
   {% endfor %}
-</div>
+
+  </div>
 
 {% endblock %}

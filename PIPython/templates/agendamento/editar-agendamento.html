@@ -10,7 +10,7 @@
                     <a href="agenda.html" class="agendamento__cabecalho--cancelar"><img src="/static//icones/cancelar.svg" alt="" class="agendamento__cabecalho--icone"></a>
                 </div>
 			</div>
-			<form action="{% url 'agendador:editar_agendamento' %}" method="POST">
+			<form action="{% url 'editar_agendamento' %}" method="POST">
 				{% csrf_token %}
 				<input type="hidden" name="id_agendamento" value="{{agendamento.id}}">
 				<input name="dataEHora" type="date" class="editar-horario" value="{{agendamento.dataEHora}}">

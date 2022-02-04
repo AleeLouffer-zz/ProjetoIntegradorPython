@@ -3,7 +3,7 @@
 
 {% block content %}
 
-<form action="{% url 'agendador:adicionar_agendamento' %}" method="POST">
+<form action="{% url 'adicionar_agendamento' %}" method="POST">
     {% csrf_token %}
     <div class="corpo">
         <input type="hidden" name="id_empresa" value="{{id_empresa}}">

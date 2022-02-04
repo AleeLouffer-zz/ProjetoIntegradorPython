@@ -5,75 +5,44 @@ from django.http import HttpResponse, HttpResponseRedirect
 from datetime import date
 
 def tela_agenda(requisicao):
-    if requisicao.method == 'POST':
-        funcionarios = obter_funcionarios(requisicao, id_empresa)
-        id_empresa = requisicao.POST['id_empresa']
-        if 'data' not in requisicao.POST:
-            data = date.today()
-        else:
-            data = requisicao.POST['data']
-
-        agendamentos = obter_agendamentos(data)
-
-    else:
-        id_empresa = requisicao.GET['id_empresa']
+    id_empresa = requisicao.POST['id_empresa']
+    funcionarios = obter_funcionarios(requisicao, id_empresa)
+    
+    if 'data' not in requisicao.POST:
         data = date.today()
         agendamentos = obter_agendamentos(requisicao, id_empresa, data)
+        
+    else:
+        data = requisicao.POST['data']
+        agendamentos = list(obter_agendamentos(requisicao, id_empresa, data))
+    
+    resposta = make_resposta(id_empresa, data, agendamentos, funcionarios)
 
-        funcionarios = obter_funcionarios(requisicao, id_empresa)
+    if 'id_funcionario' in requisicao.POST:
+        funcionario = requisicao.POST['id_funcionario']
+        if funcionario != 'Todos':
+            funcionario = int(funcionario)
+            agendamentos_filtrados = filter(lambda x: x.funcionario.id == funcionario, agendamentos)
+            agendamentos = list(agendamentos_filtrados)
+            resposta = make_resposta(id_empresa, data, agendamentos, funcionarios)
 
+    return render(requisicao, '../templates/agendamento/agenda.html', resposta)
+
+def make_resposta(id_empresa, data, agendamentos, funcionarios):
     resposta = {
         'id_empresa': id_empresa,
         'data': data,
         'agendamentos': agendamentos,
         'funcionarios': funcionarios
     }
-
-    return render(requisicao, '../templates/agendamento/agenda.html', resposta)
+    return resposta
     
 def obter_agendamentos(requisicao, id_empresa, data):
-    return list(Agendamento.objects.filter(empresa=id_empresa).filter(dataEHora=data))
+    return Agendamento.objects.filter(empresa=id_empresa).filter(dataEHora=data)
 
 def obter_funcionarios(requisicao, id_empresa):
     return list(Funcionario.objects.filter(empresa=id_empresa))
 
-def filtrar_agendamentos(requisicao, id_empresa, data=None, id_funcionario=None):
-    if data == None or data == "":
-        if id_funcionario == None or id_funcionario == "":
-            agendamentos = Agendamento.objects.filter(empresa=id_empresa).filter(dataEHora=date.today()).filter(funcionario=id_funcionario)
-        else:
-            return HttpResponseRedirect(id_empresa)
-    
-    elif id_funcionario == None or id_funcionario == "":
-        if data != None:
-            agendamentos = Agendamento.objects.filter(empresa=id_empresa).filter(dataEHora=data)
-        else:
-            return HttpResponseRedirect(id_empresa)
-    else:
-        agendamentos = Agendamento.objects.filter(empresa=id_empresa).filter(dataEHora=data).filter(funcionario=id_funcionario)
-
-    return agendamentos
-    
-def filtros_agenda(requisicao):
-    id_empresa = requisicao.POST['id_empresa']
-    data = requisicao.POST['data']
-    if "None" in requisicao.POST['id_funcionario']:
-        id_funcionario = None
-    else:
-        id_funcionario = requisicao.POST['id_funcionario']
-
-    agendamentos = filtrar_agendamentos(requisicao, id_empresa, data, id_funcionario)
-
-    funcionarios = obter_funcionarios(requisicao, id_empresa)
-
-    agendamentos_e_funcionarios = {
-        'id_empresa': id_empresa,
-        'data': data,
-        'agendamentos': list(agendamentos),
-        'funcionarios': list(funcionarios)
-    }
-
-    return render(requisicao, '../templates/agendamento/agenda.html', agendamentos_e_funcionarios)
 
 def tela_adicionar_agendamento(requisicao):
     id_empresa = requisicao.POST['id_empresa']
@@ -104,10 +73,13 @@ def adicionar_agendamento(requisicao):
     data_agendamento = requisicao.POST['data_agendamento']
     hora_agendamento = requisicao.POST['hora_agendamento'] ##ARRUMAR
     ##ADICIONAR VERIFICACAO
+    resposta = {
+        'id_empresa': id_empresa
+    }
     agendamento = Agendamento(servico=servico, funcionario=funcionario, dataEHora=data_agendamento, cliente=cliente, empresa=empresa)
     agendamento.save()
 
-    return redirect(id_empresa)
+    return redirect('tela_agenda')
 
 def verifica_botoes_agendamento(requisicao):
     if 'editar_agendamento' in requisicao.POST:
