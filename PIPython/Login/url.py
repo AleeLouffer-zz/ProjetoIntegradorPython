@@ -4,6 +4,6 @@ from Login import views
 
 
 urlpatterns = [
-    path('index/', views.Tela_Inicial, name="tela_inicial"),
-    path('entrar/', views.Entrar, name="entrar")
+    path("login/", views.tela_login, name="tela_login"),
+    path("login/entrar", views.realizar_login, name="realizar_login"),
 ]
