@@ -1,0 +1,61 @@
+.foto__logo{
+    text-align: center;
+    margin-top: 24px;
+    margin-bottom: 42px;
+}
+#logo{
+    width: 7%;
+}
+
+.informacoes__geral{
+    border-radius: 20px;
+    background-color: white;
+    margin: 30px 550px;
+    box-shadow: 2.5px 2.5px #8888889d;
+}
+
+.info__cadastro{
+    display: flex;
+    flex-direction: column;
+}
+
+.titulo__box{
+    font-size: 24px;
+    text-align: center;
+    padding-top: 25px;
+    margin-bottom: 16px;
+    color:rgb(102, 100, 100)
+}
+
+.dados{
+    margin: 12px 42px;
+    text-decoration: none;
+    border-style: none;
+    border-radius: 10px;
+    padding: 8px;
+    background-color: whitesmoke;
+}
+
+.btn__continuar{
+    text-align: right;
+}
+
+.continuar{
+    background-color: rgba(17, 73, 196, 0.897);
+    color: white;
+    font-size: 16px;
+    border-style: none;
+    border-radius: 20px;
+    padding: 6px 12px;
+    margin: 36px 32px;
+}
+
+.continuar:hover{
+    background-color: rgba(17, 73, 196, 0.897);
+    color: white;
+    font-size: 18px;
+    border-style: none;
+    border-radius: 20px;
+    padding: 6px 12px;
+    margin: 36px 32px;
+}

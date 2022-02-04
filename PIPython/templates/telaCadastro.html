@@ -1,0 +1,23 @@
+{% extends 'index.html' %}
+
+{% block content %}
+
+<div class="foto__logo">
+    <img src="logo.png" id="logo">
+</div>
+<form>
+    <div class="informacoes__geral">
+        <div class="info__cadastro">
+            <h class="titulo__box">Registrar-se</h>
+            <input class="dados" type="text" placeholder="E-mail" required/>
+            <input class="dados" type="text" placeholder="Confirmar E-mail" required/>
+            <input class="dados" type="text" placeholder="CNPJ" required/>
+            <input class="dados" type="text" placeholder="Telefone" required/>
+        </div>
+        <div class="btn__continuar">
+            <button class="continuar">Continuar</button>
+        </div>
+    </div>
+</form>
+
+{% endblock %}
