@@ -51,6 +51,7 @@ def editar_servico(requisicao):
 
     return redirect('tela_inicial_prestador', id_empresa = id_empresa)
 
+
 def criar_funcionario(requisicao):
     id_empresa = requisicao.POST['id_empresa']
     nome_funcionario = requisicao.POST['nome_funcionario']

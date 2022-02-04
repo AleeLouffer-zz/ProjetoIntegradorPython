@@ -190,6 +190,17 @@ input{
     margin-top: 15px;
 }
 
+.form_editar_empresa{
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    width: 100%;
+}
+
+.input_form_editar{
+    width: 100%;
+}
+
 @media screen and (max-width: 720px){
     .infos {
         display: block; 
@@ -235,4 +246,7 @@ input{
     body{
         background: white;
     }
+}
+.botao__confirmar{
+    background-color: green;
 }

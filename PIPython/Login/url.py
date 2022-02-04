@@ -5,5 +5,6 @@ from Login import views
 
 urlpatterns = [
     path('index/', views.Tela_Inicial, name="tela_inicial"),
-    path('entrar/', views.Entrar, name="entrar")
+    path('entrar/', views.Entrar, name="entrar"),
+    path('editarEmpresa', views.editarEmpresa, name="editarEmpresa"),
 ]
