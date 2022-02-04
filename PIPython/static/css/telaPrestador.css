@@ -198,7 +198,7 @@ input{
 }
 
 .input_form_editar{
-    width: 100%;
+    width: 94%;
 }
 
 @media screen and (max-width: 720px){
@@ -247,6 +247,10 @@ input{
         background: white;
     }
 }
-.botao__confirmar{
+.infos .botao__confirmar{
     background-color: green;
+    color: white;
+    border-radius: 8px;
+    padding:8px;
+    width: 100%
 }
