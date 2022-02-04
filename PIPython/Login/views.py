@@ -12,3 +12,9 @@ def Entrar(requisicao):
     autenticate.id_empresa
 
     tela_inicial_prestador(id_empresa)
+
+def contas_a_receber(requisicao):
+    return render(requisicao, '../templates/contasAReceber/contasAReceber.html')
+
+def agenda_prestador(requisicao):
+    return render(requisicao,'../templates/agendamento/agenda.html')

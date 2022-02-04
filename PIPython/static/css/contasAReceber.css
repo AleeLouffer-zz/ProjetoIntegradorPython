@@ -14,7 +14,7 @@ section{
 }
 .corpo {
     width: 90vw;
-    margin: 40px auto;
+    margin: 40px 40px;
     padding: 10px;
     font-family: 'Montserrat', sans-serif;
 }
@@ -108,7 +108,7 @@ body .corpo h1{
     margin-right: 5px;
 }
 
-.status, .funcionario{
+.status, .funcionario_contas{
     text-align: center;
     background-color: var(--cor-fundo);
     border: 1px solid var(--cinza-claro);
@@ -207,7 +207,7 @@ details > summary::-webkit-details-marker{
     background-color: #b62d2d;
 }
 
-.servico-paragrafo, .servico-cabecalho h1{
+.servico--paragrafo, .servico-cabecalho h1{
     margin: 5px;
     font-weight: normal;
 }

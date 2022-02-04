@@ -83,14 +83,16 @@
 	cursor: pointer;
 }
 
-.corpo{
-	background-color: transparent;
+.corpo_agenda{
+	background-color: white;
 	border: none;
 	width: 60%;
-	margin: 120px auto;
+	margin: 120px 40px;
 	padding: 30px;
 	text-align: center;
 	min-width: 300px;
+	box-shadow: 2px 2px 40px grey;
+	border-radius: 30px;
 }
 
 @media screen and (min-width: 720px){

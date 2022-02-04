@@ -28,7 +28,23 @@
 </head>
 <body>
     {% include 'menu.html'%}
+    <div class="geral">
+        <img id="logo--senac" src="{% static 'icones/logo.png' %}" style="border-radius: 0px;">
+        
+        <div class="perfil--empresa">
+            <p>Nome da Empresa</p>
+            <img id="foto--perfil" src="{% static 'imagens/image.jpg' %}">
+        </div>
+    </div>
+    
+    <div class="info--lateral">
+        <div class="button">
+            <a href="{% url 'tela_inicial_prestador' %}" id="btn">Minhas Informações</a>
+            <a href="{% url 'contas_a_receber' %}" id="btn">Contas a Receber</a>
+            <a href="{% url 'agenda_prestador' %}" id="btn">Agenda</a>
+        </div>
     {% block content %} {% endblock %}
+    </div>
 
     <script src="{% static 'js/telaPrestador.js' %}"></script>
 </body>
