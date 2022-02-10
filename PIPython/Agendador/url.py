@@ -4,5 +4,5 @@ from Login import views
 
 
 urlpatterns = [
-    path('Empresa/<int: id_empresa>', views.tela_inicial_prestador, name="tela_inicial_prestador"),
+    path('Empresa/<int:id_empresa>', views.tela_inicial_prestador, name="tela_inicial_prestador"),
 ]

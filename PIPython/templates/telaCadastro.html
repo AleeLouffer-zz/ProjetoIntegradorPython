@@ -5,17 +5,19 @@
 <div class="foto__logo">
     <img src="logo.png" id="logo">
 </div>
-<form>
+<form action="{% url 'cadastrar_empresa' %}" method="post">
+    {% csrf_token %}
     <div class="informacoes__geral">
         <div class="info__cadastro">
             <h class="titulo__box">Registrar-se</h>
-            <input class="dados" type="text" placeholder="E-mail" required/>
-            <input class="dados" type="text" placeholder="Confirmar E-mail" required/>
-            <input class="dados" type="text" placeholder="CNPJ" required/>
-            <input class="dados" type="text" placeholder="Telefone" required/>
+            <input class="dados" name="email_cadastro" type="text" placeholder="E-mail" required/>
+            <input class="dados" name="senha_cadastro" type="text" placeholder="Senha" required/>
+            <input class="dados" name="nome_cadastro" type="text" placeholder="Nome Fantasia" required/>
+            <input class="dados" name="razao_social_cadastro" type="text" placeholder="Razão social" required/>
+            <input class="dados" name="cnpj_cadastro" type="text" placeholder="CNPJ" required/>
         </div>
         <div class="btn__continuar">
-            <button class="continuar">Continuar</button>
+            <button type="submit" class="continuar">Continuar</button>
         </div>
     </div>
 </form>
