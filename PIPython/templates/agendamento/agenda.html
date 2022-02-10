@@ -7,10 +7,16 @@
       <input type="date" name="data" id="data__agenda--input" value="{{data}}" />
       <input type="hidden" name="id_empresa" value="{{id_empresa}}" />
     </section>
-    <select id="funcionario" name="id_funcionario">
-      <option>Todos</option>
+    <select id="funcionario" name="funcionario">
+      <option>Todos Funcionários</option>
       {% for funcionario in funcionarios %}
       	<option value="{{funcionario.id}}">{{funcionario.nome}}</option>
+      {% endfor %}
+    </select>
+    <select id="servico" name="servico">
+      <option>Todos Servicos</option>
+      {% for servico in servicos %}
+      	<option value="{{servico.id}}">{{servico.nome}}</option>
       {% endfor %}
     </select>
     <button type="submit">Enviar</button>
@@ -25,7 +31,7 @@
     {% for agendamento in agendamentos %}
     <div class="agendamento">
       <div class="agendamento__cabecalho">
-        <h1 class="horario">{{agendamento.dataEHora}}</h1>
+        <h1 class="horario">{{agendamento.data}} - {{agendamento.hora}}</h1>
         <a href="editar-agendamento.html" class="agendamento__cabecalho--editar"
           ><img
             src="/Icones/editar.svg"
@@ -40,7 +46,6 @@
 		{% csrf_token %}
       <button type="submit" name="excluir_agendamento" class="agendamento__deletar">Excluir agendamento</button>
 		  <input type="hidden" name="id_agendamento" value="{{agendamento.id}}">
-		  <input type="hidden" name="id_empresa" value="{{id_empresa}}">
 		  <button type="submit" name="editar_agendamento" class="agendamento__deletar">Editar Agendamento</button>
 	  </form>
   </div>

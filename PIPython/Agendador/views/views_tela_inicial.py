@@ -4,7 +4,9 @@ from Agendador.models import Agendamento, Funcionario, Cliente, Servico
 from django.http import HttpResponse, HttpResponseRedirect
 from datetime import date
 
-def tela_inicial_prestador(requisicao, id_empresa):
+def tela_inicial_prestador(requisicao):
+    id_empresa = requisicao.session['id_empresa']
+
     empresa = Empresa.objects.get(id=id_empresa)
 
     dados = {
@@ -22,7 +24,6 @@ def obter_servicos(id_empresa):
     return Servico.objects.filter(empresa_id = id_empresa)
 
 def editar_funcionario(requisicao):
-    id_empresa = requisicao.POST['id_empresa']
     id_funcionario = requisicao.POST['id_funcionario']
     nome_novo = requisicao.POST['nome_funcionario']
     
@@ -31,10 +32,9 @@ def editar_funcionario(requisicao):
     funcionario.nome = nome_novo
     funcionario.save()
 
-    return redirect('tela_inicial_prestador', id_empresa = id_empresa)
+    return redirect('tela_inicial_prestador')
     
 def editar_servico(requisicao):
-    id_empresa = requisicao.POST['id_empresa']
     id_servico = requisicao.POST['servico_id']
     nome_servico = requisicao.POST['servico_nome']
     descricao_servico = requisicao.POST['servico_descricao']
@@ -46,6 +46,6 @@ def editar_servico(requisicao):
     servico.preco = float(valor_servico)
     servico.save()
 
-    return redirect('tela_inicial_prestador', id_empresa = id_empresa)
+    return redirect('tela_inicial_prestador')
 
 

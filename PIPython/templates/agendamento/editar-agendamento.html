@@ -13,7 +13,8 @@
 			<form action="{% url 'editar_agendamento' %}" method="POST">
 				{% csrf_token %}
 				<input type="hidden" name="id_agendamento" value="{{agendamento.id}}">
-				<input name="dataEHora" type="date" class="editar-horario" value="{{agendamento.dataEHora}}">
+				<input name="data" class="editar-horario" type="date" value="{{agendamento.data}}">
+				<input name="hora_agendamento" class="editar-horario" type="time" value="{{agendamento.hora}}">
 				<select class="editar-servico" name="id_servico">
 					<option value="{{agendamento.servico.id}}">{{agendamento.servico.nome}}</option>
 					{% for servico in servicos %}

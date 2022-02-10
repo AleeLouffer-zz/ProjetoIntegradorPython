@@ -62,12 +62,6 @@
           <div class="col-1">
             <input
               type="text"
-              name="id_empresa"
-              value="{{empresa.id}}"
-              hidden
-            />
-            <input
-              type="text"
               name="id_funcionario"
               id="id_funcionario"
               hidden
@@ -116,8 +110,7 @@
       </form>
       <form action="{% url 'editar_servico'%}" method="post">
         {% csrf_token %}
-        <input name="id_empresa" value="{{empresa.id}}" hidden />
-        <input id="servico_id" name="servico_id" hidden>
+        <input id="servico_id" name="servico_id" type="hidden">
         <div
           id="checkBoxServEdit"
           style="display: none"
@@ -149,7 +142,6 @@
   </div>
   <form action="{% url 'tela_agenda' %}" method="POST">
     {% csrf_token %}
-    <input type="hidden" name="id_empresa" value="{{empresa.id}}">
     <button type="submit">Agendamento</button>
   </form>
 </div>

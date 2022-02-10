@@ -23,5 +23,6 @@ class Agendamento(models.Model):
     servico = models.ForeignKey(Servico, on_delete=models.CASCADE)
     funcionario = models.ForeignKey(Funcionario, on_delete=models.CASCADE)
     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
-    dataEHora = models.DateField(null=True)
+    data = models.DateField()
+    hora = models.TimeField()
     empresa = models.ForeignKey(Empresa, on_delete=models.CASCADE)
