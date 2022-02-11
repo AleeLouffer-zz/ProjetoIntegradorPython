@@ -6,18 +6,18 @@ from datetime import date
 
 def tela_agenda(requisicao):
     id_empresa = requisicao.session['id_empresa']
-    funcionarios = obter_funcionarios(requisicao, id_empresa)
-    servicos = obter_servicos(requisicao, id_empresa)
+    funcionarios = obter_funcionarios_ativos(requisicao, id_empresa)
+    servicos = obter_servicos_ativos(requisicao, id_empresa)
     
     if 'data' not in requisicao.POST:
         data = date.today()
-        agendamentos = obter_agendamentos(requisicao, id_empresa, data)
+        agendamentos = obter_agendamentos_ativos(requisicao, id_empresa, data)
         
     else:
         data = requisicao.POST['data']
         if data == "":
             data = date.today()
-        agendamentos = list(obter_agendamentos(requisicao, id_empresa, data))
+        agendamentos = list(obter_agendamentos_ativos(requisicao, id_empresa, data))
 
     if 'funcionario' in requisicao.POST:
         id_funcionario = requisicao.POST['funcionario']
@@ -44,16 +44,19 @@ def make_resposta(id_empresa, agendamentos, funcionarios, servicos):
     return resposta
 
 
-def obter_agendamentos(requisicao, id_empresa, data):
-    return Agendamento.objects.filter(empresa=id_empresa).filter(data=data).order_by('hora')
+def obter_agendamentos_ativos(requisicao, id_empresa, data):
+    return Agendamento.objects.filter(empresa=id_empresa).filter(data=data).filter(ativo=True).order_by('hora')
 
 
-def obter_funcionarios(requisicao, id_empresa):
-    return list(Funcionario.objects.filter(empresa=id_empresa))
+def obter_funcionarios_ativos(requisicao, id_empresa):
+    return list(Funcionario.objects.filter(empresa=id_empresa).filter(ativo=True))
 
 
-def obter_servicos(requisicao, id_empresa):
-    return list(Servico.objects.filter(empresa=id_empresa))
+def obter_servicos_ativos(requisicao, id_empresa):
+    return list(Servico.objects.filter(empresa=id_empresa).filter(ativo=True))
+
+def obter_clientes_ativos(requisicao, id_empresa):
+    return list(Cliente.objects.filter(empresa=id_empresa).filter(ativo=True))
 
 
 def tela_adicionar_agendamento(requisicao):
@@ -106,7 +109,8 @@ def verifica_botoes_agendamento(requisicao):
 def excluir_agendamento(requisicao):
     id_agendamento = requisicao.POST["id_agendamento"]
     agendamento = Agendamento.objects.get(id=id_agendamento)
-    agendamento.delete()
+    agendamento.ativo = False
+    agendamento.save()
         
 
 def obter_dados_tela_editar_agendamento(requisicao):
@@ -115,16 +119,16 @@ def obter_dados_tela_editar_agendamento(requisicao):
 
     agendamento = Agendamento.objects.get(id=id_agendamento)
 
-    servicos = Servico.objects.filter(empresa=id_empresa)
-    funcionarios = Funcionario.objects.filter(empresa=id_empresa)
-    clientes = Cliente.objects.filter(empresa=id_empresa)
+    servicos = obter_servicos_ativos(requisicao, id_empresa)
+    funcionarios = obter_servicos_ativos(requisicao, id_empresa)
+    clientes = obter_clientes_ativos(requisicao, id_empresa)
 
     dados = {
         'id_empresa': id_empresa,
         'agendamento': agendamento,
-        'servicos': remover_da_lista(list(servicos), agendamento.servico),
-        'funcionarios': remover_da_lista(list(funcionarios), agendamento.funcionario),
-        'clientes': remover_da_lista(list(clientes), agendamento.cliente)
+        'servicos': remover_da_lista(servicos, agendamento.servico),
+        'funcionarios': remover_da_lista(funcionarios, agendamento.funcionario),
+        'clientes': remover_da_lista(clientes, agendamento.cliente)
     }
 
     return dados
