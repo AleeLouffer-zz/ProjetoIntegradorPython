@@ -20,3 +20,22 @@ def realizar_login(requisicao):
         
     else:
         return redirect(tela_login)
+
+
+def tela_agendamento(requisicao):
+    return render(requisicao, '../templates/agendamento/agenda.html')
+
+def tela_agendamento_adicionar(requisicao):
+    return render(requisicao, '../templates/agendamento/adicionar-agendamento.html')
+
+def tela_agendamento_editar(requisicao):
+    return render(requisicao, '../templates/agendamento/editar-agendamento.html')
+
+def prestador(requisicao):
+    return render(requisicao, '../templates/telaPrestador.html')
+
+def tela_contas_a_receber(requisicao):
+    return render(requisicao, '../templates/contasAReceber/contasAReceber.html')
+
+def contas_adicionar(requisicao):
+    return render(requisicao, '../templates/contasAReceber/adicionar.html')

@@ -1,42 +1,8 @@
-
-
-.data__agenda--titulo{
-	font-size: 32px;
-	display: block;
-}
-
-#data__agenda--input{
-	background-color: whitesmoke;
-	margin: 16px 0;
-	border-radius: 5px;
-	width: 90%;
-	height: 30px;
-	max-width: 350px;
-	border: 0;
-	border: 1px solid whitesmoke;
-}
-
-#funcionario{
-	background-color: whitesmoke;
-	border-radius: 5px;
-	width: 90%;
-	max-width: 350px;
-	border: 0;
-	border: 1px solid whitesmoke;
-	height: 30px;
-}
-
-.adicionar__agendamento{
-	display: block;
-	margin: 16px 0;
-	background-color: #46B93C;
-	padding: 8px;
-	width: 90%;
-	margin: 16px auto;
-	max-width: 350px;
-	border-radius: 20px;
-	color: white;
-	text-decoration: none;
+.filtros__agendamento{
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	min-width: 60%;
 }
 
 .agendamentos{
@@ -45,64 +11,52 @@
 }
 
 .agendamento{
-	max-width: 400px;
-	background-color: whitesmoke;
-	padding: 16px;
-	border-radius: 5px;
 	text-align: left;
+	background-color: whitesmoke;
+	border-radius: 5px;
+	
+	min-width: 300px;
+	max-width: 400px;
+	
+	padding: 16px;
 	margin: 10px;
 }
 
-.agendamento > h1, h2, p, div{
-	margin: 8px 0;
-}
-
-.agendamento__cabecalho{
+/* .agendamento__cabecalho{
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
-}
+} */
 
-.horario{
-	font-size: 16px;
+.agendamento__titulo{
+	font-size: 18px;
 	font-weight: bold;
 }
 
-.servico{
-	font-size: 25px;
+.agendamento__paragrafo{
+	font-size: 16px;
+	margin: 4px 0;
 }
 
-.cliente{
-	font-size: 20px;
-}
 
-.funcionario{
-	font-size: 18px;
-}
-
-.agendamento__deletar{
-	background-color: #F83A3A;
-	color: white;
-	border: 0;
-	padding: 8px;
-	border-radius: 20px;
-	cursor: pointer;
-}
-
-.corpo{
-	background-color: transparent;
-	border: none;
-	width: 60%;
-	margin: 120px auto;
-	padding: 30px;
-	text-align: center;
-	min-width: 300px;
-}
-
-@media screen and (min-width: 720px){
-	.corpo{
-		border-radius: 30px;
-		box-shadow: 2px 2px 40px grey;
+@media screen and (min-width: 720px) {
+	.filtros__agendamento{
+		flex-direction: row;
+		margin: 16px 0;
 	}
-}
+  
+	input#input__data__sem__label,
+	select.select {
+	  width: 20%;
+	}
+  
+	button.btn__filtrar {
+	  width: 10%;
+	}
+  
+	button.btn__adicionar.tamanho__pequeno{
+	  width: 200px;
+	  height: 30px;
+	}
+  }

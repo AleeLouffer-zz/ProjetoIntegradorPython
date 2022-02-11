@@ -1,56 +1,52 @@
 {% extends 'index.html' %} {% block content %}
 <div class="corpo">
-  <form action="{% url 'tela_agenda' %}" method="POST">
-    {% csrf_token %}
-    <section class="data__agenda">
-      <label for="data__agenda--input" class="data__agenda--titulo">Selecione a data</label>
-      <input type="date" name="data" id="data__agenda--input" value="{{data}}" />
-      <input type="hidden" name="id_empresa" value="{{id_empresa}}" />
-    </section>
-    <select id="funcionario" name="funcionario">
-      <option>Todos Funcionários</option>
-      {% for funcionario in funcionarios %}
+  <h1 class="titulo"> Agendamentos </h1>
+  <form action="{% url 'tela_agenda' %}" method="POST"> {% csrf_token %}
+    <div class="filtros__agendamento">
+      <input type="date" name="data" id="input__data__sem__label" value="{{data}}" />      
+      
+      <select id="funcionario" name="funcionario" class="select">
+        <option>Todos Funcionários</option>
+        {% for funcionario in funcionarios %}
       	<option value="{{funcionario.id}}">{{funcionario.nome}}</option>
-      {% endfor %}
-    </select>
-    <select id="servico" name="servico">
-      <option>Todos Servicos</option>
-      {% for servico in servicos %}
+        {% endfor %}
+      </select>
+      
+      <select id="servico" name="servico" class="select">
+        <option>Todos Servicos</option>
+        {% for servico in servicos %}
       	<option value="{{servico.id}}">{{servico.nome}}</option>
-      {% endfor %}
-    </select>
-    <button type="submit">Enviar</button>
+        {% endfor %}
+      </select>
+
+      <button type="submit" class="btn btn__filtrar"> Filtrar </button>
+    </div>
   </form>
-  <form action="{% url 'tela_adicionar_agendamento' %}" method="POST">
-    {% csrf_token %}
+  <form action="{% url 'tela_adicionar_agendamento' %}" method="POST"> {% csrf_token %}
     <input type="hidden" name="id_empresa" value="{{id_empresa}}" />
-    <button type="submit" class="adicionar__agendamento">Adicionar Agendamento</button>
-    <!-- <a type="submit" class="adicionar__agendamento">Adicionar agendamento</a> -->
+    <button type="submit" class="btn btn__adicionar tamanho__pequeno">Adicionar Agendamento</button>
   </form>
   <div class="agendamentos">
     {% for agendamento in agendamentos %}
     <div class="agendamento">
       <div class="agendamento__cabecalho">
-        <h1 class="horario">{{agendamento.data}} - {{agendamento.hora}}</h1>
-        <a href="editar-agendamento.html" class="agendamento__cabecalho--editar"
-          ><img
-            src="/Icones/editar.svg"
-            alt=""
-            class="agendamento__cabecalho--icone"
-        /></a>
+        <h3 class="agendamento__titulo">{{agendamento.data}} - {{agendamento.hora}}</h3>
+        <!-- <a href="editar-agendamento.html" class="agendamento__cabecalho--editar">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="black" class="bi bi-pencil-square" viewBox="0 0 16 16">
+            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+            <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+          </svg>
+        </a> -->
       </div>
-      <h2 class="servico">{{agendamento.servico.nome}}</h2>
-      <p class="cliente">{{agendamento.cliente.nome}}</p>
-      <p class="funcionario">{{agendamento.funcionario.nome}}</p>
-	  <form action="{% url 'verifica_botoes_agendamento' %}" method="POST">
-		{% csrf_token %}
-      <button type="submit" name="excluir_agendamento" class="agendamento__deletar">Excluir agendamento</button>
-		  <input type="hidden" name="id_agendamento" value="{{agendamento.id}}">
-		  <button type="submit" name="editar_agendamento" class="agendamento__deletar">Editar Agendamento</button>
+      <h2 class="agendamento__paragrafo"> Servico: {{agendamento.servico.nome}}</h2>
+      <p class="agendamento__paragrafo"> Funcionário{{agendamento.funcionario.nome}}</p>
+      <p class="agendamento__paragrafo"> Cliente: {{agendamento.cliente.nome}}</p>
+	  <form action="{% url 'verifica_botoes_agendamento' %}" method="POST"> {% csrf_token %}
+      <input type="hidden" name="id_agendamento" value="{{agendamento.id}}">
+      <button type="submit" name="excluir_agendamento" class="btn btn__filtrar">Excluir agendamento</button>
+      <button type="submit" name="editar_agendamento" class="btn btn__filtrar"> Editar Agendamento </button>
 	  </form>
   </div>
   {% endfor %}
-
   </div>
-
 {% endblock %}
