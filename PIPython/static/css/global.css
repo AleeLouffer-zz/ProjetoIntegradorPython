@@ -74,7 +74,30 @@ input#input__data__sem__label {
   padding: 5px;
 }
 
-@media screen and (min-width: 720px) {
+.btn__icon{
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
+}
+
+.nao__encontrado{
+  background-color: white;
+  
+  border-radius: 5px;
+  border: 1px solid var(--cinza-claro);
+
+  min-width: 200px;
+  padding: 8px;
+  margin: 8px 0;
+}
+
+.sub__titulo{
+  font-size: 24px;
+}
+
+@media screen and (min-width: 950px) {
   .corpo {
     width: 60vw;
     max-width: 60vw;
@@ -86,5 +109,9 @@ input#input__data__sem__label {
     background-color: white;
     border-radius: 30px;
     box-shadow: 2px 2px 40px gray;
+  }
+
+  .nao__encontrado{
+    background-color: whitesmoke;
   }
 }
