@@ -19,10 +19,10 @@ def Perfil(requisicao, id_empresa):
 
 #     tela_inicial_prestador(id_empresa)
 
-def CadastroDeEmpresa(requisicao):
+def renderizar_tela_cadastro(requisicao):
     return render(requisicao, 'telaCadastro.html')
 
-def CadastrarEmpresa(requisicao):
+def cadastrar_empresa(requisicao):
     nome = requisicao.POST['nome_cadastro']
     razao_social = requisicao.POST['razao_social_cadastro']
     CNPJ = requisicao.POST['cnpj_cadastro']
