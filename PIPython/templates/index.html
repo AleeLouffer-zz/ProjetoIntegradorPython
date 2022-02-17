@@ -27,8 +27,26 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
 </head>
 <body>
-    {% include 'menu.html'%}
-    {% block content %} {% endblock %}
+    <div class="geral">
+        <img id="logo--senac" src="senac-2.webp">
+        <div class="perfil--empresa">
+            <p>Nome da Empresa</p>
+            <img id="foto--perfil" src="perfil.png">
+        </div>
+    
+    </div>
+    
+    <div class="conteudo">
+        <div class="menu__lateral">
+            <button class="menu__lateral__item">Minhas Informações</button>
+            <button class="menu__lateral__item">Contas a Receber</button>
+            <button class="menu__lateral__item">Agenda</button>
+        </div>
+        <div class="conteudo__container">
+            {% block content %} {% endblock %}
+        </div>
+    </div>
+    
 
     <script src="{% static 'js/telaPrestador.js' %}"></script>
 </body>
