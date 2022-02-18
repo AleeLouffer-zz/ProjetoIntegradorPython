@@ -72,7 +72,7 @@
           </div>
         </div>
       </form>
-      <form action="{% url 'editar_funcionario'%}" method="post">
+      <form action="{% url 'verifica_botoes_funcionario'%}" method="post">
         {% csrf_token %}
         <div
           id="checkBoxFuncEdit"
@@ -92,7 +92,8 @@
               name="nome_funcionario"
               id="nome_funcionario"
             />
-            <button type="submit" class="btn-confirmar">Alterar</button>
+            <button type="submit" name="editar_funcionario" class="btn-confirmar">Editar</button>
+            <button type="submit" name="excluir_funcionario" class="btn-excluir">Excluir</button>
           </div>
         </div>
       </form>
@@ -140,7 +141,7 @@
           </div>
         </div>
       </form>
-      <form action="{% url 'editar_servico'%}" method="post">
+      <form action="{% url 'verifica_botoes_servico'%}" method="post">
         {% csrf_token %}
         <input name="id_empresa" value="{{empresa.id}}" hidden />
         <input id="servico_id" name="servico_id" hidden />
@@ -167,7 +168,8 @@
               id="servico_descricao"
               name="servico_descricao"
             />
-            <button type="submit" class="btn-confirmar">Alterar</button>
+            <button type="submit" name="editar_servico" class="btn-confirmar">Editar</button>
+            <button type="submit" name="excluir_servico" class="btn-excluir">Excluir</button>
           </div>
         </div>
       </form>

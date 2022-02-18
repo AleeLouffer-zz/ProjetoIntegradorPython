@@ -45,8 +45,6 @@ def editar_funcionario(requisicao):
     
     funcionario.nome = nome_novo
     funcionario.save()
-
-    return redirect('tela_inicial_prestador')
     
 def editar_servico(requisicao):
     id_servico = requisicao.POST['servico_id']
@@ -60,9 +58,6 @@ def editar_servico(requisicao):
     servico.preco = float(valor_servico)
     
     servico.save()
-
-    return redirect('tela_inicial_prestador')
-
 
 def criar_funcionario(requisicao):
     id_empresa = requisicao.POST['id_empresa']
@@ -86,3 +81,35 @@ def criar_servico(requisicao):
     Servico.objects.create(nome = nome_servico, descricao = descricao_servico, preco = valor_servico, empresa = empresa_a_adicionar)
 
     return redirect('tela_inicial_prestador')
+
+def excluir_servico(requisicao):
+    id_servico = requisicao.POST["servico_id"]
+    servico = Servico.objects.get(id=id_servico)
+    servico.ativo = False
+    servico.save()
+
+def excluir_funcionario(requisicao):
+    id_funcionario = requisicao.POST["id_funcionario"]
+    funcionario = Funcionario.objects.get(id=id_funcionario)
+    funcionario.ativo = False
+    funcionario.save()
+
+def verifica_botoes_funcionario(requisicao):
+    if 'editar_funcionario' in requisicao.POST:
+        editar_funcionario(requisicao)
+
+        return redirect('tela_inicial_prestador')
+    elif 'excluir_funcionario' in requisicao.POST:
+        excluir_funcionario(requisicao)
+
+        return redirect('tela_inicial_prestador')
+
+def verifica_botoes_servico(requisicao):
+    if 'editar_servico' in requisicao.POST:
+        editar_servico(requisicao)
+
+        return redirect('tela_inicial_prestador')
+    elif 'excluir_servico' in requisicao.POST:
+        excluir_servico(requisicao)
+
+        return redirect('tela_inicial_prestador')
