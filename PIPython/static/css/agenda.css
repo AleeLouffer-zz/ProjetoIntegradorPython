@@ -1,53 +1,27 @@
-
-
-.data__agenda--titulo{
-	font-size: 32px;
-	display: block;
+.filtros__agendamento{
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	min-width: 60%;
 }
 
-#data__agenda--input{
-	background-color: whitesmoke;
-	margin: 16px 0;
-	border-radius: 5px;
-	width: 90%;
-	height: 30px;
-	max-width: 350px;
-	border: 0;
-	border: 1px solid whitesmoke;
-}
-
-#funcionario{
-	background-color: whitesmoke;
-	border-radius: 5px;
-	width: 90%;
-	max-width: 350px;
-	border: 0;
-	border: 1px solid whitesmoke;
-	height: 30px;
-}
-
-.adicionar__agendamento{
-	display: block;
-	margin: 16px 0;
-	background-color: #46B93C;
-	padding: 8px;
-	width: 90%;
-	margin: 16px auto;
-	max-width: 350px;
-	border-radius: 20px;
-	color: white;
-	text-decoration: none;
+.agendamentos{
+	display: flex;
+	overflow: scroll;
+	overflow-y: hidden;
 }
 
 .agendamento{
-	background-color: whitesmoke;
-	padding: 16px;
-	border-radius: 5px;
 	text-align: left;
-}
-
-.agendamento > h1, h2, p, div{
-	margin: 8px 0;
+	background-color: white;
+	border: 1px solid var(--cinza-claro);
+	border-radius: 5px;
+	
+	min-width: 350px;
+	max-width: 500px;
+	
+	padding: 16px;
+	margin: 10px;
 }
 
 .agendamento__cabecalho{
@@ -55,49 +29,88 @@
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
+	gap: 16px;
+
+	padding: 8px 0;
+	border-bottom: 1px solid var(--cor--secundaria) ;
+} 
+
+.agendamento__cabecalho__item{
+	display: flex;
+	align-items: center;
+	gap: 4px;
 }
 
-.horario{
-	font-size: 28px;
-	font-weight: bold;
-}
-
-.servico{
-	font-size: 25px;
-}
-
-.cliente{
-	font-size: 20px;
-}
-
-.funcionario{
+.agendamento__titulo{
 	font-size: 18px;
 }
 
-.agendamento__deletar{
-	background-color: #F83A3A;
-	color: white;
-	border: 0;
-	padding: 8px;
-	border-radius: 20px;
-	cursor: pointer;
+.agendamento__titulo.negrito{
+	font-weight: bold;
 }
 
-.corpo_agenda{
-	background-color: white;
-	border: none;
-	width: 60%;
-	margin: 120px 40px;
-	padding: 30px;
-	text-align: center;
-	min-width: 300px;
-	box-shadow: 2px 2px 40px grey;
-	border-radius: 30px;
+.agendamento__informacao{
+	display: flex;
+	gap: 8px;
 }
 
-@media screen and (min-width: 720px){
-	.corpo{
-		border-radius: 30px;
-		box-shadow: 2px 2px 40px grey;
+.agendamento__servico{
+	font-size: 18px;
+	margin: 4px 0;
+}
+
+.agendamento__paragrafo{
+	font-size: 14px;
+	margin: 4px 0;
+}
+
+.agendamento__paragrafo.cinza{
+	color: rgb(175, 174, 174);
+}
+
+.agendamento__botoes{
+	display: flex;
+	justify-content: flex-end;
+	gap: 8px;
+}
+
+.icon{
+	width: 24px;
+	height: 24px;
+}
+
+.btn.com__icon{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 8px;
+}
+
+.agenda{
+	margin: 24px 0;
+	width: 100%;
+}
+
+@media screen and (min-width: 950px) {
+	.filtros__agendamento{
+		flex-direction: row;
+		margin: 16px 0;
 	}
-}
+  
+	input#input__data__sem__label,
+	select.select {
+	  width: 20%;
+	}
+  
+	button.btn__filtrar {
+	  width: 10%;
+	}
+  
+	button.btn__adicionar.tamanho__pequeno{
+	  width: 200px;
+	  height: 30px;
+	}
+	.agendamento{
+		background-color: whitesmoke;
+	}
+  }

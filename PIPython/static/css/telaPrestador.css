@@ -1,15 +1,6 @@
-body {
-    background: whitesmoke;
-    font-family: 'Source Sans Pro', sans-serif;
-}
-
-.corpo {
-    box-shadow: 2px 2px 40px grey;
-    width: 60%;
-    margin: 40px auto;
-    background: white;
-    border-radius: 30px;
-    padding: 30px;
+.empresa__email{
+    text-align: center;
+    font-size:16px;
 }
 
 .infos {
@@ -201,16 +192,6 @@ input{
         margin-left: auto;
         margin-right: auto;
     }
-    .corpo{
-        width: 100%;
-        height: 100%;
-        background: none;
-        border:none;
-        box-shadow: none;
-        margin: 0px;
-        padding: 0px;
-        min-width: 320px;
-    }
 
     .col-1 .btn-confirmar{
         margin-left: auto;
@@ -226,8 +207,5 @@ input{
         display: flex;
         text-align: center;
         margin-top: 10px;
-    }
-    body{
-        background: white;
     }
 }

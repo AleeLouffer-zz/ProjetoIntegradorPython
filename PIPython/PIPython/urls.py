@@ -1,9 +1,7 @@
 from django.contrib import admin
-from django.urls import path,include
-from Agendador import views
+from django.urls import path, include
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('',include('Agendador.url')),
-    path('',include('Login.url')),
+    path('', include('Login.url')),
+    path('', include('Agendador.url')),
 ]

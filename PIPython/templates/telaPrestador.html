@@ -1,66 +1,148 @@
-{% extends 'index.html' %}
-
-{% block content %}
-    <div class="corpo">
-        <div class="infos">
-            <img src="../static/Imagens/image.jpg" alt="imagem do prestador">
-            <div class="infos-txt">
-                <h1 class="titulo">Barbearia da Jena</h1>
-                <p>322482734982</p>
-                <p>Av Afonso Pena, 1331, Centro</p>
-            </div>
-            <div class="botao">
-                <button>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
-                        <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
-                        <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
-                    </svg>
-                </button>
-            </div>
-        </div>
-    
-        <div class="func-cadastrados">
-            <h1>Funcionários cadastrados</h1>
-            <div class="caixa-func-cadastrados">
-                <button>Cleide</button>
-                <button>Ravona</button>
-                <button>Peggy</button>
-                <button onclick="ExibirCadastroFuncionario()" class="mais">+</button>
-                <form action="">
-                    <div id="checkBoxFunc" style="display:none;" class="funcionario-informacoes">
-                        <div class="col-1">
-                            <input type="text" class="Nome" placeholder="Nome Completo"> 
-                            <button type="submit" class="btn-confirmar"> Confirmar </button>
-                        </div>
-                    </div>
-                    
-                </form>
-            </div>
-        </div>
-        <div class="serv-cadastrados">
-            <h1>Serviços cadastrados</h1>
-            <div class="caixa-serv-cadastrados">
-                <button>Corte de cabelo</button>
-                <button>Manicure</button>
-                <button onclick="ExibirCadastroServico()" class="mais">+</button>
-                <form action="">
-                    <div id="checkBoxServ" style="display:none;" class="adiciona-servico">     
-                        <div class="col-1">
-                            <input type="text" placeholder="Nome do Serviço">
-                            <input name="" id="" cols="30" rows="5" class="valor" placeholder="Valor">
-                        </div> 
-                        <div class="col-2">
-                            <input type="text" class="descricao" placeholder="Descrição">
-                            <button type="submit" class="btn-confirmar"> Confirmar </button>
-                        </div>
-                        <div class="col-3">
-                            
-                        </div> 
-                    </div>
-                    
-                </form>
-    
-            </div>
-        </div>
+{% extends 'index.html' %} {% block content %}
+<div class="corpo">
+  <div class="infos">
+    <img src="../Imagens/image.jpg" alt="imagem do prestador" />
+    <div class="infos-txt">
+      <h1 class="titulo">{{empresa.nome_fantasia}}</h1>
+      <p class="empresa__email">{{empresa.email}}</p>
     </div>
+    <div class="botao">
+      <button>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          fill="currentColor"
+          class="bi bi-pencil-square"
+          viewBox="0 0 16 16"
+        >
+          <path
+            d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"
+          />
+          <path
+            fill-rule="evenodd"
+            d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"
+          />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="func-cadastrados">
+    <h1>Funcionários cadastrados</h1>
+    <div class="caixa-func-cadastrados">
+      {% for funcionario in funcionarios %}
+      <button
+        onclick="ExibirEditarFuncionario('{{funcionario.nome}}', '{{funcionario.id}}')"
+      >
+        {{funcionario.nome}}
+      </button>
+      {% endfor%}
+
+      <button onclick="ExibirCadastroFuncionario()" class="mais">+</button>
+      <form action="">
+        <div
+          id="checkBoxFunc"
+          style="display: none"
+          class="funcionario-informacoes"
+        >
+          <div class="col-1">
+            <input type="text" class="Nome" placeholder="Nome Completo" />
+            <button type="submit" class="btn-confirmar">Confirmar</button>
+          </div>
+        </div>
+      </form>
+      <form action="{% url 'editar_funcionario'%}" method="post">
+        {% csrf_token %}
+        <div
+          id="checkBoxFuncEdit"
+          style="display: none"
+          class="funcionario-informacoes"
+        >
+          <div class="col-1">
+            <input
+              type="text"
+              name="id_funcionario"
+              id="id_funcionario"
+              hidden
+            />
+            <input
+              type="text"
+              class="Nome"
+              name="nome_funcionario"
+              id="nome_funcionario"
+            />
+            <button type="submit" class="btn-confirmar">Alterar</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="serv-cadastrados">
+    <h1>Serviços cadastrados</h1>
+    <div class="caixa-serv-cadastrados">
+      {% for servico in servicos %}
+      <button
+        onclick="ExibirEditarServico('{{servico.nome}}', '{{servico.preco}}', '{{servico.descricao}}', '{{servico.id}}')"
+      >
+        {{servico.nome}}
+      </button>
+      {% endfor%}
+
+      <button onclick="ExibirCadastroServico()" class="mais">+</button>
+      <form action="">
+        <div id="checkBoxServ" style="display: none" class="adiciona-servico">
+          <div class="col-1">
+            <input type="text" placeholder="Nome do Serviço" />
+            <input
+              type="text"
+              cols="30"
+              rows="5"
+              class="valor"
+              placeholder="Valor"
+            />
+          </div>
+          <div class="col-2">
+            <input type="text" class="descricao" placeholder="Descrição" />
+            <button type="submit" class="btn-confirmar">Confirmar</button>
+          </div>
+        </div>
+      </form>
+      <form action="{% url 'editar_servico'%}" method="post">
+        {% csrf_token %}
+        <input id="servico_id" name="servico_id" type="hidden">
+        <div
+          id="checkBoxServEdit"
+          style="display: none"
+          class="adiciona-servico"
+        >
+          <div class="col-1">
+            <input type="text" name="servico_nome" id="servico_nome" />
+            <input
+              type="text"
+              id="servico_valor"
+              name="servico_valor"
+              cols="30"
+              rows="5"
+              class="valor"
+            />
+          </div>
+          <div class="col-2">
+            <input
+              type="text"
+              class="descricao"
+              id="servico_descricao"
+              name="servico_descricao"
+            />
+            <button type="submit" class="btn-confirmar">Alterar</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <form action="{% url 'tela_agenda' %}" method="POST">
+    {% csrf_token %}
+    <button type="submit">Agendamento</button>
+  </form>
+</div>
 {% endblock %}
