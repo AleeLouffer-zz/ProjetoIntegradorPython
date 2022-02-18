@@ -46,18 +46,18 @@ img {
     right: 0;
 }
 
-.func-cadastrados, .serv-cadastrados{
+.func-cadastrados, .serv-cadastrados, .cliente-cadastrados{
     margin-top: 50px;
 }
 
-.func-cadastrados h1, .serv-cadastrados h1, .fotos h1 {
+.func-cadastrados h1, .serv-cadastrados h1, .fotos h1, .cliente-cadastrados h1{
     font-size: 25px;
     margin-left: 5px;
     margin-bottom: 5px;
     font-weight: normal;
 }
     
-.caixa-func-cadastrados, .caixa-serv-cadastrados{
+.caixa-func-cadastrados, .caixa-serv-cadastrados, .caixa-cliente-cadastrados{
     border: 1px solid var(--cinza-claro);
     background-color: whitesmoke;
     padding: 10px;
@@ -65,7 +65,7 @@ img {
     transition: width 2s;
 }
 
-.caixa-func-cadastrados button, .caixa-serv-cadastrados button{
+.caixa-func-cadastrados button, .caixa-serv-cadastrados button, .caixa-cliente-cadastrados button{
     padding: 5px 20px;
     border: 0;
     background: white;
@@ -77,11 +77,7 @@ img {
     transition: 1s;
 }
 
-.caixa-func-cadastrados button:hover {
-    transform: scale(1.05);
-}
-
-.caixa-serv-cadastrados button:hover {
+.caixa-func-cadastrados button:hover, .caixa-serv-cadastrados button:hover, .caixa-cliente-cadastrados button:hover {
     transform: scale(1.05);
 }
 
