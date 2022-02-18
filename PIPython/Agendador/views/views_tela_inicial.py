@@ -35,7 +35,7 @@ def editarEmpresa(requisicao):
     empresa.senha = senha_empresa
     empresa.save()
 
-    return redirect('tela_inicial_prestador', id_empresa = id_empresa)
+    return redirect('tela_inicial_prestador')
 
 def editar_funcionario(requisicao):
     id_funcionario = requisicao.POST['id_funcionario']
@@ -72,7 +72,7 @@ def criar_funcionario(requisicao):
 
     Funcionario.objects.create(nome = nome_funcionario, empresa = empresa_a_adicionar)
 
-    return redirect('tela_inicial_prestador', id_empresa = id_empresa)
+    return redirect('tela_inicial_prestador')
 
 
 def criar_servico(requisicao):
@@ -85,4 +85,4 @@ def criar_servico(requisicao):
 
     Servico.objects.create(nome = nome_servico, descricao = descricao_servico, preco = valor_servico, empresa = empresa_a_adicionar)
 
-    return redirect('tela_inicial_prestador', id_empresa = id_empresa)
+    return redirect('tela_inicial_prestador')

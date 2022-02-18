@@ -4,6 +4,8 @@ from Agendador import views
 from .views import *
 
 urlpatterns = [
+    path('criarFuncionario', views_tela_inicial.criar_funcionario, name="criar_funcionario"),
+    path('criarServico', views_tela_inicial.criar_servico, name="criar_servico"),
     path('editarEmpresa', views_tela_inicial.editarEmpresa, name="editarEmpresa"),
     path('empresa/', views_tela_inicial.tela_inicial_prestador, name="tela_inicial_prestador"),
     path('editar_funcionario', views_tela_inicial.editar_funcionario, name="editar_funcionario"),

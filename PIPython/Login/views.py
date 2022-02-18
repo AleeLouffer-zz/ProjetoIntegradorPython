@@ -15,11 +15,9 @@ def cadastrar_empresa(requisicao):
     email = requisicao.POST['email_cadastro']
     senha = requisicao.POST['senha_cadastro']
 
-    Empresa.objects.create(nome_fantasia = nome, razao_social = razao_social, cnpj = CNPJ, email = email, senha = senha)
+    Empresa.objects.create_user(username = email, email = email, password = senha, cnpj = CNPJ, nome_fantasia = nome, razao_social = razao_social)
 
-    empresa_cadastrada = Empresa.objects.get(cnpj=CNPJ)
-
-    return redirect('perfil', empresa_cadastrada.id)
+    return redirect('tela_login')
   
 def tela_login(requisicao):
     return render(requisicao, '../templates/login/login.html')

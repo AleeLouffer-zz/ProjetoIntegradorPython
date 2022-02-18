@@ -5,7 +5,6 @@ from Login import views
 urlpatterns = [
     path('cadastrar/', views.renderizar_tela_cadastro, name="cadastro_empresa"),
     path('cadastrarEmpresa/', views.cadastrar_empresa, name="cadastrar_empresa"),
-    path('perfil/<int:id_empresa>', views.Perfil, name="perfil"),
     path("", views.tela_login, name="tela_login"),
     path("login", views.realizar_login, name="realizar_login"),
 
