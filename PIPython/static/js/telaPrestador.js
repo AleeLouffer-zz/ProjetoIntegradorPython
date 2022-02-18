@@ -18,7 +18,6 @@ function ExibirCadastroServico() {
   }
 }
 
-
 function ExibirEditarFuncionario(nomeFuncionario, idFuncionario) {
   document.getElementById("checkBoxFunc").style.display = "none";
   var boxEditFunc= document.getElementById("checkBoxFuncEdit"); 
@@ -52,7 +51,6 @@ function ExibirEditarServico(nome, valor, descricao, servicoId) {
     document.getElementById("servico_nome").value = nome;
   }
 }
-
 
 function ExibirCadastroCliente() {
   document.getElementById("checkBoxClienteEdit").style.display = "none";

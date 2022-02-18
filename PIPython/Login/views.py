@@ -4,11 +4,6 @@ from django.contrib.auth import authenticate, login
 from Agendador.views import *
 from Login.models import Empresa
 
-def Perfil(requisicao, id_empresa):
-    print(id_empresa)
-
-    return render(requisicao, 'telaPrestador.html')
-
 def renderizar_tela_cadastro(requisicao):
     return render(requisicao, 'telaCadastro.html')
 
@@ -19,11 +14,9 @@ def cadastrar_empresa(requisicao):
     email = requisicao.POST['email_cadastro']
     senha = requisicao.POST['senha_cadastro']
 
-    Empresa.objects.create(nome_fantasia = nome, razao_social = razao_social, cnpj = CNPJ, email = email, senha = senha)
+    Empresa.objects.create_user(username = email, email = email, password = senha, cnpj = CNPJ, nome_fantasia = nome, razao_social = razao_social)
 
-    empresa_cadastrada = Empresa.objects.get(cnpj=CNPJ)
-
-    return redirect('perfil', empresa_cadastrada.id)
+    return redirect('tela_login')
   
 def tela_login(requisicao):
     return render(requisicao, '../templates/login/login.html')
@@ -42,7 +35,6 @@ def realizar_login(requisicao):
         
     else:
         return redirect(tela_login)
-
 
 def tela_agendamento(requisicao):
     return render(requisicao, '../templates/agendamento/agenda.html')

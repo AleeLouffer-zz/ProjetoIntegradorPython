@@ -27,6 +27,20 @@ def obter_servicos(id_empresa):
 def obter_clientes(id_empresa):
     return Cliente.objects.filter(empresa_id = id_empresa).filter(ativo=True)
 
+def editarEmpresa(requisicao):
+    id_empresa = requisicao.POST['id_empresa']
+    nome_empresa = requisicao.POST['nome_empresa']
+    email_empresa = requisicao.POST['email_empresa']
+    senha_empresa = requisicao.POST['senha_empresa']
+
+    empresa = Empresa.objects.get(id = id_empresa)
+    empresa.nome_fantasia = nome_empresa
+    empresa.email = email_empresa
+    empresa.senha = senha_empresa
+    empresa.save()
+
+    return redirect('tela_inicial_prestador')
+
 def editar_funcionario(requisicao):
     id_funcionario = requisicao.POST['id_funcionario']
     nome_novo = requisicao.POST['nome_funcionario']
@@ -35,8 +49,6 @@ def editar_funcionario(requisicao):
     
     funcionario.nome = nome_novo
     funcionario.save()
-
-    return redirect('tela_inicial_prestador')
     
 def editar_servico(requisicao):
     id_servico = requisicao.POST['servico_id']
@@ -48,7 +60,16 @@ def editar_servico(requisicao):
     servico.nome = nome_servico
     servico.descricao = descricao_servico
     servico.preco = float(valor_servico)
+    
     servico.save()
+
+def criar_funcionario(requisicao):
+    id_empresa = requisicao.POST['id_empresa']
+    nome_funcionario = requisicao.POST['nome_funcionario']
+
+    empresa_a_adicionar = Empresa.objects.get(id=id_empresa)
+
+    Funcionario.objects.create(nome = nome_funcionario, empresa = empresa_a_adicionar)
 
     return redirect('tela_inicial_prestador')
 
@@ -60,6 +81,50 @@ def criar_cliente(requisicao):
 
     cliente = Cliente.objects.create(nome=nome_cliente, empresa=empresa)
     cliente.save()
+
+    return redirect("tela_inicial_prestador")
+
+def criar_servico(requisicao):
+    id_empresa = requisicao.POST['id_empresa']
+    nome_servico = requisicao.POST['nome_servico']
+    valor_servico = requisicao.POST['valor_servico']
+    descricao_servico = requisicao.POST['descricao_servico']
+
+    empresa_a_adicionar = Empresa.objects.get(id=id_empresa)
+
+    Servico.objects.create(nome = nome_servico, descricao = descricao_servico, preco = valor_servico, empresa = empresa_a_adicionar)
+
+    return redirect('tela_inicial_prestador')
+
+def excluir_servico(requisicao):
+    id_servico = requisicao.POST["servico_id"]
+    servico = Servico.objects.get(id=id_servico)
+    servico.ativo = False
+    servico.save()
+
+def excluir_funcionario(requisicao):
+    id_funcionario = requisicao.POST["id_funcionario"]
+    funcionario = Funcionario.objects.get(id=id_funcionario)
+    funcionario.ativo = False
+    funcionario.save()
+
+def verifica_botoes_funcionario(requisicao):
+    if 'editar_funcionario' in requisicao.POST:
+        editar_funcionario(requisicao)
+
+        return redirect('tela_inicial_prestador')
+    elif 'excluir_funcionario' in requisicao.POST:
+        excluir_funcionario(requisicao)
+
+        return redirect('tela_inicial_prestador')
+
+def verifica_botoes_servico(requisicao):
+    if 'editar_servico' in requisicao.POST:
+        editar_servico(requisicao)
+
+        return redirect('tela_inicial_prestador')
+    elif 'excluir_servico' in requisicao.POST:
+        excluir_servico(requisicao)
 
     return redirect("tela_inicial_prestador")
 
