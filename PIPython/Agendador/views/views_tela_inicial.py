@@ -77,6 +77,13 @@ def criar_cliente(requisicao):
     id_empresa = requisicao.session["id_empresa"]
     nome_cliente = requisicao.POST["nome_cliente"]
 
+    empresa = Empresa.objects.get(id=id_empresa)
+
+    cliente = Cliente.objects.create(nome=nome_cliente, empresa=empresa)
+    cliente.save()
+
+    return redirect("tela_inicial_prestador")
+
 def criar_servico(requisicao):
     id_empresa = requisicao.POST['id_empresa']
     nome_servico = requisicao.POST['nome_servico']
