@@ -55,13 +55,13 @@ button.btn {
   width: 100%;
 }
 
-.btn__adicionar {
+.btn.btn__adicionar {
   background-color: var(--verde);
   margin: 8px 0;
   width: 100%;
 }
 
-.btn__cancelar {
+.btn.btn__cancelar {
   background-color: var(--vermelho);
 }
 

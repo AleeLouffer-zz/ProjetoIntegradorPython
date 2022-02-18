@@ -12,16 +12,20 @@ def tela_inicial_prestador(requisicao):
     dados = {
         'empresa': empresa,
         'funcionarios': list(obter_funcionarios(id_empresa)),
-        'servicos': list(obter_servicos(id_empresa))
+        'servicos': list(obter_servicos(id_empresa)),
+        'clientes': list(obter_clientes(id_empresa))
     }
 
     return render(requisicao, 'telaPrestador.html', dados)
 
 def obter_funcionarios(id_empresa):
-    return Funcionario.objects.filter(empresa_id = id_empresa)
+    return Funcionario.objects.filter(empresa_id = id_empresa).filter(ativo=True)
 
 def obter_servicos(id_empresa):
-    return Servico.objects.filter(empresa_id = id_empresa)
+    return Servico.objects.filter(empresa_id = id_empresa).filter(ativo=True)
+
+def obter_clientes(id_empresa):
+    return Cliente.objects.filter(empresa_id = id_empresa).filter(ativo=True)
 
 def editarEmpresa(requisicao):
     id_empresa = requisicao.POST['id_empresa']
@@ -69,6 +73,9 @@ def criar_funcionario(requisicao):
 
     return redirect('tela_inicial_prestador')
 
+def criar_cliente(requisicao):
+    id_empresa = requisicao.session["id_empresa"]
+    nome_cliente = requisicao.POST["nome_cliente"]
 
 def criar_servico(requisicao):
     id_empresa = requisicao.POST['id_empresa']
@@ -112,4 +119,33 @@ def verifica_botoes_servico(requisicao):
     elif 'excluir_servico' in requisicao.POST:
         excluir_servico(requisicao)
 
+    return redirect("tela_inicial_prestador")
+
+def verifica_botoes_cliente(requisicao):
+    if 'editar_cliente' in requisicao.POST:
+        editar_cliente(requisicao)
+        return redirect("tela_inicial_prestador")
+    elif 'excluir_cliente' in requisicao.POST:
+        excluir_cliente(requisicao) 
         return redirect('tela_inicial_prestador')
+
+def editar_cliente(requisicao):
+    id_cliente = requisicao.POST['id_cliente']
+    nome_novo = requisicao.POST['nome_cliente']
+
+    cliente = Cliente.objects.get(id=id_cliente)
+
+    cliente.nome = nome_novo
+    cliente.save()
+
+    return redirect("tela_inicial_prestador")
+
+def excluir_cliente(requisicao):
+    id_cliente = requisicao.POST['id_cliente']
+
+    cliente = Cliente.objects.get(id=id_cliente)
+
+    cliente.ativo = False
+    cliente.save()
+
+    return redirect("tela_inicial_prestador")

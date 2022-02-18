@@ -1,4 +1,3 @@
-from asyncio.windows_events import NULL
 from django.shortcuts import redirect, render
 from Agendador.views import *
 from django.contrib.auth import authenticate, login

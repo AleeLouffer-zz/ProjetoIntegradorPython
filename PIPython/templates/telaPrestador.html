@@ -22,13 +22,8 @@
           class="bi bi-pencil-square"
           viewBox="0 0 16 16"
         >
-          <path
-            d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"
-          />
-          <path
-            fill-rule="evenodd"
-            d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"
-          />
+          <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+          <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
         </svg>
       </button>
       <div>
@@ -40,9 +35,7 @@
     <h1>Funcionários cadastrados</h1>
     <div class="caixa-func-cadastrados">
       {% for funcionario in funcionarios %}
-      <button
-        onclick="ExibirEditarFuncionario('{{funcionario.nome}}', '{{funcionario.id}}')"
-      >
+      <button onclick="ExibirEditarFuncionario('{{funcionario.nome}}', '{{funcionario.id}}')">
         {{funcionario.nome}}
       </button>
       {% endfor%}
@@ -74,11 +67,7 @@
       </form>
       <form action="{% url 'verifica_botoes_funcionario'%}" method="post">
         {% csrf_token %}
-        <div
-          id="checkBoxFuncEdit"
-          style="display: none"
-          class="funcionario-informacoes"
-        >
+        <div id="checkBoxFuncEdit" style="display: none" class="funcionario-informacoes">
           <div class="col-1">
             <input
               type="text"
@@ -103,9 +92,7 @@
     <h1>Serviços cadastrados</h1>
     <div class="caixa-serv-cadastrados">
       {% for servico in servicos %}
-      <button
-        onclick="ExibirEditarServico('{{servico.nome}}', '{{servico.preco}}', '{{servico.descricao}}', '{{servico.id}}')"
-      >
+      <button onclick="ExibirEditarServico('{{servico.nome}}', '{{servico.preco}}', '{{servico.descricao}}', '{{servico.id}}')">
         {{servico.nome}}
       </button>
       {% endfor%}
@@ -152,14 +139,7 @@
         >
           <div class="col-1">
             <input type="text" name="servico_nome" id="servico_nome" />
-            <input
-              type="text"
-              id="servico_valor"
-              name="servico_valor"
-              cols="30"
-              rows="5"
-              class="valor"
-            />
+            <input type="text" id="servico_valor" name="servico_valor" cols="30" rows="5" class="valor"/>
           </div>
           <div class="col-2">
             <input
@@ -170,6 +150,39 @@
             />
             <button type="submit" name="editar_servico" class="btn-confirmar">Editar</button>
             <button type="submit" name="excluir_servico" class="btn-excluir">Excluir</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="cliente-cadastrados">
+    <h1> Clientes cadastrados</h1>
+    <div class="caixa-cliente-cadastrados">
+      {% for cliente in clientes %}
+      <button onclick="ExibirEditarCliente('{{cliente.nome}}', '{{cliente.id}}')">
+        {{cliente.nome}}
+      </button>
+      {% endfor%}
+
+      <button onclick="ExibirCadastroCliente()" class="mais">+</button>
+      <form action="{% url 'criar_cliente' %}" method="POST">
+        {% csrf_token %}
+        <div id="checkBoxCliente" style="display: none" class="funcionario-informacoes">
+          <div class="col-1">
+            <input type="text" class="Nome" name="nome_cliente" placeholder="Nome Completo" />
+            <button type="submit" class="btn-confirmar">Confirmar</button>
+          </div>
+        </div>
+      </form>
+      <form action="{% url 'verifica_botoes_cliente'%}" method="post">
+        {% csrf_token %}
+        <div id="checkBoxClienteEdit" style="display: none" class="funcionario-informacoes">
+          <div class="col-1">
+            <input type="text" name="id_cliente" id="id_cliente" hidden/>
+            <input type="text" class="Nome" name="nome_cliente" id="nome_cliente" />
+            <button type="submit" name="editar_cliente" class="btn-confirmar"> Salvar </button>
+            <button type="submit" name="excluir_cliente" class="btn-confirmar"> Excluir </button>
           </div>
         </div>
       </form>
