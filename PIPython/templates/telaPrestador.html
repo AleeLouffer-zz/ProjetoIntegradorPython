@@ -82,12 +82,6 @@
           <div class="col-1">
             <input
               type="text"
-              name="id_empresa"
-              value="{{empresa.id}}"
-              hidden
-            />
-            <input
-              type="text"
               name="id_funcionario"
               id="id_funcionario"
               hidden
@@ -179,6 +173,10 @@
       </form>
     </div>
   </div>
+  <form action="{% url 'tela_agenda' %}" method="POST">
+    {% csrf_token %}
+    <button type="submit">Agendamento</button>
+  </form>
 </div>
 <script>
   function EditarInformacoesEmpresa(empresaNome, empresaEmail) {
