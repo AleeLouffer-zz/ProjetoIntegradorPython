@@ -1,14 +1,22 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from Agendador.views import *
+from django.contrib.auth import authenticate, login
 from Agendador.views import *
 
-def Tela_Inicial(requisicao):
-    return render(requisicao, '../templates/telaPrestador.html')
+def tela_login(requisicao):
+    return render(requisicao, '../templates/login/login.html')
 
-def Entrar(requisicao):
+def realizar_login(requisicao):
     email = requisicao.POST['email']
     senha = requisicao.POST['senha']
+    
+    user = authenticate(requisicao, username=email, password=senha)
 
-    autenticate (email, senha)
-    autenticate.id_empresa
-
-    tela_inicial_prestador(id_empresa)
+    if user is not None:
+        if user.is_active:
+            login(requisicao, user)
+            requisicao.session["id_empresa"] = user.id
+            return redirect("/empresa/")
+        
+    else:
+        return redirect(tela_login)

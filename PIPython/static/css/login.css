@@ -1,0 +1,76 @@
+body {
+    width: 90vw;
+    margin: 100px auto;
+    padding: 10px;
+    background:  var(--cor-fundo);
+    font-family: var(--fonte-Source-Sans-Pro);
+}
+
+.titulo__login {
+    padding-top: 0px;
+    font-size: 24px;
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.container__login {
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 24px;
+    border-radius: 20px;
+    background-color: white;
+    
+    box-shadow: 2.5px 2.5px #8888889d;
+}
+
+.input__texto {
+    font-family: 'Montserrat', sans-serif;
+    background-color: whitesmoke;
+    
+    max-width: 400px;
+    min-width: 180px;
+    width: 85%;
+    height: 30px;
+    
+    padding: 2px 4px;
+    margin:0;
+
+    border: none;
+    border-radius: 5px;
+}
+
+.input__texto::placeholder{
+    color:black;
+}
+
+.formulario__login{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    min-width: 400px;
+}
+
+.botao__azul{
+    max-width: 400px;
+    width: 25%;
+    min-width: 180px;
+    height: 30px;
+    
+    padding: 2px 4px;
+    margin: 16px;
+
+    border: none;
+    border-radius: 5px;
+
+    background-color: steelblue;
+    cursor: pointer;
+}
+
+.cadastro{
+    display: block;
+    font-size: 12px;
+    margin-top: 16px;
+}
