@@ -1,0 +1,117 @@
+:root {
+  --cor-primaria: #004aad;
+  --cor--secundaria: #f49223;
+  --cor-fundo: whitesmoke;
+  --cinza-claro: #e5e5e5;
+  --verde: #46b93c;
+  --vermelho: #f83a3a;
+  --fonte-Source-Sans-Pro: "Source Sans Pro", sans-serif;
+}
+
+body {
+  font-family: "Montserrat", sans-serif;
+  background: whitesmoke;
+  /* font-family: var(--fonte-Source-Sans-Pro); */
+}
+
+.corpo {
+  background-color: transparent;
+  width: 90vw;
+  margin: 40px auto;
+  padding: 10px;
+  min-width: 300px;
+}
+
+h1.titulo {
+  font-size: 32px;
+  margin: 8px;
+}
+
+select.select {
+  background-color: var(--cor-fundo);
+  border: 1px solid var(--cinza-claro);
+  border-radius: 5px;
+
+  min-width: 250px;
+
+  padding: 5px;
+}
+
+button.btn {
+  color: var(--cor-fundo);
+  text-align: center;
+
+  border: none;
+  border-radius: 5px;
+
+  padding: 5px;
+
+  min-width: 100px;
+  cursor: pointer;
+}
+
+.btn__filtrar {
+  background-color: var(--cor--secundaria);
+  width: 100%;
+}
+
+.btn__adicionar {
+  background-color: var(--verde);
+  margin: 8px 0;
+  width: 100%;
+}
+
+.btn__cancelar {
+  background-color: var(--vermelho);
+}
+
+input#input__data__sem__label {
+  background-color: whitesmoke;
+
+  border-radius: 5px;
+  min-width: 200px;
+  border: 1px solid var(--cinza-claro);
+  padding: 5px;
+}
+
+.btn__icon{
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
+}
+
+.nao__encontrado{
+  background-color: white;
+  
+  border-radius: 5px;
+  border: 1px solid var(--cinza-claro);
+
+  min-width: 200px;
+  padding: 8px;
+  margin: 8px 0;
+}
+
+.sub__titulo{
+  font-size: 24px;
+}
+
+@media screen and (min-width: 950px) {
+  .corpo {
+    width: 60vw;
+    max-width: 60vw;
+    min-width: 850px;
+
+    margin: 40px auto;
+    padding: 30px;
+
+    background-color: white;
+    border-radius: 30px;
+    box-shadow: 2px 2px 40px gray;
+  }
+
+  .nao__encontrado{
+    background-color: whitesmoke;
+  }
+}
