@@ -7,6 +7,7 @@ function ExibirCadastroFuncionario() {
     x.style.display = "none";
   }
 }
+
 function ExibirCadastroServico() {
   document.getElementById("checkBoxServEdit").style.display = "none";
   var x = document.getElementById("checkBoxServ");
@@ -16,6 +17,8 @@ function ExibirCadastroServico() {
     x.style.display = "none";
   }
 }
+
+
 function ExibirEditarFuncionario(nomeFuncionario, idFuncionario) {
   document.getElementById("checkBoxFunc").style.display = "none";
   var boxEditFunc= document.getElementById("checkBoxFuncEdit"); 
@@ -47,5 +50,33 @@ function ExibirEditarServico(nome, valor, descricao, servicoId) {
     document.getElementById('servico_descricao').value = descricao;
     document.getElementById('servico_valor').value= valor;
     document.getElementById("servico_nome").value = nome;
+  }
+}
+
+
+function ExibirCadastroCliente() {
+  document.getElementById("checkBoxClienteEdit").style.display = "none";
+  var x = document.getElementById("checkBoxCliente");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+
+function ExibirEditarCliente(nomeCliente, idCliente) {
+  document.getElementById("checkBoxCliente").style.display = "none";
+  var boxEditFunc= document.getElementById("checkBoxClienteEdit"); 
+
+  if (boxEditFunc.style.display != "none") {
+    boxEditFunc.style.display = "none";
+  } else {
+    boxEditFunc.style.display = "block";
+    document.getElementById("checkBoxCliente").style.display = "none";
+
+    document.getElementById("nome_cliente").value = nomeCliente;
+    
+    document.getElementById("id_cliente").value = idCliente;
+    console.log(document.getElementById("id_cliente"));
   }
 }

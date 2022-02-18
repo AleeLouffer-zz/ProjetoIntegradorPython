@@ -1,25 +1,13 @@
-from asyncio.windows_events import NULL
 from django.shortcuts import redirect, render
 from Agendador.views import *
 from django.contrib.auth import authenticate, login
 from Agendador.views import *
 from Login.models import Empresa
 
-# Ir na branch do CRUD do prestador e refatorar
 def Perfil(requisicao, id_empresa):
     print(id_empresa)
 
     return render(requisicao, 'telaPrestador.html')
-
-# Autentica e manda para o perfil
-# def Entrar(requisicao):
-#     email = requisicao.POST['email']
-#     senha = requisicao.POST['senha']
-
-#     autenticate (email, senha)
-#     autenticate.id_empresa
-
-#     tela_inicial_prestador(id_empresa)
 
 def renderizar_tela_cadastro(requisicao):
     return render(requisicao, 'telaCadastro.html')
