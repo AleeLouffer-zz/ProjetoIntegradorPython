@@ -2,107 +2,119 @@
 
 {% block content %}
         <div class="corpo">
-            <header>
-                <h1 class="titulo"> Contas a Receber </h1>
-                <div class="container-linha1">
-                    <div class="campo-pesquisa">
-                        <label for="pesquisar"> 
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                              <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-                            </svg> 
-                        </label>
-                        <input id="pesquisar" type="text" placeholder="Pesquisar">
-                    </div>
-                    <a href="adicionar.html" class="container_botoes_finais btn-adicionar"> + Adicionar </a>
-                    <button class="container_botoes_finais btn-relatorio"> Gerar Relatório </button>
-                </div>
-                <div class="linha-opcoes">
-                    <div class="container-datas">
-                        <div class="data inicio">
-                            <label for="data-inicio"> Inicio: </label>
-                            <input id="data-inicio" type="date">
+            <h1 class="titulo"> Contas a Receber </h1>
+            
+            <div class="container-linha1">
+                <a href="adicionar.html" class="container_botoes_finais btn__adicionar"> + Adicionar </a>
+                <button class="container_botoes_finais btn__relatorio"> Gerar Relatório </button>
+            </div>
+            
+            <form action="" method="POST"> {% csrf_token %}
+                <h2 class="sub__titulo"> Filtros </h2>
+                <section class="filtros__contas_a_receber">
+                    <div class="container__datas">
+                        <div class="data">
+                            <label for="data-inicio" class="label__input"> Data Inicial: </label>
+                            <input id="data-inicio" type="date" class="input__com__label">
                         </div>
-                        <div class="data fim">
-                            <label for="data-fim"> Final: </label>
-                            <input id="data-fim" type="date">
+                        <div class="data">
+                            <label for="data-fim" class="label__input"> Data Final: </label>
+                            <input id="data-fim" type="date" class="input__com__label">
                         </div>
                     </div>
-                    <div class="filtros">
-                        <select class="status">
-                            <option value="status"> Status </option>
-                            <option value="Pendente"> Pedente </option>
-                            <option value="Quitado"> Quitado </option>
-                        </select>
-                        <select class="funcionario">
-                            <option value="funcionario"> Funcionário </option>
-                            <option value="Cleide"> Cleide </option>
-                            <option value="Peggy"> Peggy </option>
-                            <option value="Ravona"> Ravona </option>
-                        </select>
-                    </div>
-                </div>
-            </header>
+                    
+                    <select name="Status" class="select preencher">
+                        <option value="Pendente"> Pedente </option>
+                        <option value="Quitado"> Quitado </option>
+                    </select>
+
+                    <select id="funcionario" name="funcionario" class="select preencher">
+                        <option>Todos Funcionários</option>
+                        {% for funcionario in funcionarios %}
+                            <option value="{{funcionario.id}}">{{funcionario.nome}}</option>
+                        {% endfor %}
+                    </select>
+                    
+                    <select id="servico" name="servico" class="select preencher">
+                        <option>Todos Servicos</option>
+                        {% for servico in servicos %}
+                          <option value="{{servico.id}}">{{servico.nome}}</option>
+                        {% endfor %}
+                    </select>
+
+                    <button type="submit" class="btn btn__filtrar"> Filtrar </button>
+                </section>
+            </form>
+  
             <section class="section-total">
                 <div class="total">
-                    <h3> Total de Contas Recebidas </h3>
+                    <h3> Total Recebido </h3>
                     <p class="recebidas"> R$ 40,00 </p>
                 </div>
                 <div class="total">
-                    <h3> Total de Contas a Receber </h3>
+                    <h3> Total a Receber </h3>
                     <p class="a-receber"> R$ 40,00 </p>
                 </div>
             </section>
-            <section>
-                <details>
-                    <summary>
-                        <div class="servico">
-                            <div class="servico-cabecalho">
-                                <div class="servico-e-valor">
-                                    <h1 class="servico-titulo">Corte de cabelo</h1>
-                                    <p class="servico-preco"> R$ 40,00 </p>
-                                </div>
-                                    <div class="servico-status">
-                                        <p class="status-quitado"> Quitado </p>
-                                    </div>
+            <section class="contas"> 
+                <details class="conta">
+                    <summary class="summary">
+                        <div class="conta__cabecalho">
+                            <div class="servico__e__valor">
+                                <h3 class="servico__titulo">Corte de cabelo</h3>
+                                <p class="servico__preco"> R$ 40,00 </p>
                             </div>
-                            <p class="servico-paragrafo"> Funcionário: Cleide</p>
-                            <p class="servico-paragrafo"> Cliente: Fulainha</p>
+                            <p class="status__conta quitado"> Quitado </p>
                         </div>
                     </summary>
-                    <p class="servico-paragrafo">Data de vencimento: 30/10/2021</p>
-                    <div class="pago-e-editar">
-                        <p class="servico-paragrafo">Pago em 30/10/2021 </p>
-                        <div class="servico-editar">
-                            <a href="editar.html" class="servico-editar-icone"><img src="../icones/editar.svg" alt="Icone de editar"></a>
-                        </div>
+                    <div class="caixa__informacoes">
+                        <h1 class="titulo__informacoes"> Informações Gerais </h1>
+                        <p class="servico__paragrafo"> Funcionário: Cleide</p>
+                        <p class="servico__paragrafo"> Cliente: Fulainha</p>
                     </div>
+                    <div class="caixa__informacoes">
+                        <h1 class="titulo__informacoes"> Informações de Pagamento </h1>
+                        <p class="servico__paragrafo">Data de vencimento: 30/10/2021</p>
+                        <p class="servico__paragrafo">Pago em 30/10/2021 </p>
+                    </div>
+                    
+                    <button class="btn__icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                            <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                        </svg>
+                    </button>
                 </details>
-                <details>
-                    <summary>
-                        <div class="servico">
-                            <div class="status-e-edicao">
+
+                <details class="conta">
+                    <summary class="summary">
+                        <div class="conta__cabecalho">
+                            <div class="servico__e__valor">
+                                <h3 class="servico__titulo">Corte de cabelo</h3>
+                                <p class="servico__preco"> R$ 40,00 </p>
                             </div>
-                            <div class="servico-cabecalho">
-                                <div class="servico-e-valor">
-                                    <h1 class="servico-titulo">Corte de cabelo</h1>
-                                    <p class="servico-preco"> R$ 40,00 </p>
-                                </div>
-                                <div class="servico-status">
-                                    <p class="status-pendente"> Pendente </p>
-                                </div>
-                            </div>
-                            <p class="servico-paragrafo"> Funcionário: Cleide</p>
-                            <p class="servico-paragrafo"> Cliente: Fulainha</p>
+                            <p class="status__conta pendente"> Pendente </p>
                         </div>
                     </summary>
-                    <p class="servico-paragrafo">Data de vencimento: 30/10/2021</p>
-                    <div class="pago-e-editar">
-                        <p class="servico-paragrafo">Pago em - </p>
-                        <div class="servico-editar">
-                            <a href="editar.html" class="servico-editar-icone"><img src="editar-preto.svg" alt="Icone de editar"></a>
-                        </div>
+                    <div class="caixa__informacoes">
+                        <h1 class="titulo__informacoes"> Informações Gerais </h1>
+                        <p class="servico__paragrafo"> Funcionário: Cleide</p>
+                        <p class="servico__paragrafo"> Cliente: Fulainha</p>
                     </div>
+                    <div class="caixa__informacoes">
+                        <h1 class="titulo__informacoes"> Informações de Pagamento </h1>
+                        <p class="servico__paragrafo">Data de vencimento: 30/10/2021</p>
+                        <p class="servico__paragrafo">Pago em - </p>
+                    </div>
+                    
+                    <button class="btn__icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                            <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                        </svg>
+                    </button>
                 </details>
+                
             </section>
 
         </div>

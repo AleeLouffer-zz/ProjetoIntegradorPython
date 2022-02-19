@@ -5,6 +5,7 @@
   --cinza-claro: #e5e5e5;
   --verde: #46b93c;
   --vermelho: #f83a3a;
+
   --fonte-Source-Sans-Pro: "Source Sans Pro", sans-serif;
 }
 
@@ -46,13 +47,13 @@ button.btn {
 
   padding: 5px;
 
-  min-width: 100px;
   cursor: pointer;
 }
 
 .btn__filtrar {
   background-color: var(--cor--secundaria);
   width: 100%;
+  min-width: 375px;
 }
 
 .btn.btn__adicionar {

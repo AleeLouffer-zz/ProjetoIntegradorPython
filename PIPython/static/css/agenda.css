@@ -97,12 +97,7 @@
 		margin: 16px 0;
 	}
   
-	input#input__data__sem__label,
-	select.select {
-	  width: 20%;
-	}
-  
-	button.btn__filtrar {
+	button.btn__filtrar.pequeno {
 	  width: 10%;
 	}
   

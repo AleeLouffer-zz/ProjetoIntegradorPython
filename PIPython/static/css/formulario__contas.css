@@ -26,11 +26,16 @@ input::placeholder{
     margin-bottom: 10px;
 } 
 
-.corpo .informacoes-emissao > h1{
+.titulo__informacoes{
     font-size: 16px;
+    font-weight: bold;
 }
 
-.informacoes-gerais-input-text, .informacoes-gerais-funcionario, 
+.titulo__informacoes.com__margem{
+    margin: 16px 0;
+}
+
+.informacoes-gerais-input-text, 
 .informacoes-pagamento-input-text, .informacoes-pagamento-forma-de-pagamento {
     background-color: var(--cor-fundo);
     
@@ -105,7 +110,7 @@ input::placeholder{
     min-width: 375px;
 }
 
-.botao{
+.botao__contas__a__receber{
     color: var(--cor-fundo);
     text-align: center;
 

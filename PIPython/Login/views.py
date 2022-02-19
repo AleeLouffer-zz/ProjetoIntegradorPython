@@ -36,6 +36,8 @@ def realizar_login(requisicao):
     else:
         return redirect(tela_login)
 
+
+############# REMOVER ###################################
 def tela_agendamento(requisicao):
     return render(requisicao, '../templates/agendamento/agenda.html')
 
@@ -53,3 +55,8 @@ def tela_contas_a_receber(requisicao):
 
 def contas_adicionar(requisicao):
     return render(requisicao, '../templates/contasAReceber/adicionar.html')
+
+def contas__editar(requisicao):
+    return render(requisicao, '../templates/contasAReceber/editar.html')
+
+############# REMOVER ###################################
