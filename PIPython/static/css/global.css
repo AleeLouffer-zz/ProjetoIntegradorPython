@@ -32,6 +32,11 @@ h1.titulo {
   font-size: 24px;
 }
 
+h1.titulo.centralizado {
+  text-align: center;
+  margin-bottom: 16px;
+}
+
 select.select {
   background-color: var(--cor-fundo);
   border: 1px solid var(--cinza-claro);
@@ -46,19 +51,6 @@ select.select {
 
 .negrito{
   font-weight: bold;
-}
-
-input#input__data__sem__label {
-  background-color: whitesmoke;
-
-  border-radius: 5px;
-  min-width: 200px;
-  border: 1px solid var(--cinza-claro);
-  padding: 5px;
-}
-
-input.placeholder__cinza::placeholder {
-  color: gray;
 }
 
 .nao__encontrado{

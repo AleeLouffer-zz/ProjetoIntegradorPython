@@ -15,30 +15,8 @@
   margin-bottom: 30px;
 }
 
-.input__texto {
-  background-color: whitesmoke;
-  width: 85%;
-}
-
-.input__texto::placeholder {
-  color: black;
-}
-
 .botao__login {
   width: 25%;
-}
-
-.input__texto {
-  min-width: 180px;
-  height: 30px;
-
-  padding: 2px 4px;
-  margin: 0;
-
-  border: none;
-  border-radius: 5px;
-
-  display: block;
 }
 
 .formulario__login {

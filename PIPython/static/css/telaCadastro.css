@@ -32,19 +32,9 @@
   color: rgb(102, 100, 100);
 }
 
-
 .btn__continuar {
   text-align: center;
   margin: 16px 0;
-}
-
-.continuar:hover {
-  background-color: rgba(17, 73, 196, 0.897);
-  color: white;
-  font-size: 18px;
-  border-style: none;
-  border-radius: 20px;
-  padding: 6px 12px;
 }
 
 @media screen and (min-width: 720px)  {
