@@ -1,6 +1,6 @@
 {% extends 'index.html' %}
 
-{% block content %}
+{% block content %} {% include 'menu.html'%}
 	<div class="corpo">
         <h1 class="titulo centralizado">Editar agendamento</h1>
 		<form action="{% url 'editar_agendamento' %}" method="POST"> {% csrf_token %}

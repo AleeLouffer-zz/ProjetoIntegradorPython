@@ -71,12 +71,12 @@ def prestador(requisicao):
 def tela_contas_a_receber(requisicao):
     return render(requisicao, '../templates/contasAReceber/contasAReceber.html')
 
-    tela_inicial_prestador(id_empresa)
 
 def contas_a_receber(requisicao):
     return render(requisicao, '../templates/contasAReceber/contasAReceber.html')
 
 def agenda_prestador(requisicao):
     return render(requisicao,'../templates/agendamento/agenda.html')
+
 def contas_adicionar(requisicao):
     return render(requisicao, '../templates/contasAReceber/adicionar.html')
