@@ -75,6 +75,20 @@ function ExibirEditarCliente(nomeCliente, idCliente) {
     document.getElementById("nome_cliente").value = nomeCliente;
     
     document.getElementById("id_cliente").value = idCliente;
-    console.log(document.getElementById("id_cliente"));
+  }
+}
+
+
+function EditarEmpresa(){  
+  var display_informacoes_texto = document.querySelector(".informacoes__empresa__texto");
+  var display_formulario_edicao = document.querySelector(".editar__empresa");
+
+  if (display_formulario_edicao.style.display === "none"){
+    display_formulario_edicao.style.display = "block";
+    display_informacoes_texto.style.display = "none";
+  }
+  else{
+    display_formulario_edicao.style.display = "none";
+    display_informacoes_texto.style.display = "block";
   }
 }

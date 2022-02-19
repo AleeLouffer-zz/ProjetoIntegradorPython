@@ -36,7 +36,7 @@ def realizar_login(requisicao):
         return redirect('Login:tela_login')
     
 def editar_empresa(requisicao):
-    id_empresa = requisicao.POST['id_empresa']
+    id_empresa = requisicao.session["id_empresa"]
     nome_empresa = requisicao.POST['nome_empresa']
     email_empresa = requisicao.POST['email_empresa']
     senha_empresa = requisicao.POST['senha_empresa']

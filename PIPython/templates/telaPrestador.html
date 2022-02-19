@@ -2,20 +2,24 @@
 <div class="corpo">
   <section class="informacoes__empresa__cabecalho">
     <div class="informacoes__empresa">
-      <form class="form_editar_empresa" action="{% url 'Login:editarEmpresa' %}" method="post">   {% csrf_token %}
-        <input type="text" name="id_empresa" value="{{empresa.id}}" hidden/>
+      <div class="informacoes__empresa__texto">
         <h1 class="titulo">{{empresa.nome_fantasia}}</h1>
         <p class="empresa__email">{{empresa.email}}</p>
-      </form>
+      </div>
+      <div class="editar__empresa" style="display: none;">
+        <h2 class="sub__titulo"> Editar Empresa </h2>
+        <form class="formulario__editar__empresa" action="{% url 'Login:editarEmpresa' %}" method="post">   {% csrf_token %}
+          <input type="text" name="nome_empresa" value="{{empresa.nome_fantasia}}" class="input__de__texto fundo__branco">
+          <input type="text" name="email_empresa" value="{{empresa.email}}" class="input__de__texto fundo__branco">
+          <input type="password" name="senha_empresa" class="input__de__texto fundo__branco" placeholder="Alterar senha">
+
+          <button type="submit" class="btn btn__adicionar"> Alterar </button>
+          <button type="submit" name="excluir_funcionario" class="btn btn__cancelar">Cancelar</button>
+        </form>
+      </div>
     </div>
-    <button class="btn__icon" onclick="EditarInformacoesEmpresa('{{ empresa.nome_fantasia }}', '{{ empresa.email }}')">
-      <svg class="icon" xmlns="http://www.w3.org/2000/svg"
-        width="20"
-        height="20"
-        fill="currentColor"
-        class="bi bi-pencil-square"
-        viewBox="0 0 16 16"
-      >
+    <button class="btn__icon" onclick="EditarEmpresa()">
+      <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
         <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
         <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
       </svg>
@@ -150,81 +154,4 @@
 
 </div>
 
-<script>
-  function EditarInformacoesEmpresa(empresaNome, empresaEmail) {
-  //ver se os inputs existem
-  var input = document.querySelector("#input_edicao");
-  if (input === null) {
-    //se existem troco os inputs para div
-    TrocarDivParaInput();
-  } else {
-    //se nao troco de div para input
-    TrocaInputParaElemento(empresaNome, empresaEmail);
-  }
-}
-
-function TrocarDivParaInput() {
-  var nome_empresa = document.getElementsByClassName("titulo")[0].innerHTML;
-  var email_empresa =
-    document.getElementsByClassName("empresa__email")[0].innerHTML;
-
-  var elemento_nome = document.querySelector(".titulo");
-  var elemento_email = document.querySelector(".empresa__email");
-
-  var pai_dos_elementos = elemento_nome.parentNode;
-
-  var input_edicao = document.createElement("input");
-  var input_edicao2 = document.createElement("input");
-  var input_senha = document.createElement("input");
-
-  if (document.querySelector(".botao__confirmar") == null) {
-    var botao_confirmar = document.createElement("button");
-    botao_confirmar.setAttribute("class", "botao__confirmar");
-    botao_confirmar.setAttribute("type", "submit");
-    botao_confirmar.innerHTML = "Confirmar";
-  }
-
-  input_edicao.setAttribute("id", "input_edicao");
-  input_edicao.setAttribute("name", "nome_empresa");
-  input_edicao.setAttribute("class", "input_form_editar");
-  input_edicao2.setAttribute("name", "email_empresa");
-  input_edicao2.setAttribute("id", "input_edicao2");
-  input_edicao2.setAttribute("class", "input_form_editar");
-  input_senha.setAttribute("name", "senha_empresa");
-  input_senha.setAttribute("id", "empresa_senha");
-  input_senha.setAttribute("type", "password");
-  input_senha.setAttribute("class", "input_form_editar");
-
-  input_edicao.value = nome_empresa;
-  input_edicao2.value = email_empresa;
-
-  pai_dos_elementos.replaceChild(input_edicao, elemento_nome);
-  pai_dos_elementos.replaceChild(input_edicao2, elemento_email);
-  pai_dos_elementos.appendChild(input_senha);
-  pai_dos_elementos.appendChild(botao_confirmar);
-}
-function TrocaInputParaElemento(valor_input_nome, valor_iput_email) {
-  //pega o value dos inputs
-  var input_nome = document.querySelector("#input_edicao");
-  var input_email = document.querySelector("#input_edicao2");
-  var input_senha = document.querySelector("#empresa_senha");
-  var botao_confirmar = document.querySelector(".botao__confirmar");
-  //cria a div
-  var div_nome = document.createElement("h1");
-  var div_email = document.createElement("p");
-  //seta as classes normais da div
-  div_nome.setAttribute("class", "titulo");
-  div_email.setAttribute("class", "empresa__email");  
-  //atribui o os values para o innerhtml das divs
-  div_nome.innerHTML = valor_input_nome;
-  div_email.innerHTML = valor_iput_email;
-  //faz o parent trocar
-  var parente = input_nome.parentNode;
-  parente.replaceChild(div_nome, input_nome);
-  parente.replaceChild(div_email, input_email);
-  //Pega o botao e tira do pai
-  parente.removeChild(botao_confirmar);
-  parente.removeChild(input_senha);
-}
-</script>
 {% endblock %}
