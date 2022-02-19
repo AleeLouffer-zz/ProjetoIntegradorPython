@@ -5,7 +5,7 @@
 <div class="foto__logo">
     <img src="logo.png" id="logo">
 </div>
-<form action="{% url 'cadastrar_empresa' %}" method="post">
+<form action="{% url 'Login:cadastrar_empresa' %}" method="post">
     {% csrf_token %}
     <div class="informacoes__geral">
         <div class="info__cadastro">

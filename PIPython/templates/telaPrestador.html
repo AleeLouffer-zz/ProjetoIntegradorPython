@@ -3,7 +3,7 @@
   <div class="infos">
     <img src="../Imagens/image.jpg" alt="imagem do prestador" />
     <div class="infos-txt">
-      <form class="form_editar_empresa" action="{% url 'editarEmpresa' %}" method="post">
+      <form class="form_editar_empresa" action="{% url 'Login:editarEmpresa' %}" method="post">
         {% csrf_token %}
         <input type="text" name="id_empresa" value="{{empresa.id}}" hidden />
         <h1 class="titulo">{{empresa.nome_fantasia}}</h1>
@@ -192,6 +192,10 @@
     {% csrf_token %}
     <button type="submit">Agendamento</button>
   </form>
+  <form action="{% url 'tela_contas_a_receber' %}" method="POST">
+    {% csrf_token %}
+    <button type="submit">Contas a Receber</button>
+  </form>
 </div>
 <script>
   function EditarInformacoesEmpresa(empresaNome, empresaEmail) {
@@ -207,7 +211,6 @@
   }
 
   function TrocarDivParaInput() {
-    console.log("entrei div para input ");
     var nome_empresa = document.getElementsByClassName("titulo")[0].innerHTML;
     var email_empresa =
       document.getElementsByClassName("empresa__email")[0].innerHTML;
