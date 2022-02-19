@@ -48,14 +48,24 @@ button.btn {
   cursor: pointer;
 }
 
-.btn__filtrar {
+.altura__32px{
+  height: 32px;
+}
+
+.btn__filtrar, .btn.laranja {
   background-color: var(--cor--secundaria);
 }
 
 .btn.btn__adicionar {
   background-color: var(--verde);
-  margin: 8px 0;
+}
+
+.btn.preencher{
   width: 100%;
+}
+
+.negrito{
+  font-weight: bold;
 }
 
 .btn.btn__cancelar {
@@ -69,6 +79,10 @@ input#input__data__sem__label {
   min-width: 200px;
   border: 1px solid var(--cinza-claro);
   padding: 5px;
+}
+
+input.placeholder__cinza::placeholder {
+  color: gray;
 }
 
 .btn__icon{

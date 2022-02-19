@@ -25,3 +25,6 @@ def editar_conta(requisicao):
     }
 
     return render(requisicao, '../templates/contas_a_receber/editar.html', data)
+
+def adicionar_conta(requisicao):
+    return render(requisicao, '../templates/contas_a_receber/adicionar.html')

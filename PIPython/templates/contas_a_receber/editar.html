@@ -6,46 +6,76 @@
             <form action="">
                 <div class="informacoes-gerais">
                     <div class="informacoes-emissao">
-                        <h1> Informações Gerais </h1>
-                        <div class="data-emissao">
-                            <p>Data de Emissão: 18/11/2021</p>
+                        <h1 class="titulo__informacoes negrito"> Informações Gerais </h1>
+                        <div class="data__emissao">
+                            <p class="data__emissao__paragrafo negrito">Data de Emissão: 18/11/2021</p>
                         </div>
-                    </div>
-                    <input type="text" class="informacoes-gerais-input-text" placeholder="Serviço">
-                    <input type="text" class="informacoes-gerais-input-text" placeholder="Cliente">
-                    <select class="select">
-                        <option value="status"> Funcionário </option>
-                        <option value="status"> Cleide </option>
-                        <option value="Pendente"> Peggy </option>
-                        <option value="Quitado"> Ravona </option>
-                    </select>
-                </div>
-                <div class="informacoes-pagamento">
-                    <h1> Informações de Pagamento </h1>
-                    <div class="flex-row-item">
-                        <select class="informacoes-pagamento-forma-de-pagamento">
-                            <option value="Pendente"> Forma de Pagamento </option>
-                            <option value="Pendente"> Cartão de Crédito </option>
-                            <option value="Quitado"> Cartão de Débito </option>
-                            <option value="status"> À Vista </option>
-                            <option value="Quitado"> Boleto </option>
-                            <option value="Quitado"> Pix </option>
+                    </div>      
+                    <div class="selecoes">
+                        <select id="servico" name="servico" class="select altura__32px">
+                            <option>Todos Servicos</option>
+                            {% for servico in servicos %}
+                              <option value="{{servico.id}}">{{servico.nome}}</option>
+                            {% endfor %}
                         </select>
-                        <input type="text" class="informacoes-pagamento-input-text sem-margem" placeholder="Valor">
+                        
+                        <select id="funcionario" name="funcionario" class="select altura__32px">
+                            <option>Todos Funcionários</option>
+                            {% for funcionario in funcionarios %}
+                                <option value="{{funcionario.id}}">{{funcionario.nome}}</option>
+                            {% endfor %}
+                        </select>
+    
+                        <select id="cliente" name="cliente" class="select altura__32px">
+                            <option>Todos Clientes</option>
+                            {% for cliente in clientes %}
+                              <option value="{{cliente.id}}">{{cliente.nome}}</option>
+                            {% endfor %}
+                        </select>
                     </div>
-                    <div class="container-datas flex-row-item">
-                        <div class="data data-pagamento">
-                            <label for="data-inicio"> Data de Pagamento: </label>
-                            <input id="data-inicio" type="date">
+                </div>
+                <div class="informacoes-pagamento ">
+                    <h1 class="titulo__informacoes com__margem negrito"> Informações de Pagamento </h1>
+                    <div class="container__datas">
+                        <div class="data">
+                            <label for="data-inicio" class="label__input"> Data de Pagamento:  </label>
+                            <input id="data-inicio" type="date" class="input__com__label">
                         </div>
-                        <div class="data data-vencimento sem-margem">
-                            <label for="data-fim"> Data de Vencimento: </label>
-                            <input id="data-fim" type="date">
+                        <div class="data">
+                            <label for="data-fim" class="label__input"> Data de Vencimento: </label>
+                            <input id="data-fim" type="date" class="input__com__label">
                         </div>
+                    </div>              
+
+                    <select class="select altura__32px">
+                        <option value="Pendente"> Forma de Pagamento </option>
+                        <option value="Pendente"> Cartão de Crédito </option>
+                        <option value="Quitado"> Cartão de Débito </option>
+                        <option value="status"> À Vista </option>
+                        <option value="Quitado"> Boleto </option>
+                        <option value="Quitado"> Pix </option>
+                    </select>
+                    <div class="flex-row-item">
+                        <div class="container__input__label">
+                            <label for="valor" class="label__input"> Valor: </label>
+                            <input id="valor" type="number" class="input__com__label placeholder__cinza" placeholder="R$">
+                        </div>
+                        <div class="container__input__label">
+                            <label for="parcela" class="label__input"> Parcela: </label>
+                            <input id="parcela" type="number" class="input__com__label placeholder__cinza" placeholder="-"> 
+                        </div>
+                        <!-- Mostrar parcela apenas para a opção de cartao de crédito -->
                     </div>
-                    <div class="informacoes-pagamento-adicionais flex-row-item">
-                        <input type="text" class="informacoes-pagamento-input-text" placeholder="Desconto">
-                        <input type="text" class="informacoes-pagamento-input-text sem-margem" placeholder="Juros">
+                    <div class="flex-row-item">
+                        <div class="container__input__label">
+                            <label for="desconto" class="label__input"> Desconto: </label>
+                            <input id="desconto" type="number" class="input__com__label placeholder__cinza" placeholder="-">
+                        </div>
+                        <div class="container__input__label">
+                            <label for="juros" class="label__input"> Juros: </label>
+                            <input id="juros" type="number" class="input__com__label placeholder__cinza" placeholder="-"> 
+                        </div>
+                       
                     </div>
                     
                     <div class="informacoes-pagamento-pago">
@@ -57,8 +87,8 @@
                     </div>
                 </div>
                 <div class="botoes">
-                    <button class="botao__contas__a__receber btn-adicionar" type="submit"> Salvar </button>
-                    <button class="botao__contas__a__receber btn-cancelar" type="submit"> Cancelar </button>
+                    <button class="btn btn__cancelar preencher negrito" type="submit"> Cancelar </button>
+                    <button class="btn btn__adicionar preencher negrito" type="submit"> Salvar </button>
                 </div>
             </form>
             
