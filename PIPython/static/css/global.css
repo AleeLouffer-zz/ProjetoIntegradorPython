@@ -28,6 +28,10 @@ h1.titulo {
   margin: 8px;
 }
 
+.sub__titulo{
+  font-size: 24px;
+}
+
 select.select {
   background-color: var(--cor-fundo);
   border: 1px solid var(--cinza-claro);
@@ -36,44 +40,12 @@ select.select {
   padding: 5px;
 }
 
-button.btn {
-  color: var(--cor-fundo);
-  text-align: center;
-
-  border: none;
-  border-radius: 5px;
-
-  padding: 8px;
-
-  cursor: pointer;
-}
-
 .altura__32px{
   height: 32px;
 }
 
-.btn__filtrar, .btn.laranja {
-  background-color: var(--cor--secundaria);
-}
-
-button.btn.btn__azul{
-  background-color: var(--cor-primaria);
-}
-
-.btn.btn__adicionar {
-  background-color: var(--verde);
-}
-
-.btn.preencher{
-  width: 100%;
-}
-
 .negrito{
   font-weight: bold;
-}
-
-.btn.btn__cancelar {
-  background-color: var(--vermelho);
 }
 
 input#input__data__sem__label {
@@ -89,14 +61,6 @@ input.placeholder__cinza::placeholder {
   color: gray;
 }
 
-.btn__icon{
-  border: none;
-  background-color: transparent;
-  cursor: pointer;
-  margin: 0;
-  padding: 0;
-}
-
 .nao__encontrado{
   background-color: white;
   
@@ -106,10 +70,6 @@ input.placeholder__cinza::placeholder {
   min-width: 200px;
   padding: 8px;
   margin: 8px 0;
-}
-
-.sub__titulo{
-  font-size: 24px;
 }
 
 @media screen and (min-width: 950px) {
