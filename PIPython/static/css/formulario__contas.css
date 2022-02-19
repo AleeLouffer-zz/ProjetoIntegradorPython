@@ -1,4 +1,4 @@
-input::placeholder{
+/* input::placeholder{
     color:black;
 }
 
@@ -69,7 +69,6 @@ input::placeholder{
     border-radius: 5px;
 
     padding: 5px;
-    margin-bottom: 10px;
 }
 
 .data label {
@@ -254,4 +253,4 @@ input:checked + .slider:before {
         width: 200px;
         height: 30px;
     }    
-}
+} */

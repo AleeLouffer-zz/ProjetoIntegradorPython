@@ -26,21 +26,26 @@
 .filtros__contas_a_receber {
   display: flex;
   align-items: center;
-  gap: 8px;
   flex-wrap: wrap;
+  gap: 8px;
 
   border-radius: 5px;
 
   padding: 8px;
-  margin: 8px auto;
+  margin: 8px 0;
 }
 
 .container__datas {
   display: flex;
-  align-items: center;
+  
   gap: 8px;
-  width: 100%;
+
   flex-wrap: wrap;
+}
+
+.container__datas select.select{
+  min-width: 130px;
+  width: 100%;
 }
 
 select.select.preencher{
@@ -51,20 +56,18 @@ select.select.preencher{
 .data {
   display: flex;
   align-items: center;
-  justify-content: center;
 
   background-color: var(--cor-fundo);
   border: 1px solid var(--cinza-claro);
   border-radius: 5px;
 
   width: 100%;
-  min-width: 275px;
+  min-width: 260px;
 }
 
 .label__input {
   font-size: 14px;
-  padding-right: 4px;
-  padding-left: 2px;
+  padding: 5px;
 }
 
 .input__com__label {
@@ -90,7 +93,7 @@ section .total {
   justify-content: space-between;
   align-items: center;
 
-  margin: 10px 5px;
+  margin: 10px 0px;
 
   background-color: var(--cor-fundo);
   border-radius: 5px;
@@ -125,7 +128,7 @@ details.conta {
   border: 1px solid var(--cinza-claro);
   border-radius: 5px;
 
-  min-width: 370px;
+  min-width: 350px;
   padding: 8px;
   margin-bottom: 10px;
   cursor: pointer;
@@ -197,6 +200,13 @@ summary.summary {
   padding: 8px;
 }
 
+.selecoes{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
 @media screen and (min-width: 780px) {
   .linha-opcoes {
     display: flex;
@@ -208,11 +218,13 @@ summary.summary {
 
   .container__datas{
     flex-wrap: nowrap;
+    width: 100%;
   }
 
   .section-total {
     display: flex;
     align-items: center;
+    gap: 8px;
     padding: 0;
   }
 
@@ -227,5 +239,16 @@ summary.summary {
 
   .contas {
     padding: 0px;
+  }
+
+  .selecoes{
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  
+  .selecoes select.select{
+    /* width: 10%;
+    min-width: 250px; */
+    height: 32px;
   }
 }

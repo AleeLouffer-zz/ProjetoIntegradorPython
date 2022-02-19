@@ -33,8 +33,6 @@ select.select {
   border: 1px solid var(--cinza-claro);
   border-radius: 5px;
 
-  min-width: 250px;
-
   padding: 5px;
 }
 
@@ -52,8 +50,6 @@ button.btn {
 
 .btn__filtrar {
   background-color: var(--cor--secundaria);
-  width: 100%;
-  min-width: 375px;
 }
 
 .btn.btn__adicionar {

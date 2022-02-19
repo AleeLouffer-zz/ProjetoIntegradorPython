@@ -21,28 +21,43 @@
                             <label for="data-fim" class="label__input"> Data Final: </label>
                             <input id="data-fim" type="date" class="input__com__label">
                         </div>
+                        <select name="opcao_data" class="select">
+                            <option value="todas"> Todas as datas </option>
+                            <option value="data_emissao"> Data de Emissão </option>
+                            <option value="data_pagamento"> Data de Pagamento </option>
+                            <option value="data_vencimento"> Data de Vencimento </option>
+                        </select>
                     </div>
                     
-                    <select name="Status" class="select preencher">
-                        <option value="Pendente"> Pedente </option>
-                        <option value="Quitado"> Quitado </option>
-                    </select>
+                    <div class="selecoes">   
+                        <select id="funcionario" name="funcionario" class="select">
+                            <option>Todos Funcionários</option>
+                            {% for funcionario in funcionarios %}
+                                <option value="{{funcionario.id}}">{{funcionario.nome}}</option>
+                            {% endfor %}
+                        </select>
+                        
+                        <select id="servico" name="servico" class="select">
+                            <option>Todos Servicos</option>
+                            {% for servico in servicos %}
+                              <option value="{{servico.id}}">{{servico.nome}}</option>
+                            {% endfor %}
+                        </select>
 
-                    <select id="funcionario" name="funcionario" class="select preencher">
-                        <option>Todos Funcionários</option>
-                        {% for funcionario in funcionarios %}
-                            <option value="{{funcionario.id}}">{{funcionario.nome}}</option>
-                        {% endfor %}
-                    </select>
-                    
-                    <select id="servico" name="servico" class="select preencher">
-                        <option>Todos Servicos</option>
-                        {% for servico in servicos %}
-                          <option value="{{servico.id}}">{{servico.nome}}</option>
-                        {% endfor %}
-                    </select>
+                        <select id="cliente" name="cliente" class="select">
+                            <option>Todos Clientes</option>
+                            {% for cliente in clientes %}
+                              <option value="{{cliente.id}}">{{cliente.nome}}</option>
+                            {% endfor %}
+                        </select>
+                        
+                        <select name="Status" class="select">
+                            <option value="Pendente"> Pedente </option>
+                            <option value="Quitado"> Quitado </option>
+                        </select>
+                    </div>
 
-                    <button type="submit" class="btn btn__filtrar"> Filtrar </button>
+                    <button type="submit" class="btn btn__filtrar pequeno"> Filtrar </button>
                 </section>
             </form>
   

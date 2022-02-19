@@ -98,7 +98,7 @@
 	}
   
 	button.btn__filtrar.pequeno {
-	  width: 10%;
+	  min-width: 100px;
 	}
   
 	button.btn__adicionar.tamanho__pequeno{
