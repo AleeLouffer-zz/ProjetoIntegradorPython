@@ -40,7 +40,6 @@
           <form action="{% url 'criar_funcionario' %}" method="post">
             {% csrf_token %}
             <div id="checkBoxFunc" style="display: none" class="formulario__informacoes">
-              <input type="text" name="id_empresa" value="{{empresa.id}}" hidden/>
               <input type="text" name="nome_funcionario" class="input__de__texto fundo__branco" placeholder="Nome Completo"/>
               
               <button type="submit" class="btn btn__adicionar">Confirmar</button>
@@ -78,7 +77,6 @@
           <form action="{%url 'criar_servico' %}" method="post">
             {% csrf_token %}
             <div id="checkBoxServ" style="display: none" class="formulario__informacoes">
-              <input type="text" name="id_empresa" value="{{empresa.id}}" hidden />
 
               <input type="text" name="servico_nome" class="input__de__texto fundo__branco" placeholder="Nome do Serviço"/>
               <input type="text" name="servico_valor" class="input__de__texto fundo__branco" placeholder="Valor"/>
@@ -90,7 +88,6 @@
         <div class="formulario__editar">
           <form action="{% url 'verifica_botoes_servico'%}" method="post">
             {% csrf_token %}
-            <input name="id_empresa" value="{{empresa.id}}" hidden />
             <input id="servico_id" name="servico_id" hidden />
             <div id="checkBoxServEdit" style="display: none" class="formulario__informacoes">
                 <input type="text" name="servico_nome" id="servico_nome" class="input__de__texto fundo__branco"/>

@@ -7,9 +7,6 @@
     <h1 class="titulo centralizado">Adicionar agendamento</h1>
 <form action="{% url 'adicionar_agendamento' %}" method="POST">
     {% csrf_token %}
-        
-        <input type="hidden" name="id_empresa" value="{{id_empresa}}">
-        
         <div class="novo_agendamento">
             <input name="data_agendamento" id="input__data__sem__label" type="date">
             <input name="hora_agendamento" id="input__data__sem__label" type="time">
