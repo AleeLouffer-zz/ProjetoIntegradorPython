@@ -43,7 +43,7 @@ button.btn {
   border: none;
   border-radius: 5px;
 
-  padding: 5px;
+  padding: 8px;
 
   cursor: pointer;
 }
@@ -54,6 +54,10 @@ button.btn {
 
 .btn__filtrar, .btn.laranja {
   background-color: var(--cor--secundaria);
+}
+
+button.btn.btn__azul{
+  background-color: var(--cor-primaria);
 }
 
 .btn.btn__adicionar {

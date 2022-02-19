@@ -5,7 +5,7 @@
     {% csrf_token %}
       <input class="input__texto" type="email" name="email" placeholder="Email" />
       <input class="input__texto" type="password" name="senha" placeholder="Senha" />
-      <button class="botao__azul" type="submit" id="Entrar"> Entrar </button>
+      <button class="btn btn__azul negrito botao__login" type="submit" id="Entrar"> Entrar </button>
   </form>
   <p class="cadastro"> Não tem uma conta? <a href="{% url 'Login:cadastro_empresa' %}"> Cadastre-se </a></p>
 </div>
