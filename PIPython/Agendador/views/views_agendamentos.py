@@ -92,15 +92,8 @@ def verifica_botoes_agendamento(requisicao):
         excluir_agendamento(requisicao) 
         return redirect('tela_agenda')
     elif 'editar_status' in requisicao.POST:
-        editar_status(requisicao)
-        return redirect('tela_agenda')
-
-
-def editar_status(requisicao):
-    id_agendamento = requisicao.POST['id_agendamento']
-
-    editar_status_agendamento(requisicao, id_agendamento)
-
+        requisicao.session['id_agendamento'] = requisicao.POST['id_agendamento']
+        return redirect('Contas_a_Receber:adicionar_conta_agendamento')
 
 def excluir_agendamento(requisicao):
     id_agendamento = requisicao.POST["id_agendamento"]

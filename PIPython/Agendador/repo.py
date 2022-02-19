@@ -89,7 +89,7 @@ def atualizar_cliente(requisicao, id_cliente, nome):
     
     cliente.save()
 
-def editar_status_agendamento(requisicao, id_agendamento):
+def completar_agendamento(requisicao, id_agendamento):
     agendamento = obter_agendamento_ativo_pelo_id(requisicao, id_agendamento)
 
     agendamento.completo = True
