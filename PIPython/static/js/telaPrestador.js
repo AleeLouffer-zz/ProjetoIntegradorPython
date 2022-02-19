@@ -2,7 +2,7 @@ function ExibirCadastroFuncionario() {
   document.getElementById("checkBoxFuncEdit").style.display = "none";
   var x = document.getElementById("checkBoxFunc");
   if (x.style.display === "none") {
-    x.style.display = "block";
+    x.style.display = "flex";
   } else {
     x.style.display = "none";
   }
@@ -12,7 +12,7 @@ function ExibirCadastroServico() {
   document.getElementById("checkBoxServEdit").style.display = "none";
   var x = document.getElementById("checkBoxServ");
   if (x.style.display === "none") {
-    x.style.display = "block";
+    x.style.display = "flex";
   } else {
     x.style.display = "none";
   }
@@ -25,7 +25,7 @@ function ExibirEditarFuncionario(nomeFuncionario, idFuncionario) {
   if (boxEditFunc.style.display != "none") {
     boxEditFunc.style.display = "none";
   } else {
-    boxEditFunc.style.display = "block";
+    boxEditFunc.style.display = "flex";
     document.getElementById("checkBoxServ").style.display = "none";
 
     document.getElementById("nome_funcionario").value = nomeFuncionario;
@@ -42,7 +42,7 @@ function ExibirEditarServico(nome, valor, descricao, servicoId) {
   if (boxEditServ.style.display != "none") {
     boxEditServ.style.display = "none";
   } else {
-    boxEditServ.style.display = "block";
+    boxEditServ.style.display = "flex";
     document.getElementById("checkBoxFunc").style.display = "none";
 
     document.getElementById('servico_id').value = servicoId;
@@ -56,7 +56,7 @@ function ExibirCadastroCliente() {
   document.getElementById("checkBoxClienteEdit").style.display = "none";
   var x = document.getElementById("checkBoxCliente");
   if (x.style.display === "none") {
-    x.style.display = "block";
+    x.style.display = "flex";
   } else {
     x.style.display = "none";
   }
@@ -69,7 +69,7 @@ function ExibirEditarCliente(nomeCliente, idCliente) {
   if (boxEditFunc.style.display != "none") {
     boxEditFunc.style.display = "none";
   } else {
-    boxEditFunc.style.display = "block";
+    boxEditFunc.style.display = "flex";
     document.getElementById("checkBoxCliente").style.display = "none";
 
     document.getElementById("nome_cliente").value = nomeCliente;
