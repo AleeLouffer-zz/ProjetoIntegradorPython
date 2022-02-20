@@ -1,10 +1,14 @@
-input#input__data__sem__label {
+input#input__data__sem__label, .input__de__texto {
   background-color: whitesmoke;
 
   border-radius: 5px;
   min-width: 200px;
   border: 1px solid var(--cinza-claro);
   padding: 5px;
+}
+
+input.fundo__branco{
+    background-color: white;
 }
 
 .container__input__label {
@@ -17,6 +21,7 @@ input#input__data__sem__label {
 
   width: 100%;
 }
+
 .container__datas {
   display: flex;
   gap: 8px;

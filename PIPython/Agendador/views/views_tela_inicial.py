@@ -35,7 +35,7 @@ def editar_servico(requisicao):
 
 
 def criar_funcionario(requisicao):
-    id_empresa = requisicao.POST['id_empresa']
+    id_empresa = requisicao.session["id_empresa"]
     nome_funcionario = requisicao.POST['nome_funcionario']
 
     repo_criar_funcionario(requisicao, id_empresa, nome_funcionario)
@@ -53,7 +53,7 @@ def criar_cliente(requisicao):
 
 
 def criar_servico(requisicao):
-    id_empresa = requisicao.POST['id_empresa']
+    id_empresa = requisicao.session["id_empresa"]
     nome_servico = requisicao.POST['nome_servico']
     descricao_servico = requisicao.POST['descricao_servico']
     valor_servico = requisicao.POST['valor_servico']
