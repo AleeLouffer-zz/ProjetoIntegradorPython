@@ -1,5 +1,5 @@
 from django.db import models
-from Agendador.models import Agendamento
+from Agendador.models import Agendamento, Funcionario, Servico, Cliente
 from Login.models import Empresa
 
 class Forma_de_Pagamento(models.Model):
@@ -20,7 +20,10 @@ class Contas_a_Receber(models.Model):
     data_de_vencimento = models.DateField()
     data_de_emissao = models.DateField(auto_now_add=True)
     forma_de_pagamento = models.ForeignKey(Forma_de_Pagamento, null=True, on_delete=models.CASCADE)
-    agendamento = models.ForeignKey(Agendamento, on_delete=models.CASCADE)
+    funcionario = models.ForeignKey(Funcionario, on_delete=models.CASCADE)
+    servico = models.ForeignKey(Servico, on_delete=models.CASCADE)
+    cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
+    agendamento = models.ForeignKey(Agendamento, null=True, on_delete=models.CASCADE)
     ativo = models.BooleanField(null=False, default=True)
 
 
