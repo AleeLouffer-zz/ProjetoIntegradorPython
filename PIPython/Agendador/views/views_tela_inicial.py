@@ -34,31 +34,31 @@ def editar_servico(requisicao):
     atualizar_servico(requisicao, id_servico, nome_servico, descricao_servico, valor_servico)
 
 
-def criar_funcionario(requisicao):
+def cadastrar_funcionario(requisicao):
     id_empresa = requisicao.session["id_empresa"]
     nome_funcionario = requisicao.POST['nome_funcionario']
 
-    repo_criar_funcionario(requisicao, id_empresa, nome_funcionario)
+    criar_funcionario(requisicao, id_empresa, nome_funcionario)
 
     return redirect('tela_inicial_prestador')
 
 
-def criar_cliente(requisicao):
+def cadastrar_cliente(requisicao):
     id_empresa = requisicao.session["id_empresa"]
     nome_cliente = requisicao.POST["nome_cliente"]
 
-    repo_criar_cliente(requisicao, id_empresa, nome_cliente)
+    criar_cliente(requisicao, id_empresa, nome_cliente)
 
     return redirect("tela_inicial_prestador")
 
 
-def criar_servico(requisicao):
+def cadastrar_servico(requisicao):
     id_empresa = requisicao.session["id_empresa"]
-    nome_servico = requisicao.POST['nome_servico']
-    descricao_servico = requisicao.POST['descricao_servico']
-    valor_servico = requisicao.POST['valor_servico']
+    nome_servico = requisicao.POST['servico_nome']
+    descricao_servico = requisicao.POST['servico_descricao']
+    valor_servico = requisicao.POST['servico_valor']
     
-    repo_criar_servico(requisicao, id_empresa, nome_servico, descricao_servico, valor_servico)
+    criar_servico(requisicao, id_empresa, nome_servico, descricao_servico, valor_servico)
 
     return redirect('tela_inicial_prestador')
 

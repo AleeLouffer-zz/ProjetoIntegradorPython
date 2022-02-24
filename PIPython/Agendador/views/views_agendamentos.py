@@ -62,9 +62,8 @@ def tela_adicionar_agendamento(requisicao):
     return render(requisicao, '../templates/agendamento/adicionar-agendamento.html', data)
 
 
-def adicionar_agendamento(requisicao):
+def cadastrar_agendamento(requisicao):
     id_empresa = requisicao.session['id_empresa']
-    empresa = obter_empresa_por_id(requisicao, id_empresa)
 
     id_cliente = requisicao.POST['cliente']
     cliente = obter_cliente_ativo_pelo_id(requisicao, id_cliente)
@@ -79,7 +78,7 @@ def adicionar_agendamento(requisicao):
     hora_agendamento = requisicao.POST['hora_agendamento'] 
     ##ADICIONAR VERIFICACAO
     
-    repo_criar_agendamento(requisicao, servico, cliente, funcionario, data_agendamento, hora_agendamento, empresa)
+    criar_agendamento(requisicao, servico, cliente, funcionario, data_agendamento, hora_agendamento, id_empresa)
 
     return redirect('tela_agenda')
 
@@ -92,15 +91,8 @@ def verifica_botoes_agendamento(requisicao):
         excluir_agendamento(requisicao) 
         return redirect('tela_agenda')
     elif 'editar_status' in requisicao.POST:
-        editar_status(requisicao)
-        return redirect('tela_agenda')
-
-
-def editar_status(requisicao):
-    id_agendamento = requisicao.POST['id_agendamento']
-
-    editar_status_agendamento(requisicao, id_agendamento)
-
+        requisicao.session['id_agendamento'] = requisicao.POST['id_agendamento']
+        return redirect('Contas_a_Receber:adicionar_conta_agendamento')
 
 def excluir_agendamento(requisicao):
     id_agendamento = requisicao.POST["id_agendamento"]

@@ -354,3 +354,6 @@ MigrationBackup/
 /.idea/ProjetoIntegradorPython.iml
 /.idea/vcs.xml
 /.idea/workspace.xml
+
+
+db.sqlite3

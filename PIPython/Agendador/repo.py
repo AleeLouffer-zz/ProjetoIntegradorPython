@@ -25,25 +25,27 @@ def obter_cliente_ativo_pelo_id(requisicao, id_cliente):
 def obter_funcionario_ativo_pelo_id(requisicao, id_funcionario):
     return Funcionario.objects.get(id=id_funcionario)
 
-def repo_criar_agendamento(requisicao, servico, cliente, funcionario, data, hora, empresa):
+def criar_agendamento(requisicao, servico, cliente, funcionario, data, hora, id_empresa):
+    empresa = obter_empresa_por_id(requisicao, id_empresa)
+
     agendamento = Agendamento.objects.create(servico=servico, funcionario=funcionario, cliente=cliente, data=data, hora=hora, empresa=empresa)
     agendamento.save()
 
-def repo_criar_funcionario(requisicao, id_empresa, nome):
+def criar_funcionario(requisicao, id_empresa, nome):
     empresa = obter_empresa_por_id(requisicao, id_empresa)
 
     funcionario = Funcionario.objects.create(nome = nome, empresa = empresa)
     
     funcionario.save()
 
-def repo_criar_cliente(requisicao, id_empresa, nome):
+def criar_cliente(requisicao, id_empresa, nome):
     empresa = obter_empresa_por_id(requisicao, id_empresa)
 
     cliente = Cliente.objects.create(nome = nome, empresa = empresa)
 
     cliente.save()
 
-def repo_criar_servico(requisicao, id_empresa, nome, descricao, preco):
+def criar_servico(requisicao, id_empresa, nome, descricao, preco):
     empresa = obter_empresa_por_id(requisicao, id_empresa)
 
     servico = Servico.objects.create(nome = nome, descricao = descricao, preco = preco, empresa = empresa)
@@ -89,7 +91,7 @@ def atualizar_cliente(requisicao, id_cliente, nome):
     
     cliente.save()
 
-def editar_status_agendamento(requisicao, id_agendamento):
+def completar_agendamento(requisicao, id_agendamento):
     agendamento = obter_agendamento_ativo_pelo_id(requisicao, id_agendamento)
 
     agendamento.completo = True
@@ -99,27 +101,23 @@ def editar_status_agendamento(requisicao, id_agendamento):
 def deletar_servico(requisicao, id_servico):
     servico = obter_servico_ativo_pelo_id(requisicao, id_servico)
 
-    servico.ativo = False
-
-    servico.save()
+    deletar_objeto(requisicao, servico)
 
 def deletar_funcionario(requisicao, id_funcionario):
     funcionario = obter_funcionario_ativo_pelo_id(requisicao, id_funcionario)
 
-    funcionario.ativo = False
-
-    funcionario.save()
+    deletar_objeto(requisicao, funcionario)
 
 def deletar_cliente(requisicao, id_cliente):
     cliente = obter_cliente_ativo_pelo_id(requisicao, id_cliente)
 
-    cliente.ativo = False
-
-    cliente.save()
+    deletar_objeto(requisicao, cliente)
 
 def deletar_agendamento(requisicao, id_agendamento):
     agendamento = obter_agendamento_ativo_pelo_id(requisicao, id_agendamento)
 
-    agendamento.ativo = False
+    deletar_objeto(requisicao, agendamento)
 
-    agendamento.save()
+def deletar_objeto(requisicao, obj):
+    obj.ativo = False
+    obj.save()
