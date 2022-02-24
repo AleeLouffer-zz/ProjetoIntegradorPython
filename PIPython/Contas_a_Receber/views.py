@@ -99,8 +99,18 @@ def add_conta(requisicao):
 
     else:
          criar_conta_a_receber(requisicao, valor, desconto, juros, total, data_de_vencimento, data_de_emissao, id_forma_de_pagamento, id_empresa)
-    
 
-    
+def filtrar(requisicao):
+   contas = filtrar_funcionario(requisicao)
 
+   resposta ={
+       'contas': contas
+   }
+   return render(requisicao, '../templates/agendamento/agenda.html', resposta)
 
+def filtrar_funcionario(requisicao, lista):
+     if 'funcionario' in requisicao.POST:
+        funcionario = requisicao.POST['funcionario']
+        if funcionario != 'Todos Funcionários':
+            return list(filter(lambda x: x.funcionario.id == int(funcionario), lista))
+     return lista

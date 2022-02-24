@@ -11,4 +11,5 @@ urlpatterns = [
     path('adicionar_conta_agentamento/', views.tela_adicionar_conta_agendamento, name="adicionar_conta_agendamento"),
     path('verifica_botoes_conta_agendamento/', views.verifica_botoes_conta_agendamento, name="verifica_botoes_conta_agendamento"),
     path('add_conta/', views.add_conta, name="add_conta"),
+    path('filtrar/', views.filtrar, name="filtrar")
 ]

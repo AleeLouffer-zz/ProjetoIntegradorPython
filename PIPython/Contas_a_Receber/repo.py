@@ -37,3 +37,18 @@ def criar_conta_a_receber(requisicao, valor, desconto, juros, total, data_de_ven
         data_de_vencimento = data_de_vencimento, data_de_emissao = data_de_emissao, forma_de_pagamento = forma_de_pagamento, 
         empresa = empresa)
         conta.save()
+
+def filtrar_por_status(status):
+    if status == 'Pendente':
+      return Contas_a_Receber.objects.filter(pago=False);  
+    if status == 'Quitado':
+      return Contas_a_Receber.objects.filter(pago=True); 
+
+def filtrar_por_funcionario(id_funcionario):
+    return Contas_a_Receber.objects.filter(funcionario=id_funcionario)
+
+def filtrar_por_servico(id_servico):
+    return Contas_a_Receber.objects.filter(servico=id_servico)
+
+def filtrar_por_cliente(id_cliente):
+    return Contas_a_Receber.objects.filter(cliente=id_cliente)
