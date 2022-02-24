@@ -3,12 +3,13 @@
 {% block content %}
         <div class="corpo">
             <h1 class="titulo"> Contas a Receber </h1>
-            <form action="">
+            <form action="{% url 'Contas_a_Receber:add_conta' %}" method="POST">
+                {% csrf_token %}
                 <div class="informacoes-gerais">
                     <div class="informacoes-emissao">
                         <h1 class="titulo__informacoes negrito"> Informações Gerais </h1>
                         <div class="data__emissao">
-                            <p class="data__emissao__paragrafo negrito">Data de Emissão: 18/11/2021</p>
+                            <p class="data__emissao__paragrafo negrito">Data de Emissão: {{data_de_emissao}}</p>
                         </div>
                     </div>      
                     <div class="selecoes">
@@ -43,39 +44,37 @@
                         </div>
                         <div class="data">
                             <label for="data-fim" class="label__input"> Data de Vencimento: </label>
-                            <input id="data-fim" type="date" class="input__com__label">
+                            <input id="data-fim" name="data_vencimento" type="date" class="input__com__label">
                         </div>
                     </div>              
 
-                    <select class="select altura__32px">
+                    <select class="select altura__32px" name="forma_de_pagamento">
                         <option value="Pendente"> Forma de Pagamento </option>
-                        <option value="Pendente"> Cartão de Crédito </option>
-                        <option value="Quitado"> Cartão de Débito </option>
-                        <option value="status"> À Vista </option>
-                        <option value="Quitado"> Boleto </option>
-                        <option value="Quitado"> Pix </option>
+                        {% for forma in formas_de_pagamento %}
+                        <option value="{{forma.id}}"> {{forma.nome}} </option>
+                        {% endfor %}
                     </select>
                     <div class="flex-row-item">
                         <div class="container__input__label">
                             <label for="valor" class="label__input"> Valor: </label>
-                            <input id="valor" type="number" class="input__com__label placeholder__cinza" placeholder="R$">
+                            <input id="valor" name="valor" type="number" class="input__com__label placeholder__cinza" placeholder="R$">
                         </div>
-                        <div class="container__input__label">
-                            <label for="parcela" class="label__input"> Parcela: </label>
-                            <input id="parcela" type="number" class="input__com__label placeholder__cinza" placeholder="-"> 
-                        </div>
-                        <!-- Mostrar parcela apenas para a opção de cartao de crédito -->
-                    </div>
-                    <div class="flex-row-item">
                         <div class="container__input__label">
                             <label for="desconto" class="label__input"> Desconto: </label>
-                            <input id="desconto" type="number" class="input__com__label placeholder__cinza" placeholder="-">
+                            <input id="desconto" name="desconto" type="number" class="input__com__label placeholder__cinza" placeholder="-">
                         </div>
+                    </div>
+                    <div class="flex-row-item">
+                        
                         <div class="container__input__label">
                             <label for="juros" class="label__input"> Juros: </label>
-                            <input id="juros" type="number" class="input__com__label placeholder__cinza" placeholder="-"> 
+                            <input id="juros" name="juros" type="number" class="input__com__label placeholder__cinza" placeholder="-"> 
                         </div>
-                       
+                        <div class="container__input__label">
+                            <label for="total" class="label__input"> Total: </label>
+                            <input id="total" name="total" type="number" class="input__com__label placeholder__cinza" placeholder="-"> 
+                        </div>
+                        <!-- Criar JS para somar o total da conta -->
                     </div>
                     
                     <div class="informacoes-pagamento-pago">
