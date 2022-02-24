@@ -5,19 +5,19 @@
 <div class="foto__logo">
     <img src="logo.png" id="logo">
 </div>
-<form action="{% url 'cadastrar_empresa' %}" method="post">
+<form action="{% url 'Login:cadastrar_empresa' %}" method="post">
     {% csrf_token %}
     <div class="informacoes__geral">
         <div class="info__cadastro">
             <h1 class="titulo__box">Registrar-se</h1>
-            <input class="dados" name="email_cadastro" type="email" placeholder="E-mail" required/>
-            <input class="dados" name="senha_cadastro" type="password" placeholder="Senha" required/>
-            <input class="dados" name="nome_cadastro" type="text" placeholder="Nome Fantasia" required/>
-            <input class="dados" name="razao_social_cadastro" type="text" placeholder="Razão social" required/>
-            <input class="dados" name="cnpj_cadastro" type="text" placeholder="CNPJ" required/>
+            <input class="input__texto" name="email_cadastro" type="email" placeholder="E-mail" required/>
+            <input class="input__texto" name="senha_cadastro" type="password" placeholder="Senha" required/>
+            <input class="input__texto" name="nome_cadastro" type="text" placeholder="Nome Fantasia" required/>
+            <input class="input__texto" name="razao_social_cadastro" type="text" placeholder="Razão social" required/>
+            <input class="input__texto" name="cnpj_cadastro" type="text" placeholder="CNPJ" required/>
         </div>
         <div class="btn__continuar">
-            <button type="submit" class="continuar">Continuar</button>
+            <button type="submit" class="btn btn__azul negrito"> Registrar-se </button>
         </div>
     </div>
 </form>

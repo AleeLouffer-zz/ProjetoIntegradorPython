@@ -1,274 +1,154 @@
 {% extends 'index.html' %} {% block content %}
 <div class="corpo">
-  <div class="infos">
-    <img src="../Imagens/image.jpg" alt="imagem do prestador" />
-    <div class="infos-txt">
-      <form class="form_editar_empresa" action="{% url 'editarEmpresa' %}" method="post">
-        {% csrf_token %}
-        <input type="text" name="id_empresa" value="{{empresa.id}}" hidden />
+  <section class="informacoes__empresa__cabecalho">
+    <div class="informacoes__empresa">
+      <div class="informacoes__empresa__texto">
         <h1 class="titulo">{{empresa.nome_fantasia}}</h1>
         <p class="empresa__email">{{empresa.email}}</p>
-      </form>
-    </div>
-    <div class="botao">
-      <button
-        onclick="EditarInformacoesEmpresa('{{ empresa.nome_fantasia }}', '{{ empresa.email }}')"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="20"
-          height="20"
-          fill="currentColor"
-          class="bi bi-pencil-square"
-          viewBox="0 0 16 16"
-        >
-          <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-          <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
-        </svg>
-      </button>
-      <div>
+      </div>
+      <div class="editar__empresa" style="display: none;">
+        <h2 class="sub__titulo"> Editar Empresa </h2>
+        <form class="formulario__editar__empresa" action="{% url 'Login:editarEmpresa' %}" method="post">   {% csrf_token %}
+          <input type="text" name="nome_empresa" value="{{empresa.nome_fantasia}}" class="input__de__texto fundo__branco">
+          <input type="text" name="email_empresa" value="{{empresa.email}}" class="input__de__texto fundo__branco">
+          <input type="password" name="senha_empresa" class="input__de__texto fundo__branco" placeholder="Alterar senha">
+
+          <button type="submit" class="btn btn__adicionar"> Alterar </button>
+          <button type="submit" name="excluir_funcionario" class="btn btn__cancelar">Cancelar</button>
+        </form>
       </div>
     </div>
-  </div>
+    <button class="btn__icon" onclick="EditarEmpresa()">
+      <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+        <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+        <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+      </svg>
+    </button>
+  </section>
 
-  <div class="func-cadastrados">
-    <h1>Funcionários cadastrados</h1>
-    <div class="caixa-func-cadastrados">
-      {% for funcionario in funcionarios %}
-      <button onclick="ExibirEditarFuncionario('{{funcionario.nome}}', '{{funcionario.id}}')">
-        {{funcionario.nome}}
-      </button>
-      {% endfor%}
+  <section class="conteudo">
+    <section class="funcionarios">
+      <h2 class="sub__titulo">Funcionários cadastrados</h2>
+      <div class="caixa__cadastrados">
+        {% for funcionario in funcionarios %}
+          <button class="caixa__cadastrados__botao" onclick="ExibirEditarFuncionario('{{funcionario.nome}}', '{{funcionario.id}}')"> {{funcionario.nome}} </button>
+        {% endfor%}
 
-      <button onclick="ExibirCadastroFuncionario()" class="mais">+</button>
-      <form action="{% url 'criar_funcionario' %}" method="post">
-        {% csrf_token %}
-        <div
-          id="checkBoxFunc"
-          style="display: none"
-          class="funcionario-informacoes"
-        >
-          <div class="col-1">
-            <input
-              type="text"
-              name="id_empresa"
-              value="{{empresa.id}}"
-              hidden
-            />
-            <input
-              type="text"
-              name="nome_funcionario"
-              class="Nome"
-              placeholder="Nome Completo"
-            />
-            <button type="submit" class="btn-confirmar">Confirmar</button>
-          </div>
-        </div>
-      </form>
-      <form action="{% url 'verifica_botoes_funcionario'%}" method="post">
-        {% csrf_token %}
-        <div id="checkBoxFuncEdit" style="display: none" class="funcionario-informacoes">
-          <div class="col-1">
-            <input
-              type="text"
-              name="id_funcionario"
-              id="id_funcionario"
-              hidden
-            />
-            <input
-              type="text"
-              class="Nome"
-              name="nome_funcionario"
-              id="nome_funcionario"
-            />
-            <button type="submit" name="editar_funcionario" class="btn-confirmar">Editar</button>
-            <button type="submit" name="excluir_funcionario" class="btn-excluir">Excluir</button>
-          </div>
-        </div>
-      </form>
-    </div>
-  </div>
-  <div class="serv-cadastrados">
-    <h1>Serviços cadastrados</h1>
-    <div class="caixa-serv-cadastrados">
-      {% for servico in servicos %}
-      <button onclick="ExibirEditarServico('{{servico.nome}}', '{{servico.preco}}', '{{servico.descricao}}', '{{servico.id}}')">
-        {{servico.nome}}
-      </button>
-      {% endfor%}
+        <button onclick="ExibirCadastroFuncionario()" class="caixa__cadastrados__botao">+</button>
 
-      <button onclick="ExibirCadastroServico()" class="mais">+</button>
-      <form action="{%url 'criar_servico' %}" method="post">
-        {% csrf_token %}
-        <div id="checkBoxServ" style="display: none" class="adiciona-servico">
-          <div class="col-1">
-            <input
-              name="nome_servico"
-              type="text"
-              placeholder="Nome do Serviço"
-            />
-            <input
-              name="valor_servico"
-              type="text"
-              cols="30"
-              rows="5"
-              class="valor"
-              placeholder="Valor"
-            />
-          </div>
-          <input type="text" name="id_empresa" value="{{empresa.id}}" hidden />
-          <div class="col-2">
-            <input
-              name="descricao_servico"
-              type="text"
-              class="descricao"
-              placeholder="Descrição"
-            />
-            <button type="submit" class="btn-confirmar">Confirmar</button>
-          </div>
+        <div class="formulario__adicionar">
+          <form action="{% url 'criar_funcionario' %}" method="post">
+            {% csrf_token %}
+            <div id="checkBoxFunc" style="display: none" class="formulario__informacoes">
+              <input type="text" name="nome_funcionario" class="input__de__texto fundo__branco" placeholder="Nome Completo"/>
+              
+              <button type="submit" class="btn btn__adicionar">Confirmar</button>
+            </div>
+          </form>
         </div>
-      </form>
-      <form action="{% url 'verifica_botoes_servico'%}" method="post">
-        {% csrf_token %}
-        <input name="id_empresa" value="{{empresa.id}}" hidden />
-        <input id="servico_id" name="servico_id" hidden />
-        <div
-          id="checkBoxServEdit"
-          style="display: none"
-          class="adiciona-servico"
-        >
-          <div class="col-1">
-            <input type="text" name="servico_nome" id="servico_nome" />
-            <input type="text" id="servico_valor" name="servico_valor" cols="30" rows="5" class="valor"/>
-          </div>
-          <div class="col-2">
-            <input
-              type="text"
-              class="descricao"
-              id="servico_descricao"
-              name="servico_descricao"
-            />
-            <button type="submit" name="editar_servico" class="btn-confirmar">Editar</button>
-            <button type="submit" name="excluir_servico" class="btn-excluir">Excluir</button>
-          </div>
+        <div class="formulario__editar">
+          <form action="{% url 'verifica_botoes_funcionario'%}" method="post">
+            {% csrf_token %}
+            <div id="checkBoxFuncEdit" style="display: none" class="formulario__informacoes">
+                <input type="text" name="id_funcionario" id="id_funcionario" hidden/>
+                <input type="text" class="input__de__texto fundo__branco" name="nome_funcionario" id="nome_funcionario"/>
+                <div class="botoes__pequenos">
+                  <button type="submit" name="editar_funcionario" class="btn btn__adicionar">Editar</button>
+                  <button type="submit" name="excluir_funcionario" class="btn btn__cancelar">Excluir</button>
+                </div>
+            </div>
+          </form>
         </div>
-      </form>
-    </div>
-  </div>
+      </div>
+    </section>
+    
+    <section class="servicos">
+      <h2 class="sub__titulo">Serviços cadastrados</h2>
+      <div class="caixa__cadastrados">
+        {% for servico in servicos %}
+        <button class="caixa__cadastrados__botao" onclick="ExibirEditarServico('{{servico.nome}}', '{{servico.preco}}', '{{servico.descricao}}', '{{servico.id}}')">
+          {{servico.nome}}
+        </button>
+        {% endfor%}
+  
+        <button onclick="ExibirCadastroServico()" class="caixa__cadastrados__botao">+</button>
+        
+        <div class="formulario__adicionar">
+          <form action="{%url 'criar_servico' %}" method="post">
+            {% csrf_token %}
+            <div id="checkBoxServ" style="display: none" class="formulario__informacoes">
 
-  <div class="cliente-cadastrados">
-    <h1> Clientes cadastrados</h1>
-    <div class="caixa-cliente-cadastrados">
-      {% for cliente in clientes %}
-      <button onclick="ExibirEditarCliente('{{cliente.nome}}', '{{cliente.id}}')">
-        {{cliente.nome}}
-      </button>
-      {% endfor%}
+              <input type="text" name="servico_nome" class="input__de__texto fundo__branco" placeholder="Nome do Serviço"/>
+              <input type="text" name="servico_valor" class="input__de__texto fundo__branco" placeholder="Valor"/>
+              <input type="text" name="servico_descricao" class="input__de__texto fundo__branco" placeholder="Descrição"/>
+              <button type="submit" class="btn btn__adicionar">Confirmar</button>
+            </div>
+          </form>
+        </div>
+        <div class="formulario__editar">
+          <form action="{% url 'verifica_botoes_servico'%}" method="post">
+            {% csrf_token %}
+            <input id="servico_id" name="servico_id" hidden />
+            <div id="checkBoxServEdit" style="display: none" class="formulario__informacoes">
+                <input type="text" name="servico_nome" id="servico_nome" class="input__de__texto fundo__branco"/>
+                <input type="text" name="servico_valor" id="servico_valor" class="input__de__texto fundo__branco"/>
+                <input type="text" name="servico_descricao" id="servico_descricao" class="input__de__texto fundo__branco"/>
+                <div class="botoes__pequenos">
+                  <button type="submit" name="editar_servico" class="btn btn__adicionar">Editar</button>
+                  <button type="submit" name="excluir_servico" class="btn btn__cancelar">Excluir</button>
+                </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
 
-      <button onclick="ExibirCadastroCliente()" class="mais">+</button>
-      <form action="{% url 'criar_cliente' %}" method="POST">
-        {% csrf_token %}
-        <div id="checkBoxCliente" style="display: none" class="funcionario-informacoes">
-          <div class="col-1">
-            <input type="text" class="Nome" name="nome_cliente" placeholder="Nome Completo" />
-            <button type="submit" class="btn-confirmar">Confirmar</button>
-          </div>
+    <section class="clientes">
+      <h2 class="sub__titulo">Clientes cadastrados</h2>
+      <div class="caixa__cadastrados">
+        {% for cliente in clientes %}
+          <button class="caixa__cadastrados__botao" onclick="ExibirEditarCliente('{{cliente.nome}}', '{{cliente.id}}')"> {{cliente.nome}} </button>
+        {% endfor%}
+
+        <button onclick="ExibirCadastroCliente()" class="caixa__cadastrados__botao">+</button>
+        <div class="formulario__adicionar">
+          <form action="{% url 'criar_cliente' %}" method="POST">
+            {% csrf_token %}
+            <div id="checkBoxCliente" style="display: none" class="formulario__informacoes">
+              <input type="text" class="input__de__texto fundo__branco" name="nome_cliente" placeholder="Nome Completo" />
+              <button type="submit" class="btn btn__adicionar">Confirmar</button>
+            </div>
+          </form>
         </div>
-      </form>
-      <form action="{% url 'verifica_botoes_cliente'%}" method="post">
-        {% csrf_token %}
-        <div id="checkBoxClienteEdit" style="display: none" class="funcionario-informacoes">
-          <div class="col-1">
-            <input type="text" name="id_cliente" id="id_cliente" hidden/>
-            <input type="text" class="Nome" name="nome_cliente" id="nome_cliente" />
-            <button type="submit" name="editar_cliente" class="btn-confirmar"> Salvar </button>
-            <button type="submit" name="excluir_cliente" class="btn-confirmar"> Excluir </button>
-          </div>
+        <div class="formulario__editar">
+          <form action="{% url 'verifica_botoes_cliente'%}" method="post">
+            {% csrf_token %}
+            <div id="checkBoxClienteEdit" style="display: none" class="formulario__informacoes">
+              <input type="text" name="id_cliente" id="id_cliente" hidden/>
+              <input type="text" class="input__de__texto fundo__branco" name="nome_cliente" id="nome_cliente" />
+              <div class="botoes__pequenos">
+                <button type="submit" name="editar_cliente" class="btn btn__adicionar"> Salvar </button>
+                <button type="submit" name="excluir_cliente" class="btn btn__cancelar"> Excluir </button>
+              </div>
+            </div>
+          </form>
         </div>
-      </form>
-    </div>
-  </div>
-  <form action="{% url 'tela_agenda' %}" method="POST">
+      </div>
+    </section>
+  </section>
+
+
+  <!-- --------------------------- REMOVER --------------------------- -->
+  <!-- <form action="{% url 'tela_agenda' %}" method="POST">
     {% csrf_token %}
     <button type="submit">Agendamento</button>
   </form>
+  <form action="{% url 'tela_contas_a_receber' %}" method="POST">
+    {% csrf_token %}
+    <button type="submit">Contas a Receber</button>
+  </form> -->
+  <!-- ---------------------------------------------------------------- -->
+
 </div>
-<script>
-  function EditarInformacoesEmpresa(empresaNome, empresaEmail) {
-    //ver se os inputs existem
-    var input = document.querySelector("#input_edicao");
-    if (input === null) {
-      //se existem troco os inputs para div
-      TrocarDivParaInput();
-    } else {
-      //se nao troco de div para input
-      TrocaInputParaElemento(empresaNome, empresaEmail);
-    }
-  }
 
-  function TrocarDivParaInput() {
-    console.log("entrei div para input ");
-    var nome_empresa = document.getElementsByClassName("titulo")[0].innerHTML;
-    var email_empresa =
-      document.getElementsByClassName("empresa__email")[0].innerHTML;
-
-    var elemento_nome = document.querySelector(".titulo");
-    var elemento_email = document.querySelector(".empresa__email");
-
-    var pai_dos_elementos = elemento_nome.parentNode;
-
-    var input_edicao = document.createElement("input");
-    var input_edicao2 = document.createElement("input");
-    var input_senha = document.createElement("input");
-
-    if (document.querySelector(".botao__confirmar") == null) {
-      var botao_confirmar = document.createElement("button");
-      botao_confirmar.setAttribute("class", "botao__confirmar");
-      botao_confirmar.setAttribute("type", "submit");
-      botao_confirmar.innerHTML = "Confirmar";
-    }
-
-    input_edicao.setAttribute("id", "input_edicao");
-    input_edicao.setAttribute("name", "nome_empresa");
-    input_edicao.setAttribute("class", "input_form_editar");
-    input_edicao2.setAttribute("name", "email_empresa");
-    input_edicao2.setAttribute("id", "input_edicao2");
-    input_edicao2.setAttribute("class", "input_form_editar");
-    input_senha.setAttribute("name", "senha_empresa");
-    input_senha.setAttribute("id", "empresa_senha");
-    input_senha.setAttribute("type", "password");
-    input_senha.setAttribute("class", "input_form_editar");
-
-    input_edicao.value = nome_empresa;
-    input_edicao2.value = email_empresa;
-
-    pai_dos_elementos.replaceChild(input_edicao, elemento_nome);
-    pai_dos_elementos.replaceChild(input_edicao2, elemento_email);
-    pai_dos_elementos.appendChild(input_senha);
-    pai_dos_elementos.appendChild(botao_confirmar);
-  }
-  function TrocaInputParaElemento(valor_input_nome, valor_iput_email) {
-    //pega o value dos inputs
-    var input_nome = document.querySelector("#input_edicao");
-    var input_email = document.querySelector("#input_edicao2");
-    var input_senha = document.querySelector("#empresa_senha");
-    var botao_confirmar = document.querySelector(".botao__confirmar");
-    //cria a div
-    var div_nome = document.createElement("h1");
-    var div_email = document.createElement("p");
-    //seta as classes normais da div
-    div_nome.setAttribute("class", "titulo");
-    div_email.setAttribute("class", "empresa__email");  
-    //atribui o os values para o innerhtml das divs
-    div_nome.innerHTML = valor_input_nome;
-    div_email.innerHTML = valor_iput_email;
-    //faz o parent trocar
-    var parente = input_nome.parentNode;
-    parente.replaceChild(div_nome, input_nome);
-    parente.replaceChild(div_email, input_email);
-    //Pega o botao e tira do pai
-    parente.removeChild(botao_confirmar);
-    parente.removeChild(input_senha);
-  }
-</script>
 {% endblock %}

@@ -15,33 +15,8 @@
   margin-bottom: 30px;
 }
 
-.input__texto {
-  background-color: whitesmoke;
-  width: 85%;
-}
-
-.input__texto::placeholder {
-  color: black;
-}
-
-.botao__azul {
+.botao__login {
   width: 25%;
-  background-color: steelblue;
-  cursor: pointer;
-}
-
-.input__texto,
-.botao__azul {
-  min-width: 180px;
-  height: 30px;
-
-  padding: 2px 4px;
-  margin: 0;
-
-  border: none;
-  border-radius: 5px;
-
-  display: block;
 }
 
 .formulario__login {
@@ -54,13 +29,14 @@
 
 .cadastro {
   display: block;
-  font-size: 12px;
+  font-size: 14px;
   margin-top: 16px;
 }
 
 @media screen and (max-width: 780px) {
   .container__login {
     width: 90vw;
+    min-width: 370px;
     margin: 40px auto;
     padding: 10px;
   }

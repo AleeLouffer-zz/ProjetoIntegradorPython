@@ -3,18 +3,18 @@
   margin-top: 24px;
   margin-bottom: 42px;
 }
+
 #logo {
   width: 7%;
 }
 
-.informacoes__geral {
-  width: 600px;
-  
+.informacoes__geral {  
   border-radius: 20px;
-  background-color: white;
   margin: 30px auto;
-  box-shadow: 2.5px 2.5px #8888889d;
   padding: 16px;
+
+  width: 100%;
+  min-width: 370px;
 }
 
 .info__cadastro {
@@ -32,37 +32,16 @@
   color: rgb(102, 100, 100);
 }
 
-.dados {
-  background-color: whitesmoke;
-
-  border-radius: 5px;
-  min-width: 300px;
-  width: 70%;
-  border: 1px solid var(--cinza-claro);
-  padding: 5px;
-  margin: 0;
-}
-
 .btn__continuar {
   text-align: center;
   margin: 16px 0;
 }
 
-.continuar {
-  background-color: rgba(17, 73, 196, 0.897);
-  color: white;
-  font-size: 16px;
-  border-style: none;
-  border-radius: 20px;
-  padding: 6px 12px;
-}
+@media screen and (min-width: 720px)  {
+  .informacoes__geral {
+    width: 600px;
 
-.continuar:hover {
-  background-color: rgba(17, 73, 196, 0.897);
-  color: white;
-  font-size: 18px;
-  border-style: none;
-  border-radius: 20px;
-  padding: 6px 12px;
+    background-color: white;
+    box-shadow: 2.5px 2.5px #8888889d;
+  }
 }
-

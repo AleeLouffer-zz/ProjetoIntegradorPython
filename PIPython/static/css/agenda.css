@@ -3,6 +3,7 @@
 	flex-direction: column;
 	gap: 8px;
 	min-width: 60%;
+	margin: 16px 0;
 }
 
 .agendamentos{
@@ -71,19 +72,13 @@
 .agendamento__botoes{
 	display: flex;
 	justify-content: flex-end;
+	align-items: center;
 	gap: 8px;
 }
 
 .icon{
 	width: 24px;
 	height: 24px;
-}
-
-.btn.com__icon{
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	gap: 8px;
 }
 
 .agenda{
@@ -94,16 +89,10 @@
 @media screen and (min-width: 950px) {
 	.filtros__agendamento{
 		flex-direction: row;
-		margin: 16px 0;
 	}
   
-	input#input__data__sem__label,
-	select.select {
-	  width: 20%;
-	}
-  
-	button.btn__filtrar {
-	  width: 10%;
+	button.btn__filtrar.pequeno {
+	  min-width: 100px;
 	}
   
 	button.btn__adicionar.tamanho__pequeno{
@@ -113,4 +102,4 @@
 	.agendamento{
 		background-color: whitesmoke;
 	}
-  }
+}
