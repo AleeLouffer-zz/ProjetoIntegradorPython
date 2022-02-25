@@ -1,9 +1,10 @@
-{% extends 'index.html' %} {% block content %}
+{% extends 'index.html' %} 
+{% block content %} {% include 'menu.html'%}
 <div class="corpo">
   <h1 class="titulo"> Agendamentos </h1>
-  <form action="{% url 'tela_agenda' %}" method="POST"> {% csrf_token %}
+  <form action="{% url 'Agendador:tela_agenda' %}" method="POST"> {% csrf_token %}
     <div class="filtros__agendamento">
-      <input type="date" name="data" id="input__data__sem__label" value="{{data}}" />      
+      <input type="date" name="data" id="input__data__sem__label" />      
       
       <select id="funcionario" name="funcionario" class="select">
         <option>Todos Funcionários</option>
@@ -28,7 +29,7 @@
       <button type="submit" class="btn btn__filtrar pequeno"> Filtrar </button>
     </div>
   </form>
-  <form action="{% url 'tela_adicionar_agendamento' %}" method="POST"> {% csrf_token %}
+  <form action="{% url 'Agendador:tela_adicionar_agendamento' %}" method="POST"> {% csrf_token %}
     <button type="submit" class="btn btn__adicionar tamanho__pequeno com__icon preencher"> 
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar-plus" viewBox="0 0 16 16">
         <path d="M8 7a.5.5 0 0 1 .5.5V9H10a.5.5 0 0 1 0 1H8.5v1.5a.5.5 0 0 1-1 0V10H6a.5.5 0 0 1 0-1h1.5V7.5A.5.5 0 0 1 8 7z"/>
@@ -70,7 +71,7 @@
             <p class="agendamento__paragrafo"> {{agendamento.cliente.nome}} </p>
           </div>
           
-          <form action="{% url 'verifica_botoes_agendamento' %}" method="POST"> {% csrf_token %}
+          <form action="{% url 'Agendador:verifica_botoes_agendamento' %}" method="POST"> {% csrf_token %}
             <input type="hidden" name="id_agendamento" value="{{agendamento.id}}">
             <div class="agendamento__botoes">
               <button type="submit" name="excluir_agendamento" class="btn__icon">

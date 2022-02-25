@@ -1,11 +1,9 @@
-
 {% extends 'index.html' %}
-
-{% block content %}
+{% block content %} {% include 'menu.html'%}
 
 <div class="corpo">
     <h1 class="titulo centralizado">Adicionar agendamento</h1>
-<form action="{% url 'adicionar_agendamento' %}" method="POST">
+<form action="{% url 'Agendador:verificar_botoes_adicionar_agendamento' %}" method="POST">
     {% csrf_token %}
         <div class="novo_agendamento">
             <input name="data_agendamento" id="input__data__sem__label" type="date">
@@ -33,8 +31,8 @@
             </select>
             
             <div class="acoes">
-                <button type="submit" class="btn btn__cancelar tamanho__preencher" id="add-agend">Cancelar </button>
-                <button type="submit" class="btn btn__adicionar tamanho__preencher" id="add-agend">Adicionar</button>
+                <button type="submit" class="btn btn__cancelar tamanho__preencher" name="cancelar" id="add-agend">Cancelar </button>
+                <button type="submit" class="btn btn__adicionar tamanho__preencher" name="adicionar" id="add-agend">Adicionar</button>
             </div>
         </div>
     </form>

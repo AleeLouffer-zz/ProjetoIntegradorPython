@@ -40,7 +40,7 @@ def cadastrar_funcionario(requisicao):
 
     criar_funcionario(requisicao, id_empresa, nome_funcionario)
 
-    return redirect('tela_inicial_prestador')
+    return redirect('Agendador:tela_inicial_prestador')
 
 
 def cadastrar_cliente(requisicao):
@@ -49,7 +49,7 @@ def cadastrar_cliente(requisicao):
 
     criar_cliente(requisicao, id_empresa, nome_cliente)
 
-    return redirect("tela_inicial_prestador")
+    return redirect("Agendador:tela_inicial_prestador")
 
 
 def cadastrar_servico(requisicao):
@@ -60,7 +60,7 @@ def cadastrar_servico(requisicao):
     
     criar_servico(requisicao, id_empresa, nome_servico, descricao_servico, valor_servico)
 
-    return redirect('tela_inicial_prestador')
+    return redirect('Agendador:tela_inicial_prestador')
 
 
 def excluir_servico(requisicao):
@@ -83,27 +83,27 @@ def verifica_botoes_funcionario(requisicao):
     elif 'excluir_funcionario' in requisicao.POST:
         excluir_funcionario(requisicao)
 
-        return redirect('tela_inicial_prestador')
+        return redirect('Agendador:tela_inicial_prestador')
 
 
 def verifica_botoes_servico(requisicao):
     if 'editar_servico' in requisicao.POST:
         editar_servico(requisicao)
 
-        return redirect('tela_inicial_prestador')
+        return redirect('Agendador:tela_inicial_prestador')
     elif 'excluir_servico' in requisicao.POST:
         excluir_servico(requisicao)
 
-    return redirect("tela_inicial_prestador")
+    return redirect("Agendador:tela_inicial_prestador")
 
 
 def verifica_botoes_cliente(requisicao):
     if 'editar_cliente' in requisicao.POST:
         editar_cliente(requisicao)
-        return redirect("tela_inicial_prestador")
+        return redirect("Agendador:tela_inicial_prestador")
     elif 'excluir_cliente' in requisicao.POST:
         excluir_cliente(requisicao) 
-        return redirect('tela_inicial_prestador')
+        return redirect('Agendador:tela_inicial_prestador')
 
 
 def editar_cliente(requisicao):
@@ -112,7 +112,7 @@ def editar_cliente(requisicao):
 
     atualizar_cliente(requisicao, id_cliente, nome_novo)
 
-    return redirect("tela_inicial_prestador")
+    return redirect("Agendador:tela_inicial_prestador")
 
 
 def excluir_cliente(requisicao):
@@ -120,4 +120,4 @@ def excluir_cliente(requisicao):
 
     deletar_cliente(requisicao, id_cliente)
 
-    return redirect("tela_inicial_prestador")
+    return redirect("Agendador:tela_inicial_prestador")

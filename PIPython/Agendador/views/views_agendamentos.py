@@ -80,7 +80,6 @@ def cadastrar_agendamento(requisicao):
     
     criar_agendamento(requisicao, servico, cliente, funcionario, data_agendamento, hora_agendamento, id_empresa)
 
-    return redirect('tela_agenda')
 
 
 def verifica_botoes_agendamento(requisicao):
@@ -98,7 +97,7 @@ def excluir_agendamento(requisicao):
     id_agendamento = requisicao.POST["id_agendamento"]
     
     deletar_agendamento(requisicao, id_agendamento)
-        
+
 
 def obter_dados_tela_editar_agendamento(requisicao):
     id_agendamento = requisicao.POST["id_agendamento"]
@@ -111,8 +110,8 @@ def obter_dados_tela_editar_agendamento(requisicao):
     clientes = filtrar_clientes_ativos_por_id_empresa(requisicao, id_empresa)
 
     dados = {
-        'id_empresa': id_empresa,
         'agendamento': agendamento,
+        'data_agendamento': str(agendamento.data),
         'servicos': remover_da_lista(servicos, agendamento.servico),
         'funcionarios': remover_da_lista(funcionarios, agendamento.funcionario),
         'clientes': remover_da_lista(clientes, agendamento.cliente)
@@ -120,6 +119,20 @@ def obter_dados_tela_editar_agendamento(requisicao):
 
     return dados
 
+
+def verificar_botoes_adicionar_agendamento(requisicao):
+    if 'cancelar' in requisicao.POST:
+        return redirect('Agendador:tela_agenda')
+    if 'adicionar' in requisicao.POST:
+        cadastrar_agendamento(requisicao)
+        return redirect('Agendador:tela_agenda')
+
+def verificar_botoes_editar_agendamento(requisicao):
+    if 'cancelar' in requisicao.POST:
+        return redirect('Agendador:tela_agenda')
+    if 'editar' in requisicao.POST:
+        editar_agendamento(requisicao)
+        return redirect('Agendador:tela_agenda')
 
 def editar_agendamento(requisicao):
     id_agendamento = requisicao.POST["id_agendamento"]
@@ -138,7 +151,6 @@ def editar_agendamento(requisicao):
 
     atualizar_agendamento(requisicao, id_agendamento, servico, cliente, funcionario, data, hora)
     
-    return redirect('tela_agenda')
 
 def remover_da_lista(lista, item_a_remover):
     for i in lista:
