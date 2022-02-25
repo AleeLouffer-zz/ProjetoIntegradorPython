@@ -80,16 +80,16 @@
                                 <summary class="summary">
                                     <div class="conta__cabecalho">
                                         <div class="servico__e__valor">
-                                            <h3 class="servico__titulo">{{conta.agendamento.servico.nome}}</h3>
-                                            <p class="servico__preco"> R$ {{conta.agendamento.servico.preco}}</p>
+                                            <h3 class="servico__titulo">{{conta.servico.nome}}</h3>
+                                            <p class="servico__preco"> R$ {{conta.total}}</p>
                                         </div>
                                         <p class="status__conta quitado"> {{conta.pago}} </p>
                                     </div>
                                 </summary>
                                 <div class="caixa__informacoes">
                                     <h1 class="titulo__informacoes"> Informações Gerais </h1>
-                                    <p class="servico__paragrafo"> Funcionário: {{conta.agendamento.funcionario.nome}}</p>
-                                    <p class="servico__paragrafo"> Cliente: {{conta.agendamento.cliente.nome}}</p>
+                                    <p class="servico__paragrafo"> Funcionário: {{conta.funcionario.nome}}</p>
+                                    <p class="servico__paragrafo"> Cliente: {{conta.cliente.nome}}</p>
                                 </div>
                                 <div class="caixa__informacoes">
                                     <h1 class="titulo__informacoes"> Informações de Pagamento </h1>
@@ -97,6 +97,7 @@
                                     <p class="servico__paragrafo">Pago em 30/10/2021 </p>
                                 </div>
                                 
+                                {% if not conta.agendamento %}
                                 <form action="{% url 'Contas_a_Receber:editar_conta' %}" method="POST"> {% csrf_token %}
                                     <input name="id_conta" value="{{conta.id}}" hidden>
                                     <button type="submit" class="btn__icon">
@@ -106,6 +107,7 @@
                                         </svg>
                                     </button>
                                 </form>
+                                {% endif %}
                             </details>                
                         {% endfor %}
                     </div>

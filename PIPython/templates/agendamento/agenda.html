@@ -3,7 +3,7 @@
   <h1 class="titulo"> Agendamentos </h1>
   <form action="{% url 'tela_agenda' %}" method="POST"> {% csrf_token %}
     <div class="filtros__agendamento">
-      <input type="date" name="data" id="input__data__sem__label" value="{{data}}" />      
+      <input type="date" name="data" id="input__data__sem__label" />      
       
       <select id="funcionario" name="funcionario" class="select">
         <option>Todos Funcionários</option>

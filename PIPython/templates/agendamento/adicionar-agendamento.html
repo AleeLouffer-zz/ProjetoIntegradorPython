@@ -8,8 +8,8 @@
 <form action="{% url 'adicionar_agendamento' %}" method="POST">
     {% csrf_token %}
         <div class="novo_agendamento">
-            <input name="data_agendamento" id="input__data__sem__label" type="date">
-            <input name="hora_agendamento" id="input__data__sem__label" type="time">
+            <input name="data_agendamento" id="input__data__sem__label" type="date" required>
+            <input name="hora_agendamento" id="input__data__sem__label" type="time" required>
             
             <select class="select" name="cliente" required>
                 <option value="None">Selecionar Cliente</option> <!-- adicionar verificacao se ele nao selecionar uma opcao-->

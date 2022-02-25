@@ -111,8 +111,8 @@ def obter_dados_tela_editar_agendamento(requisicao):
     clientes = filtrar_clientes_ativos_por_id_empresa(requisicao, id_empresa)
 
     dados = {
-        'id_empresa': id_empresa,
         'agendamento': agendamento,
+        'data_agendamento': str(agendamento.data),
         'servicos': remover_da_lista(servicos, agendamento.servico),
         'funcionarios': remover_da_lista(funcionarios, agendamento.funcionario),
         'clientes': remover_da_lista(clientes, agendamento.cliente)
