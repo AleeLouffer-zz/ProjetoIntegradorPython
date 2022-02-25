@@ -39,7 +39,8 @@ def criar_conta_a_receber_com_agendamento(requisicao, valor, desconto, juros, to
         cliente = agendamento.cliente,
         agendamento = agendamento, 
         empresa = empresa)
-        conta.save()
+        
+    conta.save()
 
 def criar_conta_a_receber(requisicao, valor, desconto, juros, total, data_de_vencimento, data_de_emissao, id_forma_de_pagamento, id_funcionario, id_servico, id_cliente, id_empresa):
     funcionario = obter_funcionario_ativo_pelo_id(requisicao, id_funcionario)

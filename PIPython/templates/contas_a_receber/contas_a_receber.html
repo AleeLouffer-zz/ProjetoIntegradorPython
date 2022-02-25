@@ -8,7 +8,7 @@
                 <button class="container_botoes_finais btn__relatorio"> Gerar Relatório </button>
             </div>
             
-            <form action="" method="POST"> {% csrf_token %}
+            <form action="{% url 'Contas_a_Receber:filtrar' %}" method="POST"> {% csrf_token %}
                 <h2 class="sub__titulo"> Filtros </h2>
                 <section class="filtros__contas_a_receber">
                     <div class="container__datas">
@@ -30,21 +30,21 @@
                     
                     <div class="selecoes">   
                         <select id="funcionario" name="funcionario" class="select">
-                            <option>Todos Funcionários</option>
+                            <option value="todos_funcionarios">Todos Funcionários</option>
                             {% for funcionario in funcionarios %}
                                 <option value="{{funcionario.id}}">{{funcionario.nome}}</option>
                             {% endfor %}
                         </select>
                         
                         <select id="servico" name="servico" class="select">
-                            <option>Todos Servicos</option>
+                            <option value="todos_servicos">Todos Servicos</option>
                             {% for servico in servicos %}
                               <option value="{{servico.id}}">{{servico.nome}}</option>
                             {% endfor %}
                         </select>
 
                         <select id="cliente" name="cliente" class="select">
-                            <option>Todos Clientes</option>
+                            <option value="todos_clientes">Todos Clientes</option>
                             {% for cliente in clientes %}
                               <option value="{{cliente.id}}">{{cliente.nome}}</option>
                             {% endfor %}
