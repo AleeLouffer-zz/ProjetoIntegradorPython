@@ -173,7 +173,7 @@ def verifica_botoes_tela_editar(requisicao):
     elif 'salvar' in requisicao.POST:
         editar_conta(requisicao)
         return redirect('Contas_a_Receber:tela_contas_a_receber')
-        
+
 def filtrar(requisicao):
    contas = filtrar_funcionario(requisicao)
 
@@ -182,9 +182,63 @@ def filtrar(requisicao):
    }
    return render(requisicao, '../templates/agendamento/agenda.html', resposta)
 
+def filtrar(requisicao):
+
+   contas = Contas_a_Receber.objects.all()
+   funcionariosFiltrados = filtrar_funcionario(requisicao, contas)
+   servicosFiltrados = filtrar_servico(requisicao, funcionariosFiltrados)
+   clientesFiltrados = filtrar_cliente(requisicao, servicosFiltrados)
+   statusFiltrado = filtrar_por_status(requisicao, clientesFiltrados)
+   dataFiltrada = filtrar_por_data(requisicao, statusFiltrado)
+
+
+   resposta ={
+       'contas': dataFiltrada
+   }
+   return render(requisicao, '../templates/agendamento/agenda.html', resposta)
+
 def filtrar_funcionario(requisicao, lista):
-     if 'funcionario' in requisicao.POST:
+    if 'funcionario' in requisicao.POST:
         funcionario = requisicao.POST['funcionario']
         if funcionario != 'Todos Funcionários':
             return list(filter(lambda x: x.funcionario.id == int(funcionario), lista))
-     return lista
+    return lista
+
+def filtrar_servico(requisicao, lista):
+    if 'servico' in requisicao.POST:
+        servico = requisicao.POST['servico']
+        if servico != 'Todos Os Serviços':
+            return list(filter(lambda x: x.servico.id == int(servico), lista))
+    return lista
+
+def filtrar_cliente(requisicao, lista):
+    if 'cliente' in requisicao.POST:
+        servico = requisicao.POST['cliente']
+        if servico != 'Todos Os Clientes':
+            return list(filter(lambda x: x.cliente.id == int(cliente), lista))
+    return lista
+
+def filtrar_por_status(requisicao, lista):
+    status = requisicao.POST['status']
+    if status == '0':
+       return lista
+    if status == '1':
+      return list(filter(lambda x: x.pago == False, lista))  
+    if status == '2':
+      return list(filter(lambda x: x.pago == True, lista))
+    return lista
+
+def filtrar_por_data(requisicao, lista):
+    opcao_data = requisicao.POST['opcao_data']
+    data_inicial = datetime.strptime(requisicao.POST['data_inicial'], '%d/%m/%y')
+    data_final = datetime.strptime(requisicao.POST['data_final'], '%d/%m/%y')
+    if opcao_data == 'todas':
+        return lista
+    if opcao_data == 'data_emissao':
+        return list(filter(lambda x:x.data_de_emissao >= data_inicial and data_de_emissao <= data_final, lista))
+    if opcao_data == 'data_pagamento':
+        return list(filter(lambda x:x.data_de_pagamento >= data_inicial and data_de_pagamento <= data_final, lista))
+    if opcao_data == 'data_vencimento':
+        return list(filter(lambda x:x.data_de_vencimento >= data_inicial and data_de_vencimento <= data_final, lista))
+
+

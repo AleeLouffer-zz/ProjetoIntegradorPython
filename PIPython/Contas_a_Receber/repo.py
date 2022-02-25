@@ -41,23 +41,6 @@ def criar_conta_a_receber_com_agendamento(requisicao, valor, desconto, juros, to
         empresa = empresa)
         conta.save()
 
-def filtrar_por_status(status):
-    if status == 'Pendente':
-      return Contas_a_Receber.objects.filter(pago=False);  
-    if status == 'Quitado':
-      return Contas_a_Receber.objects.filter(pago=True); 
-
-def filtrar_por_funcionario(id_funcionario):
-    return Contas_a_Receber.objects.filter(funcionario=id_funcionario)
-
-def filtrar_por_servico(id_servico):
-    return Contas_a_Receber.objects.filter(servico=id_servico)
-
-def filtrar_por_cliente(id_cliente):
-    return Contas_a_Receber.objects.filter(cliente=id_cliente)
-
-    conta.save()
-
 def criar_conta_a_receber(requisicao, valor, desconto, juros, total, data_de_vencimento, data_de_emissao, id_forma_de_pagamento, id_funcionario, id_servico, id_cliente, id_empresa):
     funcionario = obter_funcionario_ativo_pelo_id(requisicao, id_funcionario)
     servico = obter_servico_ativo_pelo_id(requisicao, id_servico)

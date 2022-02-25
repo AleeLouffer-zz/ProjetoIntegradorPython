@@ -14,11 +14,11 @@
                     <div class="container__datas">
                         <div class="data">
                             <label for="data-inicio" class="label__input"> Data Inicial: </label>
-                            <input id="data-inicio" type="date" class="input__com__label">
+                            <input name="data_inicial" id="data-inicio" type="date" class="input__com__label">
                         </div>
                         <div class="data">
                             <label for="data-fim" class="label__input"> Data Final: </label>
-                            <input id="data-fim" type="date" class="input__com__label">
+                            <input name="data_final" id="data-fim" type="date" class="input__com__label">
                         </div>
                         <select name="opcao_data" class="select">
                             <option value="todas"> Todas as datas </option>
@@ -50,9 +50,10 @@
                             {% endfor %}
                         </select>
                         
-                        <select name="Status" class="select">
-                            <option value="0"> Pedente </option>
-                            <option value="1"> Quitado </option>
+                        <select name="status" class="select">
+                            <option value="0"> Todos os Status </option>
+                            <option value="1"> Pedente </option>
+                            <option value="2"> Quitado </option>
                         </select>
                     </div>
 
