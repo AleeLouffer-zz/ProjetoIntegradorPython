@@ -1,0 +1,87 @@
+input#input__data__sem__label, .input__de__texto {
+  background-color: whitesmoke;
+
+  border-radius: 5px;
+  min-width: 200px;
+  border: 1px solid var(--cinza-claro);
+  padding: 5px;
+}
+
+input.fundo__branco{
+    background-color: white;
+}
+
+.container__input__label {
+  display: flex;
+  align-items: center;
+
+  background-color: var(--cor-fundo);
+  border: 1px solid var(--cinza-claro);
+  border-radius: 5px;
+
+  width: 100%;
+}
+
+.container__datas {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.data {
+  display: flex;
+  align-items: center;
+
+  background-color: var(--cor-fundo);
+  border: 1px solid var(--cinza-claro);
+  border-radius: 5px;
+
+  width: 100%;
+  min-width: 260px;
+}
+
+.label__input {
+  font-size: 14px;
+  padding: 5px;
+}
+
+.input__com__label {
+  border: none;
+  background: transparent;
+  min-width: 40px;
+}
+
+.input__texto::placeholder {
+  color: black;
+}
+
+input.placeholder__cinza::placeholder {
+  color: gray;
+}
+
+.input__texto {
+  width: 85%;
+  min-width: 180px;
+  height: 30px;
+
+  padding: 2px 4px;
+  margin: 0;
+
+  border: none;
+  border-radius: 5px;
+
+  display: block;
+
+  background-color: whitesmoke;
+}
+
+@media screen and (min-width: 780px) {
+  .container__datas {
+    flex-wrap: nowrap;
+    width: 100%;
+  }
+
+  input#input__data__sem__label {
+    width: 98%;
+  }
+}

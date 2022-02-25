@@ -1,13 +1,12 @@
 {% extends 'index.html' %}
-
 {% block content %} {% include 'menu.html'%}
 	<div class="corpo">
         <h1 class="titulo centralizado">Editar agendamento</h1>
-		<form action="{% url 'editar_agendamento' %}" method="POST"> {% csrf_token %}
+		<form action="{% url 'Agendador:verificar_botoes_editar_agendamento' %}" method="POST"> {% csrf_token %}
 			<div class="novo_agendamento">
 				<input type="hidden" name="id_agendamento" value="{{agendamento.id}}">
 				
-				<input name="data" type="date" id="input__data__sem__label" value="{{agendamento.data}}">
+				<input name="data" type="date" id="input__data__sem__label" value="{{data_agendamento}">
 				<input name="hora_agendamento" type="time" id="input__data__sem__label" value="{{agendamento.hora}}">
 				
 				<select class="select" name="id_cliente"> <!-- alterar para editar cliente -->
@@ -32,8 +31,8 @@
 				</select>
 				
 				<div class="acoes">
-					<button type="submit" class="btn btn__cancelar tamanho__preencher" id="add-agend">Cancelar </button>
-					<button type="submit" class="btn btn__adicionar tamanho__preencher">Salvar </button> <!-- Arrumar isso -->
+					<button type="submit" class="btn btn__cancelar tamanho__preencher" id="add-agend" name="cancelar">Cancelar </button>
+					<button type="submit" class="btn btn__adicionar tamanho__preencher" name='editar'>Salvar </button> 
 				</div>
 			</div>
 			</form>

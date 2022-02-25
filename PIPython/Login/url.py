@@ -2,15 +2,12 @@ from django.contrib import admin
 from django.urls import path
 from Login import views
 
-urlpatterns = [
-    # path('entrar/', views.Entrar, name="entrar"),
-    path('cadastrar/', views.renderizar_tela_cadastro, name="cadastro_empresa"),
-    path('cadastrarEmpresa/', views.cadastrar_empresa, name="cadastrar_empresa"),
-    path('perfil/<int:id_empresa>', views.Perfil, name="perfil"),
-    path("", views.tela_login, name="tela_login"),
-    path("login", views.realizar_login, name="realizar_login"),
+app_name = 'Login'
 
-    path("contas", views.tela_contas_a_receber, name="tela_contas_a_receber"),
-    
-    path("prestador", views.prestador, name="prestador"),
+urlpatterns = [
+    path('cadastrar/', views.renderizar_tela_cadastro, name="cadastro_empresa"),
+    path('cadastrar_empresa/', views.cadastrar_empresa, name="cadastrar_empresa"),
+    path("", views.tela_login, name="tela_login"),
+    path("login/", views.realizar_login, name="realizar_login"),
+    path('editar_empresa/', views.editar_empresa, name="editarEmpresa"),
 ]

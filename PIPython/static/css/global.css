@@ -5,6 +5,7 @@
   --cinza-claro: #e5e5e5;
   --verde: #46b93c;
   --vermelho: #f83a3a;
+
   --fonte-Source-Sans-Pro: "Source Sans Pro", sans-serif;
 }
 
@@ -27,59 +28,30 @@ h1.titulo {
   margin: 8px;
 }
 
+.sub__titulo{
+  font-size: 24px;
+}
+
+
+h1.titulo.centralizado {
+  text-align: center;
+  margin-bottom: 16px;
+}
+
 select.select {
   background-color: var(--cor-fundo);
   border: 1px solid var(--cinza-claro);
   border-radius: 5px;
 
-  min-width: 250px;
-
   padding: 5px;
 }
 
-button.btn {
-  color: var(--cor-fundo);
-  text-align: center;
-
-  border: none;
-  border-radius: 5px;
-
-  padding: 5px;
-
-  min-width: 100px;
-  cursor: pointer;
+.altura__32px{
+  height: 32px;
 }
 
-.btn__filtrar {
-  background-color: var(--cor--secundaria);
-  width: 100%;
-}
-
-.btn__adicionar {
-  background-color: var(--verde);
-  margin: 8px 0;
-  width: 100%;
-}
-
-.btn__cancelar {
-  background-color: var(--vermelho);
-}
-
-input#input__data__sem__label {
-  background-color: whitesmoke;
-
-  border-radius: 5px;
-  min-width: 200px;
-  border: 1px solid var(--cinza-claro);
-  padding: 5px;
-}
-
-.btn__icon{
-  border: none;
-  background-color: transparent;
-  cursor: pointer;
-  margin: 0;
-  padding: 0;
+.negrito{
+  font-weight: bold;
 }
 
 .nao__encontrado{
@@ -91,10 +63,6 @@ input#input__data__sem__label {
   min-width: 200px;
   padding: 8px;
   margin: 8px 0;
-}
-
-.sub__titulo{
-  font-size: 24px;
 }
 
 @media screen and (min-width: 950px) {

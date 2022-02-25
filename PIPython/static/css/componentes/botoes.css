@@ -1,0 +1,46 @@
+button.btn {
+    color: var(--cor-fundo);
+    text-align: center;
+    
+    border: none;
+    border-radius: 5px;
+    
+    padding: 8px;
+    
+    cursor: pointer;
+}
+
+.btn.preencher {
+  width: 100%;
+}
+
+.btn__icon {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
+}
+
+.btn.com__icon{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 8px;
+}
+
+button.btn.btn__azul {
+    background-color: var(--cor-primaria);
+}
+
+.btn.btn__adicionar {
+    background-color: var(--verde);
+}
+
+.btn.btn__cancelar {
+    background-color: var(--vermelho);
+}
+
+.btn__filtrar, .btn.laranja {
+  background-color: var(--cor--secundaria);
+}

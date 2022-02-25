@@ -1,211 +1,112 @@
-.empresa__email{
-    text-align: center;
-    font-size:16px;
+.informacoes__empresa__cabecalho {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
 }
 
-.infos {
-    display: flex;
-    position: relative;
+.empresa__email {
+  text-align: center;
+  font-size: 24px;
+  margin: 0 8px;
 }
 
-.infos button {
-    background: none;
-    border: 0;
-    cursor: pointer;
+.informacoes__empresa h1 {
+  font-size: 40px;
 }
 
-.infos-txt {
-    margin-top: 0px;
-    margin-left: 0px;
-    display: relative;   
+.conteudo{
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
 }
 
-img {
-    margin: 8px;
-    max-width:200px;
-    max-height:150px;
-    width: auto;
-    height: auto;
-    border-radius: 100%;
+.caixa__cadastrados{
+  background-color: whitesmoke;
+  border: 1px solid var(--cinza-claro);
+  border-radius: 5px;
+  
+  padding: 10px;
+  margin: 8px 0;
+  transition: width 2s;
 }
 
-.infos-txt h1 {
-    margin: 8px;
-    padding: 0px;
-    font-size: 45px;
+.caixa__cadastrados__botao{
+  background: white;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0px 2px 5px gray;
+  
+  padding: 5px 20px;
+  margin: 5px 5px;
+  
+  cursor: pointer;
+  font-size: 15px;
+  transition: 1s;
 }
 
-.infos-txt p {
-    margin: 8px;
-    font-size: 25px;
+.caixa__cadastrados__botao:hover {
+  transform: scale(1.05);
 }
 
-.botao {
-    position: absolute;
-    top: 0;
-    right: 0;
+.formulario__informacoes {
+  transition: 1s;
+  margin: 8px;
 }
 
-.func-cadastrados, .serv-cadastrados{
-    margin-top: 50px;
-}
-
-.func-cadastrados h1, .serv-cadastrados h1, .fotos h1 {
-    font-size: 25px;
-    margin-left: 5px;
-    margin-bottom: 5px;
-    font-weight: normal;
-}
-    
-.caixa-func-cadastrados, .caixa-serv-cadastrados{
-    border: 1px solid var(--cinza-claro);
-    background-color: whitesmoke;
-    padding: 10px;
-    border-radius: 5px;
-    transition: width 2s;
-}
-
-.caixa-func-cadastrados button, .caixa-serv-cadastrados button{
-    padding: 5px 20px;
-    border: 0;
-    background: white;
-    border-radius: 5px;
-    margin: 5px 5px;
-    cursor: pointer;
-    font-size: 15px;
-    box-shadow: 0px 2px 5px gray;
-    transition: 1s;
-}
-
-.caixa-func-cadastrados button:hover {
-    transform: scale(1.05);
-}
-
-.caixa-serv-cadastrados button:hover {
-    transform: scale(1.05);
-}
-
-.imgs-fotos .mais {
-    position: absolute;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    top: 70%;
-    left: calc(50% - 40px);
-    padding: 0;
-}
-
-.adiciona-servico, .funcionario-informacoes {
-    margin-left:0;
-    -webkit-transition: 1s;
-    transition: 1s;
-    display: flex;
-    margin: 5px;
-    border-radius: 5px;
-}
-
-.col-1{
-    width: 100%;
-    margin: 5px auto;   
-    display: block;
-}
-.col-2{
-    width: 100%;
-    margin: 5px auto;
-    display: block;
-}
-
-.col-1 .btn-confirmar{
-    text-align: center;
-    width: 100px;
-    bottom: 2px;
-    padding: 5px 15px;
-    font-size: 15px;
-    color: black;
-    background-color: #46B93C;
-    border-radius: 5px;
-    cursor: pointer;
-    box-shadow: none;
-    transition: none;
-}
-
-.col-3{
-    position: relative;
-    width: 100%;
-    margin: 0;
-    display: block;
-}
-    
-.col-2 .btn-confirmar{
-    background-color: white;
-    text-align: center;
-    width: 100px;
-    bottom: 2px;
-    padding: 5px 15px;
-    background-color: #46B93C;
-    font-size: 15px;
-    color: black;
-    border-radius: 5px;
-    cursor: pointer;
-    box-shadow: none;
-    transition: none;
-}
-
-input{
-    padding: 5px;
-    border-radius: 10px;
-    font-size: 15px;
-    border: 1px solid gray;
-}
-
-::-webkit-input-placeholder {
-    color: black;
-}
-
-.col-1 .valor{
-    width: 15%;
-}
-
-.col-2 .descricao{
-    padding: 20px;
-    width: 70%;
-}
 
 .opcoes select {
-    border-radius: 150px;
-    margin-top: 15px;
+  border-radius: 150px;
+  margin-top: 15px;
 }
 
-@media screen and (max-width: 720px){
-    .infos {
-        display: block; 
-    }
-    .infos-txt{
-        margin-left: auto;
-        margin-right: auto;
-        display: block;
-        text-align: center;
-    }
-    
-    img{        
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    .col-1 .btn-confirmar{
-        margin-left: auto;
-        margin-right: auto;
-        display: flex;
-        text-align: center;
-        margin-top: 10px;
-    }
-    
-    .col-2 .btn-confirmar{
-        margin-left: auto;
-        margin-right: auto;
-        display: flex;
-        text-align: center;
-        margin-top: 10px;
-    }
+.form_editar_empresa {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  width: 100%;
 }
+
+.input_form_editar {
+  width: 94%;
+}
+
+.infos .botao__confirmar {
+  background-color: green;
+  color: white;
+  border-radius: 8px;
+  padding: 8px;
+  width: 100%;
+}
+
+.formulario__informacoes{
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+}
+
+.formulario__editar__empresa{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 8px 0;
+}
+
+.editar__empresa{
+  border: 1px solid var(--cinza-claro);
+  border-radius: 5px;
+  padding: 8px;
+  margin: 8px;
+}
+
+@media screen and (max-width: 720px) {
+  .formulario__informacoes{
+    flex-direction: column;
+  }
+  .botoes__pequenos{
+    display: flex;
+    gap: 8px;
+    justify-content: end;
+  }
+}
+

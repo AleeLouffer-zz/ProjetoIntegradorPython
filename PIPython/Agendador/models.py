@@ -30,3 +30,4 @@ class Agendamento(models.Model):
     hora = models.TimeField()
     empresa = models.ForeignKey(Empresa, on_delete=models.CASCADE)
     ativo = models.BooleanField(null=False, default=True)
+    completo = models.BooleanField(null=False, default=False)

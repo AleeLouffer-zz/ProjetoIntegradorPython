@@ -1,0 +1,94 @@
+{% extends 'index.html' %}
+
+{% block content %} {% include 'menu.html'%}
+        <div class="corpo">
+            <h1 class="titulo"> Contas a Receber </h1>
+            <form action="{% url 'Contas_a_Receber:verifica_botoes_tela_editar' %}" method="POST">
+                {% csrf_token %}
+                <div class="informacoes-gerais">
+                    <div class="informacoes-emissao">
+                        <h1 class="titulo__informacoes negrito"> Informações Gerais </h1>
+                        <div class="data__emissao">
+                            <p class="data__emissao__paragrafo negrito">Data de Emissão: 18/11/2021</p>
+                        </div>
+                    </div>      
+                    <div class="selecoes">
+                        <select id="servico" name="id_servico" class="select altura__32px">
+                            <option value="{{conta.servico.id}}">{{conta.servico.nome}}</option>
+                            {% for servico in servicos %}
+                              <option value="{{servico.id}}">{{servico.nome}}</option>
+                            {% endfor %}
+                        </select>
+                        
+                        <select id="funcionario" name="id_funcionario" class="select altura__32px">
+                            <option value="{{conta.funcionario.id}}">{{conta.funcionario.nome}}</option>
+                            {% for funcionario in funcionarios %}
+                                <option value="{{funcionario.id}}">{{funcionario.nome}}</option>
+                            {% endfor %}
+                        </select>
+    
+                        <select id="cliente" name="id_cliente" class="select altura__32px">
+                            <option value="{{conta.cliente.id}}">{{conta.cliente.nome}}</option>
+                            <option>{{conta.cliente}}</option>
+                            {% for cliente in clientes %}
+                              <option value="{{cliente.id}}">{{cliente.nome}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="informacoes-pagamento ">
+                    <h1 class="titulo__informacoes com__margem negrito"> Informações de Pagamento </h1>
+                    <div class="container__datas">
+                        <div class="data">
+                            <label for="data-inicio" class="label__input"> Data de Pagamento:  </label>
+                            <input id="data-inicio" name="data_pagamento" type="date" class="input__com__label" value="{{data_de_pagamento}}">
+                        </div>
+                        <div class="data">
+                            <label for="data-fim" class="label__input"> Data de Vencimento: </label>
+                            <input id="data-fim" name="data_vencimento" type="date" class="input__com__label" value="{{data_de_vencimento}}">
+                        </div>
+                    </div>
+
+                    <select class="select altura__32px" name="forma_de_pagamento">
+                        <option value="{{conta.forma_de_pagamento.id}}"> {{conta.forma_de_pagamento.nome}} </option>
+                        {% for forma in forma_de_pagamento %}
+                        <option value="{{forma.id}}"> {{forma.nome}} </option>
+                        {% endfor %}
+                    </select>
+                    <div class="flex-row-item">
+                        <div class="container__input__label">
+                            <label for="valor" class="label__input"> Valor: </label>
+                            <input id="valor" name="valor" type="text" class="input__com__label placeholder__cinza" placeholder="R$" value="{{conta.valor|floatformat}}">
+                        </div>
+                        <div class="container__input__label">
+                            <label for="desconto" class="label__input"> Desconto: </label>
+                            <input id="desconto" name="desconto" type="text" class="input__com__label placeholder__cinza" placeholder="R$ -" value="{{conta.desconto|floatformat}}">
+                        </div>
+                    </div>
+                    <div class="flex-row-item">
+                        <div class="container__input__label">
+                            <label for="juros" class="label__input"> Juros: </label>
+                            <input id="juros" name="juros" type="text" name="juros" class="input__com__label placeholder__cinza" placeholder="R$ -" value="{{conta.juros|floatformat}}"> 
+                        </div>
+                        <div class="container__input__label">
+                            <label for="total" class="label__input"> Total: </label>
+                            <input id="total" name="total" type="text" class="input__com__label placeholder__cinza" placeholder="R$ -" value="{{conta.total|floatformat}}"> 
+                        </div>
+                    </div>
+                    
+                    <div class="informacoes-pagamento-pago">
+                        <label for="pago"> Pago </label>
+                        <label id="pago" class="switch">
+                            <input type="checkbox">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="botoes">
+                    <button class="btn btn__cancelar preencher negrito" name='cancelar' type="submit"> Cancelar </button>
+                    <button class="btn btn__adicionar preencher negrito" name='salvar' type="submit"> Salvar </button>
+                </div>
+            </form>
+            
+        </div>
+{% endblock %}
