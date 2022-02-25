@@ -71,10 +71,16 @@ section .total {
   min-width: 370px;
 }
 
-section .total h3 {
-  padding-left: 5px;
-  margin: 5px;
-  font-weight: normal;
+.status, .funcionario_contas{
+    text-align: center;
+    background-color: var(--cor-fundo);
+    border: 1px solid var(--cinza-claro);
+    border-radius: 5px;
+    margin-right:10px;
+    margin-top: 2px;
+    height: 25px;
+    min-width: 100px;
+    height: 30px;
 }
 
 section .total p {
@@ -169,6 +175,10 @@ summary.summary {
   padding: 8px;
 }
 
+.servico--paragrafo, .servico-cabecalho h1{
+    margin: 5px;
+    font-weight: normal;
+}
 .selecoes{
   width: 100%;
   display: flex;

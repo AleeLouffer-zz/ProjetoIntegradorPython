@@ -1,4 +1,5 @@
-{% extends 'index.html' %} {% block content %}
+{% extends 'index.html' %} 
+{% block content %} {% include 'menu.html'%}
 <div class="corpo">
   <section class="informacoes__empresa__cabecalho">
     <div class="informacoes__empresa">
@@ -37,7 +38,7 @@
         <button onclick="ExibirCadastroFuncionario()" class="caixa__cadastrados__botao">+</button>
 
         <div class="formulario__adicionar">
-          <form action="{% url 'criar_funcionario' %}" method="post">
+          <form action="{% url 'Agendador:criar_funcionario' %}" method="post">
             {% csrf_token %}
             <div id="checkBoxFunc" style="display: none" class="formulario__informacoes">
               <input type="text" name="nome_funcionario" class="input__de__texto fundo__branco" placeholder="Nome Completo"/>
@@ -47,7 +48,7 @@
           </form>
         </div>
         <div class="formulario__editar">
-          <form action="{% url 'verifica_botoes_funcionario'%}" method="post">
+          <form action="{% url 'Agendador:verifica_botoes_funcionario'%}" method="post">
             {% csrf_token %}
             <div id="checkBoxFuncEdit" style="display: none" class="formulario__informacoes">
                 <input type="text" name="id_funcionario" id="id_funcionario" hidden/>
@@ -74,7 +75,7 @@
         <button onclick="ExibirCadastroServico()" class="caixa__cadastrados__botao">+</button>
         
         <div class="formulario__adicionar">
-          <form action="{%url 'criar_servico' %}" method="post">
+          <form action="{%url 'Agendador:criar_servico' %}" method="post">
             {% csrf_token %}
             <div id="checkBoxServ" style="display: none" class="formulario__informacoes">
 
@@ -86,7 +87,7 @@
           </form>
         </div>
         <div class="formulario__editar">
-          <form action="{% url 'verifica_botoes_servico'%}" method="post">
+          <form action="{% url 'Agendador:verifica_botoes_servico'%}" method="post">
             {% csrf_token %}
             <input id="servico_id" name="servico_id" hidden />
             <div id="checkBoxServEdit" style="display: none" class="formulario__informacoes">
@@ -112,7 +113,7 @@
 
         <button onclick="ExibirCadastroCliente()" class="caixa__cadastrados__botao">+</button>
         <div class="formulario__adicionar">
-          <form action="{% url 'criar_cliente' %}" method="POST">
+          <form action="{% url 'Agendador:criar_cliente' %}" method="POST">
             {% csrf_token %}
             <div id="checkBoxCliente" style="display: none" class="formulario__informacoes">
               <input type="text" class="input__de__texto fundo__branco" name="nome_cliente" placeholder="Nome Completo" />
@@ -121,7 +122,7 @@
           </form>
         </div>
         <div class="formulario__editar">
-          <form action="{% url 'verifica_botoes_cliente'%}" method="post">
+          <form action="{% url 'Agendador:verifica_botoes_cliente'%}" method="post">
             {% csrf_token %}
             <div id="checkBoxClienteEdit" style="display: none" class="formulario__informacoes">
               <input type="text" name="id_cliente" id="id_cliente" hidden/>
@@ -136,19 +137,6 @@
       </div>
     </section>
   </section>
-
-
-  <!-- --------------------------- REMOVER --------------------------- -->
-  <!-- <form action="{% url 'tela_agenda' %}" method="POST">
-    {% csrf_token %}
-    <button type="submit">Agendamento</button>
-  </form>
-  <form action="{% url 'Contas_a_Receber:tela_contas_a_receber' %}" method="POST">
-    {% csrf_token %}
-    <button type="submit">Contas a Receber</button>
-  </form> -->
-  <!-- ---------------------------------------------------------------- -->
-
 </div>
 
 {% endblock %}
