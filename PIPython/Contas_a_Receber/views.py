@@ -4,11 +4,11 @@ from Contas_a_Receber.repo import *
 from Login.repo import *
 from Agendador.repo import *
 from Agendador.views import *
-from datetime import date
+from datetime import datetime
 
 def tela_contas_a_receber(requisicao):
     id_empresa = requisicao.session["id_empresa"]
-
+    
     data = {
         'contas_a_receber': list(obter_contas_da_empresa(requisicao, id_empresa)),
         'funcionarios': list(filtrar_funcionarios_ativos_por_id_empresa(requisicao, id_empresa)),
@@ -235,10 +235,8 @@ def filtrar_por_data(requisicao, lista):
     if opcao_data == 'todas':
         return lista
     if opcao_data == 'data_emissao':
-        return list(filter(lambda x:x.data_de_emissao >= data_inicial and data_de_emissao <= data_final, lista))
+        return list(filter(lambda x:x.data_de_emissao >= data_inicial and x.data_de_emissao <= data_final, lista))
     if opcao_data == 'data_pagamento':
-        return list(filter(lambda x:x.data_de_pagamento >= data_inicial and data_de_pagamento <= data_final, lista))
+        return list(filter(lambda x:x.data_de_pagamento >= data_inicial and x.data_de_pagamento <= data_final, lista))
     if opcao_data == 'data_vencimento':
-        return list(filter(lambda x:x.data_de_vencimento >= data_inicial and data_de_vencimento <= data_final, lista))
-
-
+        return list(filter(lambda x:x.data_de_vencimento >= data_inicial and x.data_de_vencimento <= data_final, lista))
