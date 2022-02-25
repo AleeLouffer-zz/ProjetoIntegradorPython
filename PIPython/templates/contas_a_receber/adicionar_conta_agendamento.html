@@ -11,75 +11,58 @@
                             <p class="data__emissao__paragrafo negrito">Data de Emissão: {{data_emissao}}</p>
                         </div>
                     </div>      
-                    <div class="selecoes">
-                        <select id="servico" name="servico" class="select altura__32px">
-                            <option>{{servico}}</option>
-                        </select>
-                        
-                        <select id="funcionario" name="funcionario" class="select altura__32px">
-                            <option>{{funcionario}}</option>
-                        </select>
-    
-                        <select id="cliente" name="cliente" class="select altura__32px">
-                            <option>{{cliente}}</option>
-                        </select>
+                    <div class="informacoes">
+                        <p class="informacao__paragrafo"> 
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lock-fill" viewBox="0 0 16 16">
+                                <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/>
+                            </svg>
+                            Servico: {{servico}}  
+                        </p>
+                        <p class="informacao__paragrafo">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lock-fill" viewBox="0 0 16 16">
+                                <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/>
+                            </svg>
+                            Funcionário: {{funcionario}}
+                        </p>
+                        <p class="informacao__paragrafo">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lock-fill" viewBox="0 0 16 16">
+                                <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/>
+                            </svg>
+                            Cliente: {{cliente}}
+                        </p>
                     </div>
+                    
                 </div>
                 <div class="informacoes-pagamento ">
                     <h1 class="titulo__informacoes com__margem negrito"> Informações de Pagamento </h1>
                     <div class="container__datas">
-                        <div class="data">
-                            <label for="data-inicio" class="label__input"> Data de Pagamento:  </label>
-                            <input id="data-inicio" name="data_pagamento" type="date" class="input__com__label">
-                        </div>
                         <div class="data">
                             <label for="data-fim" class="label__input"> Data de Vencimento: </label>
                             <input id="data-fim" name="data_vencimento" type="date" class="input__com__label">
                         </div>
                     </div>              
 
-                    <select class="select altura__32px" name="forma_de_pagamento">
-                        <option value="None"> Forma de Pagamento </option>
-                        {% for forma in forma_de_pagamentos %}
-                        <option value="{{forma.id}}"> {{forma.nome}} </option>
-                        {% endfor %}
-                    </select>
-                    <div class="flex-row-item">
-                        <div class="container__input__label">
-                            <label for="valor" class="label__input"> Valor: </label>
-                            <input id="valor" type="text" name="valor" class="input__com__label placeholder__cinza" placeholder="R$" value="{{valor|floatformat}}">
-                        </div>
-                        <div class="container__input__label">
-                            <label for="juros" class="label__input"> Juros: </label>
-                            <input id="juros" type="text" name="juros" class="input__com__label placeholder__cinza" placeholder="-" value="0"> 
-                        </div>
+                    <div class="forma_de_pagamento">
+                        <select class="select altura__32px" name="forma_de_pagamento">
+                            <option value="Pendente"> Forma de Pagamento </option>
+                            {% for forma in forma_de_pagamentos %}
+                            <option value="{{forma.id}}">{{forma.nome}}</option>
+                            {% endfor %}
+                        </select>
+                        <button class="btn btn__adicionar" onclick="abrirModal(event)">+</button>
                     </div>
-                    <div class="flex-row-item">
-                        <div class="container__input__label">
-                            <label for="desconto" class="label__input"> Desconto: </label>
-                            <input id="desconto" type="text" name="desconto" class="input__com__label placeholder__cinza" placeholder="-" value="0">
-                        </div>
-                       
-                        <div class="container__input__label">
-                            <label for="total" class="label__input"> Total: </label>
-                            <input id="total" type="text" name="total" class="input__com__label placeholder__cinza" placeholder="-"> 
-                        </div>
-                       
-                    </div>
-                    
-                    <div class="informacoes-pagamento-pago">
-                        <label for="pago"> Pago </label>
-                        <label id="pago" class="switch">
-                            <input type="checkbox">
-                            <span class="slider round"></span>
-                        </label>
-                    </div>
+                    <p class="informacao__paragrafo">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lock-fill" viewBox="0 0 16 16">
+                            <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/>
+                        </svg>
+                        Valor: R$ {{valor}}
+                    </p>
                 </div>
                 <div class="botoes">
                     <button class="btn btn__cancelar preencher negrito" name="cancelar" type="submit"> Cancelar </button>
                     <button class="btn btn__adicionar preencher negrito" name="adicionar" type="submit"> Adicionar </button>
                 </div>
             </form>
-            
         </div>
+        {% include 'contas_a_receber/adicionar_forma_de_pagamento_modal.html' %}
 {% endblock %}

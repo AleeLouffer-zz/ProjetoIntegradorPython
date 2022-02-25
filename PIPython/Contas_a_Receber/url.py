@@ -10,6 +10,9 @@ urlpatterns = [
     path('editar_conta/', views.tela_editar_conta, name="editar_conta"),
     path('adicionar_conta_agentamento/', views.tela_adicionar_conta_agendamento, name="adicionar_conta_agendamento"),
     path('verifica_botoes_conta_agendamento/', views.verifica_botoes_conta_agendamento, name="verifica_botoes_conta_agendamento"),
-    path('verifica_botoes_adicionar_conta', views.verifica_botoes_adicionar_conta, name="verifica_botoes_adicionar_conta"),
-    path('verifica_botoes_editar_conta', views.verifica_botoes_tela_editar, name="verifica_botoes_tela_editar")
+    path('verifica_botoes_adicionar_conta/', views.verifica_botoes_adicionar_conta, name="verifica_botoes_adicionar_conta"),
+    path('verifica_botoes_editar_conta/', views.verifica_botoes_tela_editar, name="verifica_botoes_tela_editar"),
+    path('verifica_botoes_tela_contas_a_receber/', views.verifica_botoes_tela_contas_a_receber, name="verifica_botoes_tela_contas_a_receber"),
+    path('tela_pagamento/', views.tela_pagamento, name="tela_pagamento"),
+    path('adicionar_forma_de_pagamento/', views.adicionar_forma_de_pagamento, name="adicionar_forma_de_pagamento")
 ]
