@@ -96,10 +96,10 @@
                                 </div>
                                 <div class="caixa__informacoes">
                                     <h1 class="titulo__informacoes"> Informações de Pagamento </h1>
-                                    <p class="servico__paragrafo">Data de vencimento: {{conta.data_de_vencimento}}</p>
+                                    <p class="servico__paragrafo">Data de vencimento: {{conta.data_de_vencimento|date:"SHORT_DATE_FORMAT"}}</p>
                                     <p class="servico__paragrafo"> Forma de pagamento: {{conta.forma_de_pagamento.nome}}</p>
                                     {%if conta.data_de_pagamento%}
-                                        <p class="servico__paragrafo">Pago em {{conta.data_de_pagamento}} </p>
+                                        <p class="servico__paragrafo">Pago em {{conta.data_de_pagamento|date:"SHORT_DATE_FORMAT"}} </p>
                                     {% endif %}
                                 </div>
                                 <form action="{% url 'Contas_a_Receber:verifica_botoes_tela_contas_a_receber' %}" method="POST"> {% csrf_token %}
