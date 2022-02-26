@@ -139,7 +139,6 @@ def editar_conta(requisicao):
     del requisicao.session['id_conta']
 
 def verifica_botoes_tela_contas_a_receber(requisicao):
-    
     if 'editar' in requisicao.POST:
         requisicao.session['id_conta'] = requisicao.POST['id_conta']
         return redirect('Contas_a_Receber:editar_conta')
@@ -187,3 +186,4 @@ def adicionar_forma_de_pagamento(requisicao):
     id_empresa = requisicao.session["id_empresa"]
     forma_pagamento = requisicao.POST['forma_pagamento']
     criar_forma_de_pagamento(requisicao, id_empresa, forma_pagamento)
+    ## retornar para a tela que estava
