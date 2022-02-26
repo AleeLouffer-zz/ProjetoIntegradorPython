@@ -1,5 +1,4 @@
 function fecharModal(e) {
-  console.log("hello")
   e.preventDefault();
   document.getElementById("caixa__modal").style.display = "none";
 }
