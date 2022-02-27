@@ -13,7 +13,7 @@ def obter_totais_de_contas(requisicao, id_empresa, situacao_pagamento):
     contas =  Contas_a_Receber.objects.filter(empresa = id_empresa).filter(ativo = True).filter(pago = situacao_pagamento)
     total = 0
     for conta in contas:
-        total += conta.valor
+        total += conta.total
     return total
 
 def obter_contas_da_empresa(requisicao, id_empresa):
@@ -81,13 +81,13 @@ def alterar_status_de_pagamento_da_conta(requisicao, id_conta, data_de_pagamento
     conta = obter_conta_por_id(requisicao, id_conta)
 
     if conta.pago:
-        conta.pago = False
         conta.total = conta.valor
+        conta.pago = False
     else:
-        conta.total = total
+        total_da_conta = conta.valor + (juros - desconto)
+        conta.total = total_da_conta
         conta.pago = True
         ## Verificar se o total está valido, se não estiver enviar mensagem
-        # total_da_conta = conta.valor + (juros - desconto)
         # if total == total_da_conta:
         #     conta.total = total
 

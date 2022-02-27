@@ -18,19 +18,19 @@
                 <div class="flex-row-item">
                     <div class="container__input__label">
                         <label for="desconto" class="label__input"> Desconto: </label>
-                        <input id="desconto" type="number" class="input__com__label placeholder__cinza" name="desconto"  placeholder="R$ -" value="0" onchange="CalcularTotal()">
+                        <input id="desconto" type="number" step="0.01" min="0" class="input__com__label placeholder__cinza" name="desconto"  placeholder="R$ -" value="0" onchange="CalcularTotal()">
                     </div>
                     <div class="container__input__label">
                         <label for="juros" class="label__input"> Juros: </label>
-                        <input id="juros" type="number" class="input__com__label placeholder__cinza" name="juros"  placeholder="R$ -" value="0" onchange="CalcularTotal()"> 
+                        <input id="juros" type="number" step="0.01" min="0" class="input__com__label placeholder__cinza" name="juros"  placeholder="R$ -" value="0" onchange="CalcularTotal()"> 
                     </div>
                     <div class="informacao__paragrafo">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lock-fill" viewBox="0 0 16 16">
                             <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/>
                         </svg>
                         <p id="total"> Total: R$ {{valor}} </p>
-                        <input id="input_total" type="text" name="total" value="{{valor}}" hidden>
                     </div>
+                    <input id="input_total" type="text" name="total" value="{{valor}}" hidden>
                 </div>
             </div>
             <div class="botoes">
