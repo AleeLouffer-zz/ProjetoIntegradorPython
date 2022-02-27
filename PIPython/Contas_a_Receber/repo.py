@@ -77,20 +77,25 @@ def atualizar_conta(requisicao, conta, data_de_vencimento,forma_de_pagamento, id
 
    conta.save()
 
-def alterar_status_de_pagamento_da_conta(requisicao, id_conta, desconto=None, juros=None, total=None):
+def alterar_status_de_pagamento_da_conta(requisicao, id_conta, data_de_pagamento=None, total=0, desconto=0, juros=0):
     conta = obter_conta_por_id(requisicao, id_conta)
 
     if conta.pago:
-        conta.desconto = 0
-        conta.juros = 0
-        conta.total = 0
         conta.pago = False
+        conta.total = conta.valor
     else:
-        conta.desconto = desconto
-        conta.juros = juros
-        total_da_conta = conta.valor + (juros - desconto)
-        if total == total_da_conta:
-            conta.total = total
+        conta.total = total
+        conta.pago = True
+        ## Verificar se o total está valido, se não estiver enviar mensagem
+        # total_da_conta = conta.valor + (juros - desconto)
+        # if total == total_da_conta:
+        #     conta.total = total
+
+    conta.data_de_pagamento = data_de_pagamento
+    conta.desconto = desconto
+    conta.juros = juros
+        
+    conta.save()
 
 
 def criar_forma_de_pagamento(requisicao, id_empresa, forma_pagamento):

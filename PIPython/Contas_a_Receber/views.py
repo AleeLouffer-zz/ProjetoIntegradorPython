@@ -12,6 +12,7 @@ def atualizar_tela_atual(requisicao, tela_atual):
     requisicao.session["tela_atual"] = tela_atual
 
 def tela_contas_a_receber(requisicao):
+    atualizar_tela_atual(requisicao, 'Contas_a_Receber:tela_contas_a_receber')
     id_empresa = requisicao.session["id_empresa"]
 
     data = {
@@ -152,7 +153,7 @@ def verifica_botoes_tela_contas_a_receber(requisicao):
         requisicao.session['id_conta'] = requisicao.POST['id_conta']
         return redirect('Contas_a_Receber:tela_pagamento')
     elif 'cancelar_pagamento' in requisicao.POST:
-        atualiza_status_da_conta(requisicao)
+        alterar_status_de_pagamento_da_conta(requisicao, requisicao.POST['id_conta'])
         return redirect('Contas_a_Receber:tela_contas_a_receber')
 
 def verifica_botoes_tela_editar(requisicao):
@@ -163,22 +164,8 @@ def verifica_botoes_tela_editar(requisicao):
         editar_conta(requisicao)
         return redirect('Contas_a_Receber:tela_contas_a_receber')
 
-def verifica_botoes_tela_pagamento(requisicao):
-    if 'cancelar' in requisicao.POST:
-        return redirect('Contas_a_Receber:tela_contas_a_receber')
-    elif 'atualizar' in requisicao.POST:
-        atualiza_status_da_conta(requisicao)
-        return redirect('Contas_a_Receber:tela_contas_a_receber')
-
-def atualiza_status_da_conta(requisicao):
-    id_conta = requisicao.POST['conta']
-    juros = requisicao.POST['juros']
-    desconto = requisicao.POST['desconto']
-    total = requisicao.POST['total']
-
-    alterar_status_de_pagamento_da_conta(requisicao, id_conta, desconto, juros, total)
-
 def tela_pagamento(requisicao):
+    atualizar_tela_atual(requisicao, 'Contas_a_Receber:tela_pagamento')
     id_conta = requisicao.session['id_conta']
     conta = obter_conta_por_id(requisicao, id_conta)
 
@@ -187,6 +174,22 @@ def tela_pagamento(requisicao):
     }
 
     return render(requisicao, '../templates/contas_a_receber/pagamento.html', dados)
+
+def verifica_botoes_tela_pagamento(requisicao):
+    if 'cancelar' in requisicao.POST:
+        return redirect('Contas_a_Receber:tela_contas_a_receber')
+    elif 'atualizar' in requisicao.POST:
+        atualiza_status_da_conta(requisicao)
+        return redirect('Contas_a_Receber:tela_contas_a_receber')
+
+def atualiza_status_da_conta(requisicao):
+    id_conta = requisicao.session['id_conta']
+    data_de_pagamento = requisicao.POST['data_de_pagamento']
+    juros = float(requisicao.POST['juros'])
+    desconto = float(requisicao.POST['desconto'])
+    total = float(requisicao.POST['total'])
+
+    alterar_status_de_pagamento_da_conta(requisicao, id_conta, data_de_pagamento, total, desconto, juros)
 
 def adicionar_forma_de_pagamento(requisicao):
     id_empresa = requisicao.session["id_empresa"]

@@ -14,6 +14,7 @@ function  CalcularTotal(){
   var desconto = parseFloat(document.getElementById("desconto").value);
   var total = document.getElementById("total");
 
-  valor_calculado = valor + (juros - desconto)
-  total.innerHTML = "Total: R$" + valor_calculado
+  valor_calculado = valor + (juros - desconto);
+  total.innerHTML = "Total: R$" + valor_calculado;
+  document.getElementById("input_total").value = valor_calculado;
 }
