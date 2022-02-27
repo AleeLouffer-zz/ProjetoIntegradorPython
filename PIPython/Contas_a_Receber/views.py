@@ -8,6 +8,9 @@ from Agendador.repo import *
 from Agendador.views import *
 from datetime import date
 
+def atualizar_tela_atual(requisicao, tela_atual):
+    requisicao.session["tela_atual"] = tela_atual
+
 def tela_contas_a_receber(requisicao):
     id_empresa = requisicao.session["id_empresa"]
 
@@ -23,6 +26,7 @@ def tela_contas_a_receber(requisicao):
 
 
 def tela_editar_conta(requisicao):
+    atualizar_tela_atual(requisicao, 'Contas_a_Receber:editar_conta')
     id_conta = requisicao.session["id_conta"]
     conta = obter_conta_por_id(requisicao, id_conta)
     
@@ -45,6 +49,7 @@ def tela_editar_conta(requisicao):
     return render(requisicao, '../templates/contas_a_receber/editar.html', data)
 
 def tela_adicionar_conta(requisicao):
+    atualizar_tela_atual(requisicao, 'Contas_a_Receber:adicionar_conta')
     id_empresa = requisicao.session['id_empresa']
 
     data = {
@@ -66,6 +71,7 @@ def verifica_botoes_adicionar_conta(requisicao):
         return redirect('Contas_a_Receber:tela_contas_a_receber')
 
 def tela_adicionar_conta_agendamento(requisicao):
+    atualizar_tela_atual(requisicao, 'Contas_a_Receber:adicionar_conta_agendamento')
     id_agendamento = requisicao.session["id_agendamento"]
     id_empresa = requisicao.session["id_empresa"]
 
@@ -186,4 +192,4 @@ def adicionar_forma_de_pagamento(requisicao):
     id_empresa = requisicao.session["id_empresa"]
     forma_pagamento = requisicao.POST['forma_pagamento']
     criar_forma_de_pagamento(requisicao, id_empresa, forma_pagamento)
-    ## retornar para a tela que estava
+    return redirect(requisicao.session["tela_atual"])
