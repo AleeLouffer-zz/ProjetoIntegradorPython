@@ -26,10 +26,13 @@ def realizar_login(requisicao):
     
     user = authenticate(requisicao, username=email, password=senha)
 
+    empresa = obter_empresa_por_id(requisicao, user.id)
+
     if user is not None:
         if user.is_active:
             login(requisicao, user)
             requisicao.session["id_empresa"] = user.id
+            requisicao.session["nome_empresa"] = empresa.nome_fantasia
             return redirect("/empresa/")
         
     else:
