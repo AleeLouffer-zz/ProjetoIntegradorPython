@@ -8,8 +8,9 @@
 
 .agendamentos{
 	display: flex;
-	overflow: scroll;
-	overflow-y: hidden;
+	flex-wrap: wrap;
+	/* overflow: scroll; */
+	/* overflow-y: hidden; */
 }
 
 .agendamento{

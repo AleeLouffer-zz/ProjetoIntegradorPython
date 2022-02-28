@@ -2,40 +2,42 @@
 
 {% block content %} {% include 'menu.html'%}
 <div class="corpo"> 
-    <div class="formulario__pago">           
-            <div class="data">
-                <label for="data-fim" class="label__input"> Data de Pagamento: </label>
-                <input id="data-fim" type="date" class="input__com__label">
-            </div>
-            <p class="informacao__paragrafo">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lock-fill" viewBox="0 0 16 16">
-                    <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/>
-                </svg>
-                Valor: R$ {{valor}}
-            </p>
-            <input id="valor__pagamento" type="number" value="{{valor}}" hidden>
-            <div class="flex-row-item">
-                <div class="container__input__label">
-                    <label for="desconto" class="label__input"> Desconto: </label>
-                    <input id="desconto" type="number" class="input__com__label placeholder__cinza" placeholder="R$ -" value="0" onchange="CalcularTotal()">
+    <form action="{% url 'Contas_a_Receber:verifica_botoes_tela_pagamento' %}" method="post"> {% csrf_token %}
+        <div class="formulario__pago">  
+                <div class="data">
+                    <label for="data-fim" class="label__input"> Data de Pagamento: </label>
+                    <input id="data-fim" type="date" class="input__com__label" name="data_de_pagamento" required>
                 </div>
-                <div class="container__input__label">
-                    <label for="juros" class="label__input"> Juros: </label>
-                    <input id="juros" type="number" class="input__com__label placeholder__cinza" placeholder="R$ -" value="0" onchange="CalcularTotal()"> 
-                </div>
-                <div class="informacao__paragrafo">
+                <p class="informacao__paragrafo">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lock-fill" viewBox="0 0 16 16">
                         <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/>
                     </svg>
-                    <p id="total"> Total: R$ {{valor}} </p>
+                    Valor: R$ {{valor}}
+                </p>
+                <input id="valor__pagamento" type="number" value="{{valor}}" hidden>
+                <div class="flex-row-item">
+                    <div class="container__input__label">
+                        <label for="desconto" class="label__input"> Desconto: </label>
+                        <input id="desconto" type="number" step="0.01" min="0" class="input__com__label placeholder__cinza" name="desconto"  placeholder="R$ -" value="0" onchange="CalcularTotal()">
+                    </div>
+                    <div class="container__input__label">
+                        <label for="juros" class="label__input"> Juros: </label>
+                        <input id="juros" type="number" step="0.01" min="0" class="input__com__label placeholder__cinza" name="juros"  placeholder="R$ -" value="0" onchange="CalcularTotal()"> 
+                    </div>
+                    <div class="informacao__paragrafo">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lock-fill" viewBox="0 0 16 16">
+                            <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/>
+                        </svg>
+                        <p id="total"> Total: R$ {{valor}} </p>
+                    </div>
+                    <input id="input_total" type="text" name="total" value="{{valor}}" hidden>
                 </div>
             </div>
-        </form>
-    </div>
-    <div class="botoes">
-    <button class="btn btn__cancelar preencher negrito" type="submit"> Cancelar </button>
-    <button class="btn btn__adicionar preencher negrito" type="submit"> Salvar </button>
-    </div>
+            <div class="botoes">
+                <button class="btn btn__cancelar preencher negrito" name="cancelar" type="submit"> Cancelar </button>
+                <button class="btn btn__adicionar preencher negrito" name="atualizar" type="submit"> Salvar </button>
+            </div>
+    </form>
 </div>
 
 {% endblock %}
