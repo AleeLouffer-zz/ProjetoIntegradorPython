@@ -5,7 +5,7 @@
             
             <div class="container-linha1">
                 <a href="{% url 'Contas_a_Receber:adicionar_conta' %}" class="container_botoes_finais btn__adicionar__conta"> + Adicionar </a>
-                <button class="container_botoes_finais btn__relatorio"> Gerar Relatório </button>
+                <a href="{% url 'Contas_a_Receber:relatorio' %}" class="container_botoes_finais btn__relatorio"> Gerar Relatório </a>
             </div>
             
             <form action="{% url 'Contas_a_Receber:tela_contas_a_receber' %}" method="POST"> {% csrf_token %}
@@ -200,16 +200,16 @@
                                     <div class="conta__cabecalho">
                                         <div class="servico__e__valor">
                                             <h3 class="servico__titulo">{{conta.servico.nome}}</h3>
-                                            <p class="servico__preco"> R$ {{conta.total}}</p>
+                                            {% if conta.pago %}
+                                                <p class="servico__preco"> R$ {{conta.total}}</p>
+                                            {% else %}
+                                                <p class="servico__preco"> R$ {{conta.valor}}</p>
+                                            {% endif %}
                                         </div>
                                         {% if conta.pago %}
-                                            <p class="status__conta quitado">
-                                                Quitado
-                                            </p>
+                                            <p class="status__conta quitado"> Quitado </p>
                                         {% else %}
-                                            <p class="status__conta pendente">
-                                                Pendente
-                                            </p>
+                                            <p class="status__conta pendente"> Pendente </p>
                                         {% endif %}
                                     </div>
                                 </summary>
@@ -220,21 +220,29 @@
                                 </div>
                                 <div class="caixa__informacoes">
                                     <h1 class="titulo__informacoes"> Informações de Pagamento </h1>
-                                    <p class="servico__paragrafo">Data de vencimento: {{conta.data_de_vencimento}}</p>
-                                    <p class="servico__paragrafo">Pago em 30/10/2021 </p>
+                                    <p class="servico__paragrafo">Data de vencimento: {{conta.data_de_vencimento|date:"SHORT_DATE_FORMAT"}}</p>
+                                    <p class="servico__paragrafo"> Forma de pagamento: {{conta.forma_de_pagamento.nome}}</p>
+                                    {%if conta.data_de_pagamento%}
+                                        <p class="servico__paragrafo">Pago em {{conta.data_de_pagamento|date:"SHORT_DATE_FORMAT"}} </p>
+                                    {% endif %}
                                 </div>
-                                
-                                {% if not conta.agendamento %}
-                                <form action="{% url 'Contas_a_Receber:editar_conta' %}" method="POST"> {% csrf_token %}
+                                <form action="{% url 'Contas_a_Receber:verifica_botoes_tela_contas_a_receber' %}" method="POST"> {% csrf_token %}
                                     <input name="id_conta" value="{{conta.id}}" hidden>
-                                    <button type="submit" class="btn__icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
-                                            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-                                            <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
-                                        </svg>
-                                    </button>
+                                    <div class="botoes">
+                                        <button type="submit" class="btn com__icon laranja tamanho__pequeno preencher" name="editar">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                                <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                                                <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                                            </svg>
+                                            Editar
+                                        </button>
+                                        {% if conta.pago %}
+                                            <button class="btn btn__cancelar preencher negrito" name="cancelar_pagamento" type="submit"> Cancelar Pagamento </button>
+                                        {% else %}
+                                            <button class="btn btn__adicionar preencher negrito" name="tela_pagamento" type="submit"> Pagar </button>
+                                        {% endif %}
+                                    </div>
                                 </form>
-                                {% endif %}
                             </details>                
                         {% endfor %}
                     </div>

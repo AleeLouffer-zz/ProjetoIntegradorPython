@@ -8,10 +8,10 @@ def atualizar_empresa(requisicao, id_empresa, nome_fantasia, email_empresa, senh
 
     empresa.nome_fantasia = nome_fantasia
     empresa.email = email_empresa
-    empresa.senha = senha_empresa
+    empresa.set_password(senha_empresa)
     
     empresa.save()
 
-def criar_empresa_usuario(requisicao, email, senha, cnpj, nome_fantasia):
+def criar_empresa_usuario(requisicao, email, senha, cnpj, nome_fantasia, razao_social):
     Empresa.objects.create_user(username = email, email = email, password = senha, 
-    cnpj = cnpj, nome_fantasia = nome_fantasia)
+    cnpj = cnpj, nome_fantasia = nome_fantasia, razao_social = razao_social)

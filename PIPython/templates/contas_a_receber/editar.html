@@ -9,86 +9,43 @@
                     <div class="informacoes-emissao">
                         <h1 class="titulo__informacoes negrito"> Informações Gerais </h1>
                         <div class="data__emissao">
-                            <p class="data__emissao__paragrafo negrito">Data de Emissão: 18/11/2021</p>
+                            <p class="data__emissao__paragrafo negrito">Data de Emissão: {{conta.data_de_emissao|date:"SHORT_DATE_FORMAT"}}</p>
                         </div>
                     </div>      
-                    <div class="selecoes">
-                        <select id="servico" name="id_servico" class="select altura__32px">
-                            <option value="{{conta.servico.id}}">{{conta.servico.nome}}</option>
-                            {% for servico in servicos %}
-                              <option value="{{servico.id}}">{{servico.nome}}</option>
-                            {% endfor %}
-                        </select>
-                        
-                        <select id="funcionario" name="id_funcionario" class="select altura__32px">
-                            <option value="{{conta.funcionario.id}}">{{conta.funcionario.nome}}</option>
-                            {% for funcionario in funcionarios %}
-                                <option value="{{funcionario.id}}">{{funcionario.nome}}</option>
-                            {% endfor %}
-                        </select>
-    
-                        <select id="cliente" name="id_cliente" class="select altura__32px">
-                            <option value="{{conta.cliente.id}}">{{conta.cliente.nome}}</option>
-                            <option>{{conta.cliente}}</option>
-                            {% for cliente in clientes %}
-                              <option value="{{cliente.id}}">{{cliente.nome}}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
+                    {% if not conta.agendamento %}
+                        {% include 'contas_a_receber/selecoes_contas_a_receber.html'%}
+                    {% else %}
+                        {% include 'contas_a_receber/informacoes_paragrafos.html'%}
+                    {% endif %}
                 </div>
                 <div class="informacoes-pagamento ">
                     <h1 class="titulo__informacoes com__margem negrito"> Informações de Pagamento </h1>
-                    <div class="container__datas">
-                        <div class="data">
-                            <label for="data-inicio" class="label__input"> Data de Pagamento:  </label>
-                            <input id="data-inicio" name="data_pagamento" type="date" class="input__com__label" value="{{data_de_pagamento}}">
-                        </div>
-                        <div class="data">
-                            <label for="data-fim" class="label__input"> Data de Vencimento: </label>
-                            <input id="data-fim" name="data_vencimento" type="date" class="input__com__label" value="{{data_de_vencimento}}">
-                        </div>
-                    </div>
-
-                    <select class="select altura__32px" name="forma_de_pagamento">
-                        <option value="{{conta.forma_de_pagamento.id}}"> {{conta.forma_de_pagamento.nome}} </option>
-                        {% for forma in forma_de_pagamento %}
-                        <option value="{{forma.id}}"> {{forma.nome}} </option>
-                        {% endfor %}
-                    </select>
-                    <div class="flex-row-item">
-                        <div class="container__input__label">
-                            <label for="valor" class="label__input"> Valor: </label>
-                            <input id="valor" name="valor" type="text" class="input__com__label placeholder__cinza" placeholder="R$" value="{{conta.valor|floatformat}}">
-                        </div>
-                        <div class="container__input__label">
-                            <label for="desconto" class="label__input"> Desconto: </label>
-                            <input id="desconto" name="desconto" type="text" class="input__com__label placeholder__cinza" placeholder="R$ -" value="{{conta.desconto|floatformat}}">
-                        </div>
-                    </div>
-                    <div class="flex-row-item">
-                        <div class="container__input__label">
-                            <label for="juros" class="label__input"> Juros: </label>
-                            <input id="juros" name="juros" type="text" name="juros" class="input__com__label placeholder__cinza" placeholder="R$ -" value="{{conta.juros|floatformat}}"> 
-                        </div>
-                        <div class="container__input__label">
-                            <label for="total" class="label__input"> Total: </label>
-                            <input id="total" name="total" type="text" class="input__com__label placeholder__cinza" placeholder="R$ -" value="{{conta.total|floatformat}}"> 
-                        </div>
-                    </div>
+                    <p class="informacao__paragrafo">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lock-fill" viewBox="0 0 16 16">
+                            <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/>
+                        </svg>
+                        Valor: R$ {{conta.valor}}
+                    </p>
+                    <div class="data">
+                      <label for="data-inicio" class="label__input"> Data de Vencimento: </label>
+                      <input id="data-inicio" type="date" class="input__com__label" name="data_vencimento" value="{{data_de_vencimento}}">
+                    </div>  
                     
-                    <div class="informacoes-pagamento-pago">
-                        <label for="pago"> Pago </label>
-                        <label id="pago" class="switch">
-                            <input type="checkbox">
-                            <span class="slider round"></span>
-                        </label>
+                    <div class="forma_de_pagamento">
+                        <select class="select altura__32px" name="forma_de_pagamento">
+                            <option value="{{conta.forma_de_pagamento.id}}"> {{conta.forma_de_pagamento.nome}} </option>
+                            {% for forma in forma_de_pagamento %}
+                            <option value="{{forma.id}}">{{forma.nome}}</option>
+                            {% endfor %}
+                        </select>
+                        <button class="btn btn__adicionar" onclick="abrirModal(event)">+</button>
                     </div>
-                </div>
                 <div class="botoes">
                     <button class="btn btn__cancelar preencher negrito" name='cancelar' type="submit"> Cancelar </button>
                     <button class="btn btn__adicionar preencher negrito" name='salvar' type="submit"> Salvar </button>
                 </div>
             </form>
-            
         </div>
+        {% include 'contas_a_receber/adicionar_forma_de_pagamento_modal.html' %}          
+    </div>
 {% endblock %}

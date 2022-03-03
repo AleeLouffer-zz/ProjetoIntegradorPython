@@ -1,3 +1,4 @@
+from argparse import ArgumentError
 from Contas_a_Receber.models import Forma_de_Pagamento, Contas_a_Receber
 from Agendador.repo import *
 from Login.repo import *
@@ -11,8 +12,12 @@ def obter_forma_de_pagamento_ativo_por_id(requisicao, id_forma_de_pagamento):
 def obter_totais_de_contas(requisicao, id_empresa, situacao_pagamento):
     contas =  Contas_a_Receber.objects.filter(empresa = id_empresa).filter(ativo = True).filter(pago = situacao_pagamento)
     total = 0
+    
     for conta in contas:
-        total += conta.valor
+        if conta.pago:
+            total += conta.total
+        else:
+            total += conta.valor
     return total
 
 def obter_contas_da_empresa(requisicao, id_empresa):
@@ -21,16 +26,13 @@ def obter_contas_da_empresa(requisicao, id_empresa):
 def obter_conta_por_id(requisicao, id_conta):
     return Contas_a_Receber.objects.get(id= id_conta)
 
-def criar_conta_a_receber_com_agendamento(requisicao, valor, desconto, juros, total, data_de_vencimento, data_de_emissao, id_forma_de_pagamento, id_empresa, id_agendamento):
+def criar_conta_a_receber_com_agendamento(requisicao, data_de_vencimento, data_de_emissao, id_forma_de_pagamento, id_empresa, id_agendamento):
     agendamento = obter_agendamento_ativo_pelo_id(requisicao, id_agendamento)
     empresa = obter_empresa_por_id(requisicao, id_empresa)
     forma_de_pagamento = obter_forma_de_pagamento_ativo_por_id(requisicao, id_forma_de_pagamento)
-
+    
     conta = Contas_a_Receber.objects.create(
-        valor = valor, 
-        desconto = desconto, 
-        juros = juros, 
-        total = total, 
+        valor = agendamento.servico.preco, 
         data_de_vencimento = data_de_vencimento, 
         data_de_emissao = data_de_emissao, 
         forma_de_pagamento = forma_de_pagamento, 
@@ -42,7 +44,7 @@ def criar_conta_a_receber_com_agendamento(requisicao, valor, desconto, juros, to
         
     conta.save()
 
-def criar_conta_a_receber(requisicao, valor, desconto, juros, total, data_de_vencimento, data_de_emissao, id_forma_de_pagamento, id_funcionario, id_servico, id_cliente, id_empresa):
+def criar_conta_a_receber(requisicao, valor, data_de_vencimento, data_de_emissao, id_forma_de_pagamento, id_funcionario, id_servico, id_cliente, id_empresa):
     funcionario = obter_funcionario_ativo_pelo_id(requisicao, id_funcionario)
     servico = obter_servico_ativo_pelo_id(requisicao, id_servico)
     cliente = obter_cliente_ativo_pelo_id(requisicao, id_cliente)
@@ -51,9 +53,6 @@ def criar_conta_a_receber(requisicao, valor, desconto, juros, total, data_de_ven
 
     conta = Contas_a_Receber.objects.create(
         valor = valor, 
-        desconto = desconto, 
-        juros = juros, 
-        total = total, 
         data_de_vencimento = data_de_vencimento, 
         data_de_emissao = data_de_emissao, 
         forma_de_pagamento = forma_de_pagamento, 
@@ -65,19 +64,45 @@ def criar_conta_a_receber(requisicao, valor, desconto, juros, total, data_de_ven
     conta.save()
 
 
-def atualizar_conta(requisicao, id_conta, valor, desconto, juros, total, data_de_vencimento,forma_de_pagamento, funcionario, servico, cliente, id_empresa):
+def atualizar_conta(requisicao, conta, data_de_vencimento,forma_de_pagamento, id_empresa, funcionario=None, servico=None, cliente=None):
    empresa = obter_empresa_por_id(requisicao, id_empresa)
-   conta = obter_conta_por_id(requisicao, id_conta)
 
-   conta.valor = valor
-   conta.desconto = desconto
-   conta.juros = juros
-   conta.total = total
    conta.data_de_vencimento = data_de_vencimento
    conta.forma_de_pagamento = forma_de_pagamento
-   conta.funcionario = funcionario
-   conta.servico = servico
-   conta.cliente = cliente
+   
+   if funcionario != None:
+    conta.funcionario = funcionario
+   if servico != None:
+    conta.servico = servico
+   if cliente != None:
+    conta.cliente = cliente
+
    conta.empresa = empresa
 
    conta.save()
+
+def alterar_status_de_pagamento_da_conta(requisicao, id_conta, data_de_pagamento=None, total=0, desconto=0, juros=0):
+    conta = obter_conta_por_id(requisicao, id_conta)
+
+    if conta.pago:
+        conta.total = conta.valor
+        conta.pago = False
+    else:
+        total_da_conta = conta.valor + (juros - desconto)
+        conta.total = total_da_conta
+        conta.pago = True
+        ## Verificar se o total está valido, se não estiver enviar mensagem
+        # if total == total_da_conta:
+        #     conta.total = total
+
+    conta.data_de_pagamento = data_de_pagamento
+    conta.desconto = desconto
+    conta.juros = juros
+        
+    conta.save()
+
+
+def criar_forma_de_pagamento(requisicao, id_empresa, forma_pagamento):
+    empresa = obter_empresa_por_id(requisicao, id_empresa)
+    forma_de_pagamento = Forma_de_Pagamento.objects.create(nome = forma_pagamento, empresa = empresa)
+    forma_de_pagamento.save()
