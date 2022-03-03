@@ -1,10 +1,6 @@
 {% extends 'index.html' %}
 
 {% block content %}
-
-<div class="foto__logo">
-    <img src="logo.png" id="logo">
-</div>
 <form action="{% url 'Login:cadastrar_empresa' %}" method="post">
     {% csrf_token %}
     <div class="informacoes__geral">
