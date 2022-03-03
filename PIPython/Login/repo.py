@@ -8,7 +8,7 @@ def atualizar_empresa(requisicao, id_empresa, nome_fantasia, email_empresa, senh
 
     empresa.nome_fantasia = nome_fantasia
     empresa.email = email_empresa
-    empresa.senha = senha_empresa
+    empresa.set_password(senha_empresa)
     
     empresa.save()
 
