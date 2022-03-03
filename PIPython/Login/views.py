@@ -39,12 +39,3 @@ def realizar_login(requisicao):
     else:
         return redirect('Login:tela_login')
     
-def editar_empresa(requisicao):
-    id_empresa = requisicao.session["id_empresa"]
-    nome_empresa = requisicao.POST['nome_empresa']
-    email_empresa = requisicao.POST['email_empresa']
-    senha_empresa = requisicao.POST['senha_empresa']
-
-    atualizar_empresa(requisicao, id_empresa, nome_empresa, email_empresa, senha_empresa)
-
-    return redirect('tela_inicial_prestador')

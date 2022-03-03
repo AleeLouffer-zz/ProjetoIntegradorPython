@@ -43,6 +43,23 @@ def cadastrar_funcionario(requisicao):
     return redirect('Agendador:tela_inicial_prestador')
 
 
+def verifica_botoes_editar_empresa(requisicao):
+    if 'editar' in requisicao.POST:
+        editar_empresa(requisicao)
+        return redirect('Agendador:tela_inicial_prestador')
+    elif 'cancelar' in requisicao.POST:
+        return redirect('Agendador:tela_inicial_prestador')
+
+
+def editar_empresa(requisicao):
+    id_empresa = requisicao.session["id_empresa"]
+    nome_empresa = requisicao.POST['nome_empresa']
+    email_empresa = requisicao.POST['email_empresa']
+    senha_empresa = requisicao.POST['senha_empresa']
+
+    atualizar_empresa(requisicao, id_empresa, nome_empresa, email_empresa, senha_empresa)
+
+
 def cadastrar_cliente(requisicao):
     id_empresa = requisicao.session["id_empresa"]
     nome_cliente = requisicao.POST["nome_cliente"]
