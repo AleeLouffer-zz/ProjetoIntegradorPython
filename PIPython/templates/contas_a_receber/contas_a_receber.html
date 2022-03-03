@@ -5,7 +5,7 @@
             
             <div class="container-linha1">
                 <a href="{% url 'Contas_a_Receber:adicionar_conta' %}" class="container_botoes_finais btn__adicionar__conta"> + Adicionar </a>
-                <button class="container_botoes_finais btn__relatorio"> Gerar Relatório </button>
+                <a href="{% url 'Contas_a_Receber:relatorio' %}" class="container_botoes_finais btn__relatorio"> Gerar Relatório </a>
             </div>
             
             <form action="" method="POST"> {% csrf_token %}

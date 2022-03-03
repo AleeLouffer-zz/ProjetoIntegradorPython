@@ -1,3 +1,4 @@
+from unicodedata import name
 from django.contrib import admin
 from django.urls import path
 from Contas_a_Receber import views
@@ -15,5 +16,6 @@ urlpatterns = [
     path('verifica_botoes_tela_contas_a_receber/', views.verifica_botoes_tela_contas_a_receber, name="verifica_botoes_tela_contas_a_receber"),
     path('tela_pagamento/', views.tela_pagamento, name="tela_pagamento"),
     path('adicionar_forma_de_pagamento/', views.adicionar_forma_de_pagamento, name="adicionar_forma_de_pagamento"),
-    path('atualizar_status_pagamento/', views.verifica_botoes_tela_pagamento, name="verifica_botoes_tela_pagamento")
+    path('atualizar_status_pagamento/', views.verifica_botoes_tela_pagamento, name="verifica_botoes_tela_pagamento"),
+    path('relatorio/', views.relatorio, name='relatorio')
 ]

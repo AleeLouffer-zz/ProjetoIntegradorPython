@@ -1,6 +1,4 @@
-from os import remove
 from re import I
-from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from Contas_a_Receber.repo import *
 from Login.repo import *
@@ -196,3 +194,10 @@ def adicionar_forma_de_pagamento(requisicao):
     forma_pagamento = requisicao.POST['forma_pagamento']
     criar_forma_de_pagamento(requisicao, id_empresa, forma_pagamento)
     return redirect(requisicao.session["tela_atual"])
+
+def relatorio(requisicao):
+    contas = Contas_a_Receber.objects.all()
+    data={
+        'contas_a_receber': contas
+    }
+    return render(requisicao, '../templates/contas_a_receber/pdf.html', data)
