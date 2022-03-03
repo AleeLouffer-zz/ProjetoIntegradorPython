@@ -47,7 +47,8 @@ def editar_empresa(requisicao):
 
     atualizar_empresa(requisicao, id_empresa, nome_empresa, email_empresa, senha_empresa)
 
-    return redirect('tela_inicial_prestador')
+    return redirect('Agendador:tela_inicial_prestador')
+
 
 def deslogar(requisicao):
     logout(requisicao)
