@@ -1,0 +1,18 @@
+<div class="fundo__modal" id="caixa__modal" style="display:none">
+    <div class="modal">
+            <div class="formulario__forma_de_pagamento">
+                <div class="cabecalho__modal">
+                    <p class="titulo__formulario"> Adicionar Forma de Pagamento </p> 
+                    <button id="fecharModal" class="btn__icon" onclick="fecharModal(event)">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+                        </svg>
+                    </button>
+                </div>
+                <form action="{% url 'Contas_a_Receber:adicionar_forma_de_pagamento' %}" method="POST">  {% csrf_token %}
+                    <input type="text" name="forma_pagamento" class="input__de__texto fundo__branco" placeholder="Forma de Pagamento"/>
+                    <button type="submit" class="btn btn__adicionar">Confirmar</button>
+                </form>
+            </div>
+    </div>
+</div>

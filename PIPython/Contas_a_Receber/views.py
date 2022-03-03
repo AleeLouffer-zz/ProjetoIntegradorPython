@@ -1,4 +1,4 @@
-from os import remove
+from re import I
 from django.shortcuts import render, redirect
 from Contas_a_Receber.repo import *
 from Login.repo import *
@@ -6,7 +6,11 @@ from Agendador.repo import *
 from Agendador.views import *
 from datetime import date
 
+def atualizar_tela_atual(requisicao, tela_atual):
+    requisicao.session["tela_atual"] = tela_atual
+
 def tela_contas_a_receber(requisicao):
+    atualizar_tela_atual(requisicao, 'Contas_a_Receber:tela_contas_a_receber')
     id_empresa = requisicao.session["id_empresa"]
 
     data = {
@@ -21,10 +25,9 @@ def tela_contas_a_receber(requisicao):
 
 
 def tela_editar_conta(requisicao):
-    id_conta = requisicao.POST["id_conta"]
+    atualizar_tela_atual(requisicao, 'Contas_a_Receber:editar_conta')
+    id_conta = requisicao.session["id_conta"]
     conta = obter_conta_por_id(requisicao, id_conta)
-
-    requisicao.session['id_conta'] = id_conta
     
     id_empresa = requisicao.session['id_empresa']
 
@@ -36,7 +39,6 @@ def tela_editar_conta(requisicao):
     data = {
         'conta': conta,
         'data_de_vencimento': str(conta.data_de_vencimento),
-        'data_de_pagamento': str(conta.data_de_pagamento),
         'servicos': remover_da_lista(servicos, conta.servico),
         'funcionarios': remover_da_lista(funcionarios, conta.funcionario),
         'clientes': remover_da_lista(clientes, conta.cliente),
@@ -46,6 +48,7 @@ def tela_editar_conta(requisicao):
     return render(requisicao, '../templates/contas_a_receber/editar.html', data)
 
 def tela_adicionar_conta(requisicao):
+    atualizar_tela_atual(requisicao, 'Contas_a_Receber:adicionar_conta')
     id_empresa = requisicao.session['id_empresa']
 
     data = {
@@ -67,6 +70,7 @@ def verifica_botoes_adicionar_conta(requisicao):
         return redirect('Contas_a_Receber:tela_contas_a_receber')
 
 def tela_adicionar_conta_agendamento(requisicao):
+    atualizar_tela_atual(requisicao, 'Contas_a_Receber:adicionar_conta_agendamento')
     id_agendamento = requisicao.session["id_agendamento"]
     id_empresa = requisicao.session["id_empresa"]
 
@@ -99,72 +103,56 @@ def adicionar_conta(requisicao):
     if 'id_agendamento' in requisicao.session:
         id_agendamento = requisicao.session["id_agendamento"]
 
-    valor = float(requisicao.POST['valor'])
-
-    desconto = float(requisicao.POST['desconto'])
-    if desconto == '' or desconto == None:
-        desconto = 0
-    
-    juros = float(requisicao.POST['juros'])
-    if juros == '' or juros == None:
-        juros = 0
-
-    total = (valor-desconto)+juros
-    ## pago = adicionar verificacao no switch
-    ## data_de_pagamento = verificar
-
     data_de_vencimento = requisicao.POST['data_vencimento']
     data_de_emissao = date.today()
     id_forma_de_pagamento = requisicao.POST['forma_de_pagamento']
 
     if 'id_agendamento' in requisicao.session:
-        criar_conta_a_receber_com_agendamento(requisicao, valor, desconto, juros, total, data_de_vencimento, data_de_emissao, id_forma_de_pagamento, id_empresa, id_agendamento)
+        criar_conta_a_receber_com_agendamento(requisicao, data_de_vencimento, data_de_emissao, id_forma_de_pagamento, id_empresa, id_agendamento)
         completar_agendamento(requisicao, id_agendamento)
         del requisicao.session['id_agendamento']
 
     else:
+        valor = requisicao.POST['valor']
         id_funcionario = requisicao.POST['id_funcionario']
         id_servico = requisicao.POST['id_servico']
         id_cliente = requisicao.POST['id_cliente']
-        criar_conta_a_receber(requisicao, valor, desconto, juros, total, data_de_vencimento, data_de_emissao, id_forma_de_pagamento, id_funcionario, id_servico, id_cliente, id_empresa)
+        criar_conta_a_receber(requisicao, valor, data_de_vencimento, data_de_emissao, id_forma_de_pagamento, id_funcionario, id_servico, id_cliente, id_empresa)
 
     return redirect('Contas_a_Receber:tela_contas_a_receber')
 
 def editar_conta(requisicao):
     id_empresa = requisicao.session["id_empresa"]
     id_conta = requisicao.session['id_conta']
+    conta = obter_conta_por_id(requisicao, id_conta)
 
-    valor = float(requisicao.POST['valor'])
-
-    desconto = float(requisicao.POST['desconto'])
-    if desconto == '' or desconto == None:
-        desconto = 0
-    
-    juros = float(requisicao.POST['juros'])
-    if juros == '' or juros == None:
-        juros = 0
-
-    total = (valor-desconto)+juros
-    ## pago = adicionar verificacao no switch
-    ## data_de_pagamento = verificar
-
-    
     data_de_vencimento = requisicao.POST['data_vencimento']
     id_forma_de_pagamento = requisicao.POST['forma_de_pagamento']
     forma_de_pagamento = obter_forma_de_pagamento_ativo_por_id(requisicao, id_forma_de_pagamento)
 
-    id_funcionario = requisicao.POST['id_funcionario']
-    funcionario = obter_funcionario_ativo_pelo_id(requisicao, id_funcionario)
-    id_servico = requisicao.POST['id_servico']
-    servico = obter_servico_ativo_pelo_id(requisicao, id_servico)
-    id_cliente = requisicao.POST['id_cliente']
-    cliente = obter_cliente_ativo_pelo_id(requisicao, id_cliente)
+    if not conta.agendamento:
+        id_funcionario = requisicao.POST['id_funcionario']
+        funcionario = obter_funcionario_ativo_pelo_id(requisicao, id_funcionario)
+        id_servico = requisicao.POST['id_servico']
+        servico = obter_servico_ativo_pelo_id(requisicao, id_servico)
+        id_cliente = requisicao.POST['id_cliente']
+        cliente = obter_cliente_ativo_pelo_id(requisicao, id_cliente)
+        atualizar_conta(requisicao, conta, data_de_vencimento, forma_de_pagamento, id_empresa, funcionario, servico, cliente)
 
-    atualizar_conta(requisicao, id_conta, valor, desconto, juros, total, data_de_vencimento,forma_de_pagamento, funcionario, servico, cliente, id_empresa)
+    atualizar_conta(requisicao, conta, data_de_vencimento, forma_de_pagamento, id_empresa)
 
     del requisicao.session['id_conta']
 
-    return redirect('Contas_a_Receber:tela_contas_a_receber')
+def verifica_botoes_tela_contas_a_receber(requisicao):
+    if 'editar' in requisicao.POST:
+        requisicao.session['id_conta'] = requisicao.POST['id_conta']
+        return redirect('Contas_a_Receber:editar_conta')
+    elif 'tela_pagamento' in requisicao.POST:
+        requisicao.session['id_conta'] = requisicao.POST['id_conta']
+        return redirect('Contas_a_Receber:tela_pagamento')
+    elif 'cancelar_pagamento' in requisicao.POST:
+        alterar_status_de_pagamento_da_conta(requisicao, requisicao.POST['id_conta'])
+        return redirect('Contas_a_Receber:tela_contas_a_receber')
 
 def verifica_botoes_tela_editar(requisicao):
     if 'cancelar' in requisicao.POST:
@@ -173,3 +161,43 @@ def verifica_botoes_tela_editar(requisicao):
     elif 'salvar' in requisicao.POST:
         editar_conta(requisicao)
         return redirect('Contas_a_Receber:tela_contas_a_receber')
+
+def tela_pagamento(requisicao):
+    atualizar_tela_atual(requisicao, 'Contas_a_Receber:tela_pagamento')
+    id_conta = requisicao.session['id_conta']
+    conta = obter_conta_por_id(requisicao, id_conta)
+
+    dados = {
+        'valor': str(conta.valor)
+    }
+
+    return render(requisicao, '../templates/contas_a_receber/pagamento.html', dados)
+
+def verifica_botoes_tela_pagamento(requisicao):
+    if 'cancelar' in requisicao.POST:
+        return redirect('Contas_a_Receber:tela_contas_a_receber')
+    elif 'atualizar' in requisicao.POST:
+        atualiza_status_da_conta(requisicao)
+        return redirect('Contas_a_Receber:tela_contas_a_receber')
+
+def atualiza_status_da_conta(requisicao):
+    id_conta = requisicao.session['id_conta']
+    data_de_pagamento = requisicao.POST['data_de_pagamento']
+    juros = float(requisicao.POST['juros'])
+    desconto = float(requisicao.POST['desconto'])
+    total = float(requisicao.POST['total'])
+
+    alterar_status_de_pagamento_da_conta(requisicao, id_conta, data_de_pagamento, total, desconto, juros)
+
+def adicionar_forma_de_pagamento(requisicao):
+    id_empresa = requisicao.session["id_empresa"]
+    forma_pagamento = requisicao.POST['forma_pagamento']
+    criar_forma_de_pagamento(requisicao, id_empresa, forma_pagamento)
+    return redirect(requisicao.session["tela_atual"])
+
+def relatorio(requisicao):
+    contas = Contas_a_Receber.objects.all()
+    data={
+        'contas_a_receber': contas
+    }
+    return render(requisicao, '../templates/contas_a_receber/pdf.html', data)
