@@ -41,7 +41,7 @@ def criar_conta_a_receber_com_agendamento(requisicao, data_de_vencimento, data_d
         cliente = agendamento.cliente,
         agendamento = agendamento, 
         empresa = empresa)
-
+        
     conta.save()
 
 def criar_conta_a_receber(requisicao, valor, data_de_vencimento, data_de_emissao, id_forma_de_pagamento, id_funcionario, id_servico, id_cliente, id_empresa):

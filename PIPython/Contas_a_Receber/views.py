@@ -4,7 +4,7 @@ from Contas_a_Receber.repo import *
 from Login.repo import *
 from Agendador.repo import *
 from Agendador.views import *
-from datetime import date
+from datetime import datetime
 
 def atualizar_tela_atual(requisicao, tela_atual):
     requisicao.session["tela_atual"] = tela_atual
@@ -14,7 +14,7 @@ def tela_contas_a_receber(requisicao):
     id_empresa = requisicao.session["id_empresa"]
 
     data = {
-        'contas_a_receber': list(obter_contas_da_empresa(requisicao, id_empresa)),
+        'contas_a_receber': list(filtrar(requisicao)),
         'funcionarios': list(filtrar_funcionarios_ativos_por_id_empresa(requisicao, id_empresa)),
         'servicos': list(filtrar_servicos_ativos_por_id_empresa(requisicao, id_empresa)),
         'total_recebido': obter_totais_de_contas(requisicao, id_empresa, True),
@@ -22,7 +22,6 @@ def tela_contas_a_receber(requisicao):
     }
 
     return render(requisicao, '../templates/contas_a_receber/contas_a_receber.html', data)
-
 
 def tela_editar_conta(requisicao):
     atualizar_tela_atual(requisicao, 'Contas_a_Receber:editar_conta')
@@ -125,7 +124,6 @@ def editar_conta(requisicao):
     id_empresa = requisicao.session["id_empresa"]
     id_conta = requisicao.session['id_conta']
     conta = obter_conta_por_id(requisicao, id_conta)
-
     data_de_vencimento = requisicao.POST['data_vencimento']
     id_forma_de_pagamento = requisicao.POST['forma_de_pagamento']
     forma_de_pagamento = obter_forma_de_pagamento_ativo_por_id(requisicao, id_forma_de_pagamento)
@@ -162,6 +160,121 @@ def verifica_botoes_tela_editar(requisicao):
         editar_conta(requisicao)
         return redirect('Contas_a_Receber:tela_contas_a_receber')
 
+def filtrar(requisicao):
+    id_empresa = requisicao.session['id_empresa']
+
+    contas = obter_contas_da_empresa(requisicao, id_empresa)
+    funcionariosFiltrados = filtrar_funcionario(requisicao, contas)
+    servicosFiltrados = filtrar_servico(requisicao, funcionariosFiltrados)
+    clientesFiltrados = filtrar_cliente(requisicao, servicosFiltrados)
+    statusFiltrado = filtrar_por_status(requisicao, clientesFiltrados)
+    dataFiltradaEmissao = filtrar_por_data_emissao(requisicao, statusFiltrado)
+    dataFiltradaPagamento = filtrar_por_data_pagamento(requisicao, dataFiltradaEmissao)
+    dataFiltradaVencimento = filtrar_por_data_vencimento(requisicao, dataFiltradaPagamento)
+
+    return dataFiltradaVencimento
+
+def filtrar_funcionario(requisicao, lista):
+    if 'funcionario' in requisicao.POST:
+        funcionario = requisicao.POST['funcionario']
+        print(funcionario)
+        if funcionario != 'todos_funcionarios':
+            return list(filter(lambda x: x.funcionario.id == int(funcionario), lista))
+    
+    return lista
+
+def filtrar_servico(requisicao, lista):
+    if 'servico' in requisicao.POST:
+        servico = requisicao.POST['servico']
+        if servico != 'todos_servicos':
+            return list(filter(lambda x: x.servico.id == int(servico), lista))
+
+    return lista
+
+def filtrar_cliente(requisicao, lista):
+    if 'cliente' in requisicao.POST:
+        cliente = requisicao.POST['cliente']
+        if cliente != 'todos_clientes':
+            return list(filter(lambda x: x.cliente.id == int(cliente), lista))
+            
+    return lista
+
+def filtrar_por_status(requisicao, lista):
+    if 'statustatus' in requisicao.POST:
+            status = requisicao.POST['status']
+            if status == '0':
+                 return lista
+            if status == '1':
+                    return list(filter(lambda x: x.pago == False, lista))  
+            if status == '2':
+                  return list(filter(lambda x: x.pago == True, lista))
+
+    return lista
+
+def filtrar_por_data_emissao(requisicao, lista):
+    data_inicial = None
+    data_final = None
+
+    if 'data_inicial--emissao' in requisicao.POST:
+        if requisicao.POST['data_inicial--emissao']:
+            data_inicial = datetime.strptime(requisicao.POST['data_inicial--emissao'], '%Y-%m-%d').date()
+    
+    if 'data_final--emissao' in requisicao.POST:
+        if requisicao.POST['data_final--emissao']:
+            data_final = datetime.strptime(requisicao.POST['data_final--emissao'], '%Y-%m-%d').date()
+
+    if data_inicial and data_final:
+       return list(filter(lambda x:x.data_de_emissao >= data_inicial and x.data_de_emissao <= data_final, lista))
+    elif data_inicial:
+        return list(filter(lambda x:x.data_de_emissao >= data_inicial, lista))
+    elif data_final:
+        return list(filter(lambda x:x.data_de_emissao <= data_final, lista))
+
+    return lista
+
+def filtrar_por_data_vencimento(requisicao, lista):
+    data_inicial = None
+    data_final = None
+    
+        
+    if 'data_inicial--vencimento' in requisicao.POST:
+        if requisicao.POST['data_inicial--vencimento']:
+            data_inicial = datetime.strptime(requisicao.POST['data_inicial--vencimento'], '%Y-%m-%d').date()
+
+    if 'data_final--vencimento' in requisicao.POST:
+        if requisicao.POST['data_final--vencimento']:
+            data_final = datetime.strptime(requisicao.POST['data_final--vencimento'], '%Y-%m-%d').date()
+
+    if data_inicial and data_final:
+        return list(filter(lambda x:x.data_de_vencimento != None and x.data_de_vencimento >= data_inicial and x.data_de_vencimento <= data_final, lista))
+    elif data_inicial:
+        return list(filter(lambda x:x.data_de_vencimento != None and x.data_de_vencimento >= data_inicial, lista))        
+    elif data_final:
+        return list(filter(lambda x:x.data_de_vencimento != None and x.data_de_vencimento <= data_final, lista))
+
+    return lista
+
+def filtrar_por_data_pagamento(requisicao, lista):
+    data_inicial = None
+    data_final = None
+
+    if 'data_inicial--pagamento' in requisicao.POST:
+        if requisicao.POST['data_inicial--pagamento']:
+            data_inicial = datetime.strptime(requisicao.POST['data_inicial--pagamento'], '%Y-%m-%d').date()
+
+    if 'data_final--pagamento' in requisicao.POST:
+        if requisicao.POST['data_final--pagamento']:
+            data_final = datetime.strptime(requisicao.POST['data_final--pagamento'], '%Y-%m-%d').date()
+
+    if data_inicial and data_final:
+        return list(filter(lambda x:x.data_de_pagamento != None and x.data_de_pagamento >= data_inicial and x.data_de_pagamento <= data_final, lista))
+    elif data_inicial:
+        return list(filter(lambda x:x.data_de_pagamento != None and x.data_de_pagamento >= data_inicial, lista))        
+    elif data_final:
+        return list(filter(lambda x:x.data_de_pagamento != None and x.data_de_pagamento <= data_final, lista))
+
+    return lista
+  
 def tela_pagamento(requisicao):
     atualizar_tela_atual(requisicao, 'Contas_a_Receber:tela_pagamento')
     id_conta = requisicao.session['id_conta']
