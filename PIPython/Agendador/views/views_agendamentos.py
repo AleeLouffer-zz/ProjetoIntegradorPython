@@ -35,7 +35,6 @@ def tela_agenda(requisicao):
             agendamentos = list(filter(lambda x: x.completo == converter_para_bool(status), agendamentos))
 
     resposta = make_resposta(id_empresa, agendamentos, funcionarios, servicos)
-
     return render(requisicao, '../templates/agendamento/agenda.html', resposta)
 
 

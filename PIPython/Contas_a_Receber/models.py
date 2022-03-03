@@ -11,9 +11,9 @@ class Forma_de_Pagamento(models.Model):
 class Contas_a_Receber(models.Model):
     id = models.AutoField(primary_key=True)
     valor = models.FloatField()
-    desconto = models.FloatField()
-    juros = models.FloatField()
-    total = models.FloatField()
+    desconto = models.FloatField(null=True)
+    juros = models.FloatField(null=True)
+    total = models.FloatField(null=True)
     pago = models.BooleanField(null=False, default=False)
     empresa = models.ForeignKey(Empresa, on_delete=models.CASCADE)
     data_de_pagamento = models.DateField(null=True)

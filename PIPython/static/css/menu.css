@@ -10,11 +10,14 @@
     list-style: none;
   }
   
-  a {
+  .menu__item__acao {
     text-decoration: none;
     color: black;
   }
+
   .btnMenu {
+    text-decoration: none;
+    color: black;
     display: flex;
     align-items: center;
     cursor: pointer;
