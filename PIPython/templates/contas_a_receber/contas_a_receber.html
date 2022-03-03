@@ -80,7 +80,11 @@
                                     <div class="conta__cabecalho">
                                         <div class="servico__e__valor">
                                             <h3 class="servico__titulo">{{conta.servico.nome}}</h3>
-                                            <p class="servico__preco"> R$ {{conta.total}}</p>
+                                            {% if conta.pago %}
+                                                <p class="servico__preco"> R$ {{conta.total}}</p>
+                                            {% else %}
+                                                <p class="servico__preco"> R$ {{conta.valor}}</p>
+                                            {% endif %}
                                         </div>
                                         {% if conta.pago %}
                                             <p class="status__conta quitado"> Quitado </p>
