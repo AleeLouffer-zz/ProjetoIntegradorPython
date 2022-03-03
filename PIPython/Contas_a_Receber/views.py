@@ -4,7 +4,9 @@ from Contas_a_Receber.repo import *
 from Login.repo import *
 from Agendador.repo import *
 from Agendador.views import *
-from datetime import date
+from datetime import datetime
+from django.http import JsonResponse
+
 
 def atualizar_tela_atual(requisicao, tela_atual):
     requisicao.session["tela_atual"] = tela_atual
@@ -13,16 +15,30 @@ def tela_contas_a_receber(requisicao):
     atualizar_tela_atual(requisicao, 'Contas_a_Receber:tela_contas_a_receber')
     id_empresa = requisicao.session["id_empresa"]
 
+    setar_filtros_sessao(requisicao)
+
+    contas_a_receber = list(filtrar(requisicao))
+
     data = {
-        'contas_a_receber': list(obter_contas_da_empresa(requisicao, id_empresa)),
+        'contas_a_receber': contas_a_receber,
         'funcionarios': list(filtrar_funcionarios_ativos_por_id_empresa(requisicao, id_empresa)),
         'servicos': list(filtrar_servicos_ativos_por_id_empresa(requisicao, id_empresa)),
-        'total_recebido': obter_totais_de_contas(requisicao, id_empresa, True),
-        'total_a_receber': obter_totais_de_contas(requisicao, id_empresa, False)
+        'clientes': list(filtrar_clientes_ativos_por_id_empresa(requisicao, id_empresa)),
+        'total_recebido': obter_totais_de_contas_lista(requisicao, list(filter(lambda x: x.pago == True, contas_a_receber))),
+        'total_a_receber': obter_totais_de_contas_lista(requisicao, list(filter(lambda x: x.pago == False, contas_a_receber)))
     }
 
     return render(requisicao, '../templates/contas_a_receber/contas_a_receber.html', data)
 
+def obter_totais_de_contas_lista(requisicao, contas):
+    total = 0
+    
+    for conta in contas:
+        if conta.pago:
+            total += conta.total
+        else:
+            total += conta.valor
+    return total
 
 def tela_editar_conta(requisicao):
     atualizar_tela_atual(requisicao, 'Contas_a_Receber:editar_conta')
@@ -196,8 +212,93 @@ def adicionar_forma_de_pagamento(requisicao):
     return redirect(requisicao.session["tela_atual"])
 
 def relatorio(requisicao):
-    contas = Contas_a_Receber.objects.all()
-    data={
-        'contas_a_receber': contas
+    contas_a_receber = list(filtrar(requisicao))
+
+    data = {
+        'contas_a_receber': contas_a_receber,
+        'total_recebido': obter_totais_de_contas_lista(requisicao, list(filter(lambda x: x.pago == True, contas_a_receber))),
+        'total_a_receber': obter_totais_de_contas_lista(requisicao, list(filter(lambda x: x.pago == False, contas_a_receber))),
+        'total_geral': obter_totais_de_contas_lista(requisicao, contas_a_receber)
     }
+
     return render(requisicao, '../templates/contas_a_receber/pdf.html', data)
+
+def filtrar(requisicao):
+    id_empresa = requisicao.session['id_empresa']
+   
+    contas = obter_contas_da_empresa(requisicao, id_empresa)
+    funcionariosFiltrados = filtrar_funcionario(requisicao, contas)
+    servicosFiltrados = filtrar_servico(requisicao, funcionariosFiltrados)
+    clientesFiltrados = filtrar_cliente(requisicao, servicosFiltrados)
+    statusFiltrado = filtrar_por_status(requisicao, clientesFiltrados)
+    dataFiltrada = filtrar_por_data(requisicao, statusFiltrado)
+
+    return dataFiltrada
+
+def setar_filtros_sessao(requisicao):
+    verificar_filtro(requisicao, 'funcionario')
+    verificar_filtro(requisicao, 'servico')
+    verificar_filtro(requisicao, 'cliente')
+    verificar_filtro(requisicao, 'status')
+    # verificar datas e colocar na sessao
+
+def verificar_filtro(requisicao, filtro):
+    if filtro in requisicao.POST:
+        requisicao.session[filtro] = requisicao.POST[filtro]
+    else:
+        requisicao.session[filtro] = 'todos'
+
+def filtrar_funcionario(requisicao, lista):
+    if requisicao.session['funcionario'] != 'todos':
+        funcionario = requisicao.session['funcionario']
+        if funcionario != 'todos_funcionarios':
+            return list(filter(lambda x: x.funcionario.id == int(funcionario), lista))
+    
+    return lista
+
+def filtrar_servico(requisicao, lista):
+    if requisicao.session['servico'] != 'todos':
+        servico = requisicao.session['servico']
+        if servico != 'todos_servicos':
+            return list(filter(lambda x: x.servico.id == int(servico), lista))
+
+    return lista
+
+def filtrar_cliente(requisicao, lista):
+    if requisicao.session['cliente'] != 'todos':
+        cliente = requisicao.session['cliente']
+        if cliente != 'todos_clientes':
+            return list(filter(lambda x: x.cliente.id == int(cliente), lista))
+            
+    return lista
+
+def filtrar_por_status(requisicao, lista):
+    if requisicao.session['status'] != 'todos':
+        status = requisicao.session['status']
+        if status == '0':
+            return lista
+        if status == '1':
+            return list(filter(lambda x: x.pago == False, lista))  
+        if status == '2':
+            return list(filter(lambda x: x.pago == True, lista))
+    return lista
+
+def filtrar_por_data(requisicao, lista):
+    if 'opcao_data' in requisicao.POST:
+        opcao_data = requisicao.POST['opcao_data']
+        if opcao_data == 'todas':
+            return lista
+        if opcao_data == 'data_emissao':
+            data_inicial = datetime.strptime(requisicao.POST['data_inicial'], '%Y-%m-%d').date()
+            data_final = datetime.strptime(requisicao.POST['data_final'], '%Y-%m-%d').date()
+            return list(filter(lambda x:x.data_de_emissao >= data_inicial and x.data_de_emissao <= data_final, lista))
+        if opcao_data == 'data_pagamento':
+            data_inicial = datetime.strptime(requisicao.POST['data_inicial'], '%Y-%m-%d').date()
+            data_final = datetime.strptime(requisicao.POST['data_final'], '%Y-%m-%d').date()
+            return list(filter(lambda x:x.data_de_pagamento >= data_inicial and x.data_de_pagamento <= data_final, lista))
+        if opcao_data == 'data_vencimento':
+            data_inicial = datetime.strptime(requisicao.POST['data_inicial'], '%Y-%m-%d').date()
+            data_final = datetime.strptime(requisicao.POST['data_final'], '%Y-%m-%d').date()
+            return list(filter(lambda x:x.data_de_vencimento >= data_inicial and x.data_de_vencimento <= data_final, lista))
+    
+    return lista

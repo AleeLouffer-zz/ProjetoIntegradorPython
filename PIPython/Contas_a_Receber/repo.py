@@ -9,17 +9,6 @@ def filtrar_formas_de_pagamentos_ativas_por_id_empresa(requisicao, id_empresa):
 def obter_forma_de_pagamento_ativo_por_id(requisicao, id_forma_de_pagamento):
     return Forma_de_Pagamento.objects.get(id=id_forma_de_pagamento)
 
-def obter_totais_de_contas(requisicao, id_empresa, situacao_pagamento):
-    contas =  Contas_a_Receber.objects.filter(empresa = id_empresa).filter(ativo = True).filter(pago = situacao_pagamento)
-    total = 0
-    
-    for conta in contas:
-        if conta.pago:
-            total += conta.total
-        else:
-            total += conta.valor
-    return total
-
 def obter_contas_da_empresa(requisicao, id_empresa):
     return Contas_a_Receber.objects.filter(empresa = id_empresa).filter(ativo=True)  
 
@@ -41,7 +30,7 @@ def criar_conta_a_receber_com_agendamento(requisicao, data_de_vencimento, data_d
         cliente = agendamento.cliente,
         agendamento = agendamento, 
         empresa = empresa)
-
+        
     conta.save()
 
 def criar_conta_a_receber(requisicao, valor, data_de_vencimento, data_de_emissao, id_forma_de_pagamento, id_funcionario, id_servico, id_cliente, id_empresa):

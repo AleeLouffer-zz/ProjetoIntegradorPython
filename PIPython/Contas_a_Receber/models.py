@@ -25,5 +25,3 @@ class Contas_a_Receber(models.Model):
     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
     agendamento = models.ForeignKey(Agendamento, null=True, on_delete=models.CASCADE)
     ativo = models.BooleanField(null=False, default=True)
-
-
