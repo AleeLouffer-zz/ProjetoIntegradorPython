@@ -8,13 +8,16 @@
   width: 7%;
 }
 
-.informacoes__geral {  
+.informacoes__geral {
   border-radius: 20px;
   margin: 30px auto;
   padding: 16px;
 
-  width: 100%;
-  min-width: 370px;
+  width: 70%;
+  min-width: 270px;
+
+  background-color: white;
+  box-shadow: 2.5px 2.5px #8888889d;
 }
 
 .info__cadastro {
@@ -37,7 +40,13 @@
   margin: 16px 0;
 }
 
-@media screen and (min-width: 720px)  {
+.label_tela_cadastro {
+  text-align: left;
+  width: 85%;
+  padding: 2px 4px;
+}
+
+@media screen and (min-width: 720px) {
   .informacoes__geral {
     width: 600px;
 

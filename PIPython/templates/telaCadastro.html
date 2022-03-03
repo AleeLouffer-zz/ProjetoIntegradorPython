@@ -10,11 +10,20 @@
     <div class="informacoes__geral">
         <div class="info__cadastro">
             <h1 class="titulo__box">Registrar-se</h1>
-            <input class="input__texto" name="email_cadastro" type="email" placeholder="E-mail" required/>
-            <input class="input__texto" name="senha_cadastro" type="password" placeholder="Senha" required/>
-            <input class="input__texto" name="nome_cadastro" type="text" placeholder="Nome Fantasia" required/>
-            <input class="input__texto" name="razao_social_cadastro" type="text" placeholder="Razão social" required/>
-            <input class="input__texto" name="cnpj_cadastro" type="text" placeholder="CNPJ" required/>
+            <label for="nome_fantasia" class="label_tela_cadastro"> Nome Fantasia </label>
+            <input id="nome_fantasia" class="input__texto" name="nome_cadastro" type="text" placeholder="Nome Fantasia" required/>
+            
+            <label for="razao_social" class="label_tela_cadastro"> Razão Social </label>
+            <input id="razao_social" class="input__texto" name="razao_social_cadastro" type="text" placeholder="Razão social" required/>
+            
+            <label for="cnpj" class="label_tela_cadastro"> CNPJ </label>
+            <input id="cnpj" class="input__texto" name="cnpj_cadastro" type="text" placeholder="CNPJ" required/>
+            
+            <label for="email" class="label_tela_cadastro"> Email </label>
+            <input id="email" class="input__texto" name="email_cadastro" type="email" placeholder="E-mail" required/>
+            
+            <label for="senha" class="label_tela_cadastro"> Senha </label>
+            <input id="senha" class="input__texto" name="senha_cadastro" type="password" placeholder="Senha" required/>
         </div>
         <div class="btn__continuar">
             <button type="submit" class="btn btn__azul negrito"> Registrar-se </button>
