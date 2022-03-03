@@ -157,6 +157,11 @@ summary.summary {
   background-color: #b62d2d;
 }
 
+.quitado, .pendente {
+  color: white;
+  font-weight: bold;
+}
+
 .caixa__informacoes {
   margin: 4px;
   padding: 8px;

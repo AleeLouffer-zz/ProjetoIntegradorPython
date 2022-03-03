@@ -83,7 +83,15 @@
                                             <h3 class="servico__titulo">{{conta.servico.nome}}</h3>
                                             <p class="servico__preco"> R$ {{conta.total}}</p>
                                         </div>
-                                        <p class="status__conta quitado"> {{conta.pago}} </p>
+                                        {% if conta.pago %}
+                                            <p class="status__conta quitado">
+                                                Quitado
+                                            </p>
+                                        {% else %}
+                                            <p class="status__conta pendente">
+                                                Pendente
+                                            </p>
+                                        {% endif %}
                                     </div>
                                 </summary>
                                 <div class="caixa__informacoes">
