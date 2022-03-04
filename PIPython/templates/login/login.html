@@ -8,5 +8,6 @@
       <button class="btn btn__azul negrito botao__login" type="submit" id="Entrar"> Entrar </button>
   </form>
   <p class="cadastro"> Não tem uma conta? <a href="{% url 'Login:cadastro_empresa' %}"> Cadastre-se </a></p>
+  <p class="cadastro"> Esqueceu sua senha? <a href="{% url 'Login:redefinir_senha' %}"> Clique aqui.</p>
 </div>
 {% endblock %}

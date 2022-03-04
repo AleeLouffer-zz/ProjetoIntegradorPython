@@ -1,0 +1,17 @@
+{% extends 'index.html' %}
+
+{% block content %}
+
+  {% load crispy_forms_tags %}  
+    <div class="container p-5">
+	    <h2 class="font-weight-bold mt-3">Redefinição de Senha</h2>
+		<hr>
+        <p>Por favor informe a sua nova senha.</p>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form|crispy }}                    
+            <button class="btn btn-primary" type="submit">Redefinir senha</button>
+        </form>
+    </div>
+
+{% endblock %}

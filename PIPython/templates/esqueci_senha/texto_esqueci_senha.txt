@@ -1,0 +1,15 @@
+{% autoescape off %}
+Olá,
+
+Nós recebemos um pedido para redefinir a senha da conta vinculada a este email. Para prosseguir, clique no link.
+
+{{ protocol }}://{{ domain }}{% url 'Login:confirmacao_esqueci_senha' uidb64=uid token=token %}
+
+Esse link só pode ser usado uma vez. Caso precise trocar de senha novamente, visite {{ protocol }}://{{domain}} e vá até "Esqueci minha Senha".
+
+Se você não fez esse pedido, ignore este email.
+
+Att.,
+Equipe JovemDev Senac - MS
+
+{% endautoescape %}
