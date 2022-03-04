@@ -4,12 +4,38 @@
             <h1 class="titulo"> Contas a Receber </h1>
             <form action="{% url 'Contas_a_Receber:verifica_botoes_adicionar_conta' %}" method="POST">
                 {% csrf_token %}
-                <div class="informacoes-gerais">
+                <div class="informacoes-pagamento ">
                     <div class="informacoes-emissao">
-                        <h1 class="titulo__informacoes negrito"> Informações Gerais </h1>
+                        <h1 class="titulo__informacoes com__margem negrito"> Informações de Pagamento </h1>
                         <div class="data__emissao">
                             <p class="data__emissao__paragrafo negrito">Data de Emissão: {{data_de_emissao|date:"SHORT_DATE_FORMAT"}}</p>
                         </div>
+                    </div>
+                    <div class="forma_de_pagamento">
+                        <select class="select altura__32px" name="forma_de_pagamento">
+                            <option> Forma de Pagamento </option>
+                            {% for forma in formas_de_pagamento %}
+                            <option value="{{forma.id}}">{{forma.nome}}</option>
+                            {% endfor %}
+                        </select>
+                        <button class="btn btn__adicionar" onclick="abrirModal(event)">+</button>
+                    </div>
+                    <div class="container__datas">
+                        <div class="data">
+                            <label for="data-fim" class="label__input"> Data de Vencimento: </label>
+                            <input id="data-fim" name="data_vencimento" type="date" class="input__com__label">
+                        </div>
+                    </div>
+                    <div class="flex-row-item">
+                        <div class="container__input__label">
+                            <label for="valor" class="label__input"> Valor: </label>
+                            <input id="valor" name="valor" type="number" class="input__com__label placeholder__cinza" placeholder="R$ -">
+                        </div>
+                    </div>
+                </div>
+                <div class="informacoes-gerais">
+                    <div class="informacoes-emissao">
+                        <h1 class="titulo__informacoes negrito"> Informações Gerais </h1>
                     </div>      
                     <div class="selecoes">
                         <select id="servico" name="id_servico" class="select altura__32px">
@@ -32,31 +58,6 @@
                               <option value="{{cliente.id}}">{{cliente.nome}}</option>
                             {% endfor %}
                         </select>
-                    </div>
-                </div>
-                <div class="informacoes-pagamento ">
-                    <h1 class="titulo__informacoes com__margem negrito"> Informações de Pagamento </h1>
-                    <div class="container__datas">
-                        <div class="data">
-                            <label for="data-fim" class="label__input"> Data de Vencimento: </label>
-                            <input id="data-fim" name="data_vencimento" type="date" class="input__com__label">
-                        </div>
-                    </div>              
-
-                    <div class="forma_de_pagamento">
-                        <select class="select altura__32px" name="forma_de_pagamento">
-                            <option value="Pendente"> Forma de Pagamento </option>
-                            {% for forma in formas_de_pagamento %}
-                            <option value="{{forma.id}}">{{forma.nome}}</option>
-                            {% endfor %}
-                        </select>
-                        <button class="btn btn__adicionar" onclick="abrirModal(event)">+</button>
-                    </div>
-                    <div class="flex-row-item">
-                        <div class="container__input__label">
-                            <label for="valor" class="label__input"> Valor: </label>
-                            <input id="valor" name="valor" type="number" class="input__com__label placeholder__cinza" placeholder="R$ -">
-                        </div>
                     </div>
                 </div>
                 <div class="botoes">

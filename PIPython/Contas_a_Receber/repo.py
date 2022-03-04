@@ -12,6 +12,9 @@ def obter_forma_de_pagamento_ativo_por_id(requisicao, id_forma_de_pagamento):
 def obter_contas_da_empresa(requisicao, id_empresa):
     return Contas_a_Receber.objects.filter(empresa = id_empresa).filter(ativo=True)  
 
+def obter_contas_da_empresa_decrescente(requisicao, id_empresa):
+    return Contas_a_Receber.objects.filter(empresa = id_empresa).filter(ativo=True).order_by('-data_de_emissao')
+
 def obter_conta_por_id(requisicao, id_conta):
     return Contas_a_Receber.objects.get(id= id_conta)
 

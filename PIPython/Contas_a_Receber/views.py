@@ -225,7 +225,7 @@ def relatorio(requisicao):
 def filtrar(requisicao):
     id_empresa = requisicao.session['id_empresa']
    
-    contas = obter_contas_da_empresa(requisicao, id_empresa)
+    contas = obter_contas_da_empresa_decrescente(requisicao, id_empresa)
     funcionariosFiltrados = filtrar_funcionario(requisicao, contas)
     servicosFiltrados = filtrar_servico(requisicao, funcionariosFiltrados)
     clientesFiltrados = filtrar_cliente(requisicao, servicosFiltrados)

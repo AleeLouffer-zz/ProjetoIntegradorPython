@@ -35,22 +35,21 @@
                 </div>
                 <div class="informacoes-pagamento ">
                     <h1 class="titulo__informacoes com__margem negrito"> Informações de Pagamento </h1>
-                    <div class="container__datas">
-                        <div class="data">
-                            <label for="data-fim" class="label__input"> Data de Vencimento: </label>
-                            <input id="data-fim" name="data_vencimento" type="date" class="input__com__label">
-                        </div>
-                    </div>              
-
                     <div class="forma_de_pagamento">
                         <select class="select altura__32px" name="forma_de_pagamento">
-                            <option value="Pendente"> Forma de Pagamento </option>
+                            <option> Forma de Pagamento </option>
                             {% for forma in forma_de_pagamentos %}
                             <option value="{{forma.id}}">{{forma.nome}}</option>
                             {% endfor %}
                         </select>
                         <button class="btn btn__adicionar" onclick="abrirModal(event)">+</button>
                     </div>
+                    <div class="container__datas">
+                        <div class="data">
+                            <label for="data-fim" class="label__input"> Data de Vencimento: </label>
+                            <input id="data-fim" name="data_vencimento" type="date" class="input__com__label">
+                        </div>
+                    </div>              
                     <p class="informacao__paragrafo">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lock-fill" viewBox="0 0 16 16">
                             <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/>

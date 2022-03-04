@@ -87,7 +87,7 @@ def verifica_botoes_agendamento(requisicao):
         return render(requisicao, '../templates/agendamento/editar-agendamento.html', data)
     elif 'excluir_agendamento' in requisicao.POST:
         excluir_agendamento(requisicao) 
-        return redirect('tela_agenda')
+        return redirect('Agendador:tela_agenda')
     elif 'editar_status' in requisicao.POST:
         requisicao.session['id_agendamento'] = requisicao.POST['id_agendamento']
         return redirect('Contas_a_Receber:adicionar_conta_agendamento')
@@ -105,7 +105,7 @@ def obter_dados_tela_editar_agendamento(requisicao):
     agendamento = obter_agendamento_ativo_pelo_id(requisicao, id_agendamento)
 
     servicos = filtrar_servicos_ativos_por_id_empresa(requisicao, id_empresa)
-    funcionarios = filtrar_servicos_ativos_por_id_empresa(requisicao, id_empresa)
+    funcionarios = filtrar_funcionarios_ativos_por_id_empresa(requisicao, id_empresa)
     clientes = filtrar_clientes_ativos_por_id_empresa(requisicao, id_empresa)
 
     dados = {

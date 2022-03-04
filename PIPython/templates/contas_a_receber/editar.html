@@ -26,11 +26,6 @@
                         </svg>
                         Valor: R$ {{conta.valor}}
                     </p>
-                    <div class="data">
-                      <label for="data-inicio" class="label__input"> Data de Vencimento: </label>
-                      <input id="data-inicio" type="date" class="input__com__label" name="data_vencimento" value="{{data_de_vencimento}}">
-                    </div>  
-                    
                     <div class="forma_de_pagamento">
                         <select class="select altura__32px" name="forma_de_pagamento">
                             <option value="{{conta.forma_de_pagamento.id}}"> {{conta.forma_de_pagamento.nome}} </option>
@@ -40,6 +35,10 @@
                         </select>
                         <button class="btn btn__adicionar" onclick="abrirModal(event)">+</button>
                     </div>
+                    <div class="data">
+                      <label for="data-inicio" class="label__input"> Data de Vencimento: </label>
+                      <input id="data-inicio" type="date" class="input__com__label" name="data_vencimento" value="{{data_de_vencimento}}">
+                    </div>  
                 <div class="botoes">
                     <button class="btn btn__cancelar preencher negrito" name='cancelar' type="submit"> Cancelar </button>
                     <button class="btn btn__adicionar preencher negrito" name='salvar' type="submit"> Salvar </button>
