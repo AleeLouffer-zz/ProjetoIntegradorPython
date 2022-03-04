@@ -9,6 +9,7 @@ urlpatterns = [
     path('empresa/', views_tela_inicial.tela_inicial_prestador, name="tela_inicial_prestador"),
     path('verifica_botoes_funcionario', views_tela_inicial.verifica_botoes_funcionario, name="verifica_botoes_funcionario"),
     path('verifica_botoes_servico', views_tela_inicial.verifica_botoes_servico, name="verifica_botoes_servico"),
+    path('verifica_botoes_editar_empresa', views_tela_inicial.verifica_botoes_editar_empresa, name="verifica_botoes_editar_empresa"),
     path('botoes_cliente', views_tela_inicial.verifica_botoes_cliente, name="verifica_botoes_cliente"),
     path('criar_cliente', views_tela_inicial.cadastrar_cliente, name="criar_cliente"),
     path('verificar_botoes_adicionar_agendamento', views_agendamentos.verificar_botoes_adicionar_agendamento, name="verificar_botoes_adicionar_agendamento"),

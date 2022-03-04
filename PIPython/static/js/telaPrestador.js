@@ -38,7 +38,7 @@ function ExibirEditarFuncionario(nomeFuncionario, idFuncionario) {
 function ExibirEditarServico(nome, valor, descricao, servicoId) {
   document.getElementById("checkBoxServ").style.display = "none";
   var boxEditServ = document.getElementById("checkBoxServEdit");
-
+  
   if (boxEditServ.style.display != "none") {
     boxEditServ.style.display = "none";
   } else {
@@ -47,7 +47,7 @@ function ExibirEditarServico(nome, valor, descricao, servicoId) {
 
     document.getElementById('servico_id').value = servicoId;
     document.getElementById('servico_descricao').value = descricao;
-    document.getElementById('servico_valor').value= valor;
+    document.getElementById('servico_valor').value = parseFloat(valor.replace(",", "."));
     document.getElementById("servico_nome").value = nome;
   }
 }

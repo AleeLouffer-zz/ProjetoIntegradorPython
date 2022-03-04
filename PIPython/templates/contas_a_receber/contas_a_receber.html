@@ -10,27 +10,6 @@
             
             <form action="{% url 'Contas_a_Receber:tela_contas_a_receber' %}" method="POST"> {% csrf_token %}
                 <h2 class="sub__titulo"> Filtros </h2>
-                
-                    <!-- Antigo container de datas -->
-                    <!-- <div class="container__datas">
-                        <div class="data">
-                            <label for="data-inicio" class="label__input"> Data Inicial: </label>
-                            <input name="data_inicial" id="data-inicio" type="date" class="input__com__label">
-                        </div>
-                        <div class="data">
-                            <label for="data-fim" class="label__input"> Data Final: </label>
-                            <input name="data_final" id="data-fim" type="date" class="input__com__label">
-                        </div>
-                        <select name="opcao_data" class="select">
-                            <option value="todas"> Todas as datas </option>
-                            <option value="data_emissao"> Data de Emissão </option>
-                            <option value="data_pagamento"> Data de Pagamento </option>
-                            <option value="data_vencimento"> Data de Vencimento </option>
-                        </select>
-                    </div> -->
-                    <!-- Antigo container de datas -->
-
-                    <!-- Container novo de datas -->
                     <section class="filtro--datas">
                         <details class="filtro--datas--details">
                             <summary class="container--filtros--datas">
@@ -77,76 +56,7 @@
                                 <input type="date" class="filtro--datas--input" name="data_final--pagamento">
                             </div>
                         </details>
-                    </section>
-                    <!-- Container novo de datas -->
-
-                    <!-- Css container novo de datas -->
-                    <style>
-                        .filtro--datas {
-                            width: 100%;
-                            margin: 8px auto;
-
-                            display: flex;
-                            flex-direction: row;
-                            align-items: flex-start;
-                            justify-content: space-between;
-                        }
-
-                        .filtro--datas--details {
-                            display: flex;
-                            flex-direction: column;
-
-                            padding: 8px;
-
-                            width: 30%;
-                            
-                            margin: 0 4px;
-
-                            color: black;
-
-                            background-color: whitesmoke;
-
-                            border-radius: 4px;
-
-                            cursor: pointer;
-                        }
-
-                        .filtro--datas--cabecalho {
-                            width: 90%;
-                            margin: 0 auto;
-
-                            display: flex;
-                            flex-direction: row;
-                            justify-content: space-between;
-                        }
-
-                        .titulo--filtro--datas {
-                            max-width: 100px;
-
-                            cursor: pointer;
-                        }
-
-                        .filtro--datas--inputs {
-                            width: 100%;
-
-                            margin: 16px auto 0 auto;
-
-                            display: flex;
-                            flex-direction: column;
-                            align-items: left;
-
-                            cursor: initial;
-                        }
-
-                        .filtro--datas--input {
-                            width: 90%;
-                            
-                            margin: 8px auto;
-                            padding: 4px;
-                        }
-                    </style>
-                    <!-- Css container novo de datas -->
-                    
+                    </section>                   
                     <div class="selecoes">   
                         <select id="funcionario" name="funcionario" class="select">
                             <option value="todos_funcionarios">Todos Funcionários</option>
@@ -154,7 +64,6 @@
                                 <option value="{{funcionario.id}}">{{funcionario.nome}}</option>
                             {% endfor %}
                         </select>
-                        
                         <select id="servico" name="servico" class="select">
                             <option value="todos_servicos">Todos Servicos</option>
                             {% for servico in servicos %}
@@ -176,7 +85,7 @@
                         </select>
                     </div>
 
-                    <button type="submit" class="btn btn__filtrar pequeno"> Filtrar </button>
+                    <button type="submit" class="btn btn__filtrar pequeno btn_com_margin"> Filtrar </button>
                 </section>
             </form>
             
@@ -201,9 +110,9 @@
                                         <div class="servico__e__valor">
                                             <h3 class="servico__titulo">{{conta.servico.nome}}</h3>
                                             {% if conta.pago %}
-                                                <p class="servico__preco"> R$ {{conta.total}}</p>
+                                                <p class="servico__preco"> R$ {{conta.total|floatformat:2}}</p>
                                             {% else %}
-                                                <p class="servico__preco"> R$ {{conta.valor}}</p>
+                                                <p class="servico__preco"> R$ {{conta.valor|floatformat:2}}</p>
                                             {% endif %}
                                         </div>
                                         {% if conta.pago %}

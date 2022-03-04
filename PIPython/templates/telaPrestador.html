@@ -9,13 +9,13 @@
       </div>
       <div class="editar__empresa" style="display: none;">
         <h2 class="sub__titulo"> Editar Empresa </h2>
-        <form class="formulario__editar__empresa" action="{% url 'Login:editarEmpresa' %}" method="post">   {% csrf_token %}
+        <form class="formulario__editar__empresa" action="{% url 'Agendador:verifica_botoes_editar_empresa' %}" method="post">   {% csrf_token %}
           <input type="text" name="nome_empresa" value="{{empresa.nome_fantasia}}" class="input__de__texto fundo__branco">
           <input type="text" name="email_empresa" value="{{empresa.email}}" class="input__de__texto fundo__branco">
           <input type="password" name="senha_empresa" class="input__de__texto fundo__branco" placeholder="Alterar senha">
 
-          <button type="submit" class="btn btn__adicionar"> Alterar </button>
-          <button type="submit" name="excluir_funcionario" class="btn btn__cancelar">Cancelar</button>
+          <button type="submit" name="editar" class="btn btn__adicionar"> Alterar </button>
+          <button type="submit" name="cancelar" class="btn btn__cancelar">Cancelar</button>
         </form>
       </div>
     </div>
@@ -80,7 +80,7 @@
             <div id="checkBoxServ" style="display: none" class="formulario__informacoes">
 
               <input type="text" name="servico_nome" class="input__de__texto fundo__branco" placeholder="Nome do Serviço"/>
-              <input type="text" name="servico_valor" class="input__de__texto fundo__branco" placeholder="Valor"/>
+              <input type="number" name="servico_valor" step="0.01" min="0" class="input__de__texto fundo__branco" placeholder="Valor"/>
               <input type="text" name="servico_descricao" class="input__de__texto fundo__branco" placeholder="Descrição"/>
               <button type="submit" class="btn btn__adicionar">Confirmar</button>
             </div>
@@ -92,7 +92,7 @@
             <input id="servico_id" name="servico_id" hidden />
             <div id="checkBoxServEdit" style="display: none" class="formulario__informacoes">
                 <input type="text" name="servico_nome" id="servico_nome" class="input__de__texto fundo__branco"/>
-                <input type="text" name="servico_valor" id="servico_valor" class="input__de__texto fundo__branco"/>
+                <input type="number"  step="0.01" min="0" name="servico_valor" id="servico_valor" class="input__de__texto fundo__branco"/>
                 <input type="text" name="servico_descricao" id="servico_descricao" class="input__de__texto fundo__branco"/>
                 <div class="botoes__pequenos">
                   <button type="submit" name="editar_servico" class="btn btn__adicionar">Editar</button>
