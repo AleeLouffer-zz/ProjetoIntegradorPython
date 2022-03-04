@@ -114,18 +114,18 @@
             {% endif %}
             <td class="tabela__corpo__coluna"> {{conta.data_de_vencimento|date:"SHORT_DATE_FORMAT"}}</td>
             {% if conta.pago %}
-              <td class="tabela__corpo__coluna"> R$ {{conta.total}}</td>
+              <td class="tabela__corpo__coluna"> R$ {{conta.total|floatformat:2}}</td>
             {% else %}
-              <td class="tabela__corpo__coluna"> R$ {{conta.valor}}</td>
+              <td class="tabela__corpo__coluna"> R$ {{conta.valor|floatformat:2}}</td>
             {% endif %}
           </tr>
           {%endfor%}
         </tbody>
       </table>
       <div class="totais">
-        <p class="total negrito">Total recebido: R$ {{total_recebido}}</p>
-        <p class="total negrito">Total a receber: R$ {{total_a_receber}}</p>
-        <p class="total negrito">Total geral: R$ {{total_geral}}</p>
+        <p class="total negrito">Total recebido: R$ {{total_recebido|floatformat:2}}</p>
+        <p class="total negrito">Total a receber: R$ {{total_a_receber|floatformat:2}}</p>
+        <p class="total negrito">Total geral: R$ {{total_geral|floatformat:2}}</p>
       </div>
     </div>
   </body>

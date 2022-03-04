@@ -1,6 +1,6 @@
 from django.shortcuts import redirect, render
 from Agendador.views import *
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from Agendador.views import *
 from Login.repo import *
 
@@ -39,3 +39,17 @@ def realizar_login(requisicao):
     else:
         return redirect('Login:tela_login')
     
+def editar_empresa(requisicao):
+    id_empresa = requisicao.session["id_empresa"]
+    nome_empresa = requisicao.POST['nome_empresa']
+    email_empresa = requisicao.POST['email_empresa']
+    senha_empresa = requisicao.POST['senha_empresa']
+
+    atualizar_empresa(requisicao, id_empresa, nome_empresa, email_empresa, senha_empresa)
+
+    return redirect('Agendador:tela_inicial_prestador')
+
+
+def deslogar(requisicao):
+    logout(requisicao)
+    return redirect('Login:tela_login')

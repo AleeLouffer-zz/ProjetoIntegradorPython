@@ -16,7 +16,7 @@ def tela_contas_a_receber(requisicao):
     id_empresa = requisicao.session["id_empresa"]
 
     setar_filtros_sessao(requisicao)
-
+    
     contas_a_receber = list(filtrar(requisicao))
 
     data = {
@@ -141,7 +141,6 @@ def editar_conta(requisicao):
     id_empresa = requisicao.session["id_empresa"]
     id_conta = requisicao.session['id_conta']
     conta = obter_conta_por_id(requisicao, id_conta)
-
     data_de_vencimento = requisicao.POST['data_vencimento']
     id_forma_de_pagamento = requisicao.POST['forma_de_pagamento']
     forma_de_pagamento = obter_forma_de_pagamento_ativo_por_id(requisicao, id_forma_de_pagamento)
@@ -231,22 +230,38 @@ def filtrar(requisicao):
     servicosFiltrados = filtrar_servico(requisicao, funcionariosFiltrados)
     clientesFiltrados = filtrar_cliente(requisicao, servicosFiltrados)
     statusFiltrado = filtrar_por_status(requisicao, clientesFiltrados)
-    dataFiltrada = filtrar_por_data(requisicao, statusFiltrado)
+    dataFiltradaEmissao = filtrar_por_data_emissao(requisicao, statusFiltrado)
+    dataFiltradaPagamento = filtrar_por_data_pagamento(requisicao, dataFiltradaEmissao)
+    dataFiltradaVencimento = filtrar_por_data_vencimento(requisicao, dataFiltradaPagamento)
 
-    return dataFiltrada
+    return dataFiltradaVencimento
 
 def setar_filtros_sessao(requisicao):
     verificar_filtro(requisicao, 'funcionario')
     verificar_filtro(requisicao, 'servico')
     verificar_filtro(requisicao, 'cliente')
     verificar_filtro(requisicao, 'status')
-    # verificar datas e colocar na sessao
+    verificar_filtro_data(requisicao, 'data_inicial--emissao')
+    verificar_filtro_data(requisicao, 'data_final--emissao')
+    verificar_filtro_data(requisicao, 'data_inicial--pagamento')
+    verificar_filtro_data(requisicao, 'data_final--pagamento')
+    verificar_filtro_data(requisicao, 'data_inicial--vencimento')
+    verificar_filtro_data(requisicao, 'data_final--vencimento')
 
 def verificar_filtro(requisicao, filtro):
     if filtro in requisicao.POST:
         requisicao.session[filtro] = requisicao.POST[filtro]
     else:
         requisicao.session[filtro] = 'todos'
+
+def verificar_filtro_data(requisicao, filtro):
+    if filtro in requisicao.POST:
+        if requisicao.POST[filtro]:
+            requisicao.session[filtro] = requisicao.POST[filtro]
+        else: 
+            requisicao.session[filtro] = 'sem data'
+    else:
+        requisicao.session[filtro] = 'sem data'
 
 def filtrar_funcionario(requisicao, lista):
     if requisicao.session['funcionario'] != 'todos':
@@ -283,22 +298,46 @@ def filtrar_por_status(requisicao, lista):
             return list(filter(lambda x: x.pago == True, lista))
     return lista
 
-def filtrar_por_data(requisicao, lista):
-    if 'opcao_data' in requisicao.POST:
-        opcao_data = requisicao.POST['opcao_data']
-        if opcao_data == 'todas':
-            return lista
-        if opcao_data == 'data_emissao':
-            data_inicial = datetime.strptime(requisicao.POST['data_inicial'], '%Y-%m-%d').date()
-            data_final = datetime.strptime(requisicao.POST['data_final'], '%Y-%m-%d').date()
-            return list(filter(lambda x:x.data_de_emissao >= data_inicial and x.data_de_emissao <= data_final, lista))
-        if opcao_data == 'data_pagamento':
-            data_inicial = datetime.strptime(requisicao.POST['data_inicial'], '%Y-%m-%d').date()
-            data_final = datetime.strptime(requisicao.POST['data_final'], '%Y-%m-%d').date()
-            return list(filter(lambda x:x.data_de_pagamento >= data_inicial and x.data_de_pagamento <= data_final, lista))
-        if opcao_data == 'data_vencimento':
-            data_inicial = datetime.strptime(requisicao.POST['data_inicial'], '%Y-%m-%d').date()
-            data_final = datetime.strptime(requisicao.POST['data_final'], '%Y-%m-%d').date()
-            return list(filter(lambda x:x.data_de_vencimento >= data_inicial and x.data_de_vencimento <= data_final, lista))
+def obter_data_sessao(requisicao, data):
+    if requisicao.session[data] != "sem data":
+        return datetime.strptime(requisicao.session[data], '%Y-%m-%d').date()
+    return None
+
+def filtrar_por_data_emissao(requisicao, lista):
+    data_inicial = obter_data_sessao(requisicao, 'data_inicial--emissao')
+    data_final = obter_data_sessao(requisicao, 'data_final--emissao')
     
+    if data_inicial and data_final:
+       return list(filter(lambda x:x.data_de_emissao >= data_inicial and x.data_de_emissao <= data_final, lista))
+    elif data_inicial:
+        return list(filter(lambda x:x.data_de_emissao >= data_inicial, lista))
+    elif data_final:
+        return list(filter(lambda x:x.data_de_emissao <= data_final, lista))
+
+    return lista
+
+def filtrar_por_data_vencimento(requisicao, lista):
+    data_inicial = obter_data_sessao(requisicao, 'data_inicial--vencimento')
+    data_final = obter_data_sessao(requisicao, 'data_final--vencimento')
+
+    if data_inicial and data_final:
+        return list(filter(lambda x:x.data_de_vencimento != None and x.data_de_vencimento >= data_inicial and x.data_de_vencimento <= data_final, lista))
+    elif data_inicial:
+        return list(filter(lambda x:x.data_de_vencimento != None and x.data_de_vencimento >= data_inicial, lista))        
+    elif data_final:
+        return list(filter(lambda x:x.data_de_vencimento != None and x.data_de_vencimento <= data_final, lista))
+
+    return lista
+
+def filtrar_por_data_pagamento(requisicao, lista):
+    data_inicial = obter_data_sessao(requisicao, 'data_inicial--pagamento')
+    data_final = obter_data_sessao(requisicao, 'data_final--pagamento')
+    
+    if data_inicial and data_final:
+        return list(filter(lambda x:x.data_de_pagamento != None and x.data_de_pagamento >= data_inicial and x.data_de_pagamento <= data_final, lista))
+    elif data_inicial:
+        return list(filter(lambda x:x.data_de_pagamento != None and x.data_de_pagamento >= data_inicial, lista))        
+    elif data_final:
+        return list(filter(lambda x:x.data_de_pagamento != None and x.data_de_pagamento <= data_final, lista))
+
     return lista

@@ -24,6 +24,69 @@
 }
 /* ------------------------------------- */
 
+.filtro--datas {
+  width: 100%;
+  margin: 8px auto;
+
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.filtro--datas--details {
+  display: flex;
+  flex-direction: column;
+
+  padding: 8px;
+
+  width: 30%;
+  
+  margin: 0 4px;
+
+  color: black;
+
+  background-color: whitesmoke;
+
+  border-radius: 4px;
+
+  cursor: pointer;
+}
+
+.filtro--datas--cabecalho {
+  width: 90%;
+  margin: 0 auto;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.titulo--filtro--datas {
+  max-width: 100px;
+
+  cursor: pointer;
+}
+
+.filtro--datas--inputs {
+  width: 100%;
+
+  margin: 16px auto 0 auto;
+
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+
+  cursor: initial;
+}
+
+.filtro--datas--input {
+  width: 90%;
+  
+  margin: 8px auto;
+  padding: 4px;
+}
+
 .filtros__contas_a_receber {
   display: flex;
   align-items: center;

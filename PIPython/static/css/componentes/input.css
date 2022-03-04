@@ -52,7 +52,7 @@ input.fundo__branco{
 }
 
 .input__texto::placeholder {
-  color: black;
+  color: gray;
 }
 
 input.placeholder__cinza::placeholder {

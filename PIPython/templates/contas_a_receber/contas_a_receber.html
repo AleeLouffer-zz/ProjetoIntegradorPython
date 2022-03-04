@@ -10,24 +10,53 @@
             
             <form action="{% url 'Contas_a_Receber:tela_contas_a_receber' %}" method="POST"> {% csrf_token %}
                 <h2 class="sub__titulo"> Filtros </h2>
-                <section class="filtros__contas_a_receber">
-                    <div class="container__datas">
-                        <div class="data">
-                            <label for="data-inicio" class="label__input"> Data Inicial: </label>
-                            <input name="data_inicial" id="data-inicio" type="date" class="input__com__label">
-                        </div>
-                        <div class="data">
-                            <label for="data-fim" class="label__input"> Data Final: </label>
-                            <input name="data_final" id="data-fim" type="date" class="input__com__label">
-                        </div>
-                        <select name="opcao_data" class="select">
-                            <option value="todas"> Todas as datas </option>
-                            <option value="data_emissao"> Data de Emissão </option>
-                            <option value="data_pagamento"> Data de Pagamento </option>
-                            <option value="data_vencimento"> Data de Vencimento </option>
-                        </select>
-                    </div>
-                    
+                    <section class="filtro--datas">
+                        <details class="filtro--datas--details">
+                            <summary class="container--filtros--datas">
+                                <div class="filtro--datas--cabecalho">
+                                    <h1 class="titulo--filtro--datas">
+                                        Data de vencimento
+                                    </h1>
+                                </div>
+                            </summary>
+                            <div class="filtro--datas--inputs">
+                                <h3>Data inicial:</h3>
+                                <input type="date" class="filtro--datas--input" name="data_inicial--vencimento">
+                                <h3>Data final:</h3>
+                                <input type="date" class="filtro--datas--input" name="data_final--vencimento">
+                            </div>
+                        </details>
+                        <details class="filtro--datas--details">
+                            <summary class="container--filtros--datas">
+                                <div class="filtro--datas--cabecalho">
+                                    <h1 class="titulo--filtro--datas">
+                                        Data de emissão
+                                    </h1>
+                                </div>
+                            </summary>
+                            <div class="filtro--datas--inputs">
+                                <h3>Data inicial:</h3>
+                                <input type="date" class="filtro--datas--input" name="data_inicial--emissao">
+                                <h3>Data final:</h3>
+                                <input type="date" class="filtro--datas--input" name="data_final--emissao">
+                            </div>
+                        </details>
+                        <details class="filtro--datas--details">
+                            <summary class="container--filtros--datas">
+                                <div class="filtro--datas--cabecalho">
+                                    <h1 class="titulo--filtro--datas">
+                                        Data de pagamento
+                                    </h1>
+                                </div>
+                            </summary>
+                            <div class="filtro--datas--inputs">
+                                <h3>Data inicial:</h3>
+                                <input type="date" class="filtro--datas--input" name="data_inicial--pagamento">
+                                <h3>Data final:</h3>
+                                <input type="date" class="filtro--datas--input" name="data_final--pagamento">
+                            </div>
+                        </details>
+                    </section>                   
                     <div class="selecoes">   
                         <select id="funcionario" name="funcionario" class="select">
                             <option value="todos_funcionarios">Todos Funcionários</option>
@@ -35,7 +64,6 @@
                                 <option value="{{funcionario.id}}">{{funcionario.nome}}</option>
                             {% endfor %}
                         </select>
-                        
                         <select id="servico" name="servico" class="select">
                             <option value="todos_servicos">Todos Servicos</option>
                             {% for servico in servicos %}
@@ -57,7 +85,7 @@
                         </select>
                     </div>
 
-                    <button type="submit" class="btn btn__filtrar pequeno"> Filtrar </button>
+                    <button type="submit" class="btn btn__filtrar pequeno btn_com_margin"> Filtrar </button>
                 </section>
             </form>
             
@@ -82,9 +110,9 @@
                                         <div class="servico__e__valor">
                                             <h3 class="servico__titulo">{{conta.servico.nome}}</h3>
                                             {% if conta.pago %}
-                                                <p class="servico__preco"> R$ {{conta.total}}</p>
+                                                <p class="servico__preco"> R$ {{conta.total|floatformat:2}}</p>
                                             {% else %}
-                                                <p class="servico__preco"> R$ {{conta.valor}}</p>
+                                                <p class="servico__preco"> R$ {{conta.valor|floatformat:2}}</p>
                                             {% endif %}
                                         </div>
                                         {% if conta.pago %}
@@ -101,6 +129,7 @@
                                 </div>
                                 <div class="caixa__informacoes">
                                     <h1 class="titulo__informacoes"> Informações de Pagamento </h1>
+                                    <p class="servico__paragrafo">Data de Emissao: {{conta.data_de_emissao|date:"SHORT_DATE_FORMAT"}}</p>
                                     <p class="servico__paragrafo">Data de vencimento: {{conta.data_de_vencimento|date:"SHORT_DATE_FORMAT"}}</p>
                                     <p class="servico__paragrafo"> Forma de pagamento: {{conta.forma_de_pagamento.nome}}</p>
                                     {%if conta.data_de_pagamento%}

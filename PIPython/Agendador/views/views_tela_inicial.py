@@ -96,7 +96,7 @@ def verifica_botoes_funcionario(requisicao):
     if 'editar_funcionario' in requisicao.POST:
         editar_funcionario(requisicao)
 
-        return redirect('tela_inicial_prestador')
+        return redirect('Agendador:tela_inicial_prestador')
     elif 'excluir_funcionario' in requisicao.POST:
         excluir_funcionario(requisicao)
 
