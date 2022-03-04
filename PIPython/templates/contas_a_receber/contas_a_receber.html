@@ -220,6 +220,7 @@
                                 </div>
                                 <div class="caixa__informacoes">
                                     <h1 class="titulo__informacoes"> Informações de Pagamento </h1>
+                                    <p class="servico__paragrafo">Data de Emissao: {{conta.data_de_emissao|date:"SHORT_DATE_FORMAT"}}</p>
                                     <p class="servico__paragrafo">Data de vencimento: {{conta.data_de_vencimento|date:"SHORT_DATE_FORMAT"}}</p>
                                     <p class="servico__paragrafo"> Forma de pagamento: {{conta.forma_de_pagamento.nome}}</p>
                                     {%if conta.data_de_pagamento%}

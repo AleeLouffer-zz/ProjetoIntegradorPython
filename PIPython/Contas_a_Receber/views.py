@@ -177,7 +177,6 @@ def filtrar(requisicao):
 def filtrar_funcionario(requisicao, lista):
     if 'funcionario' in requisicao.POST:
         funcionario = requisicao.POST['funcionario']
-        print(funcionario)
         if funcionario != 'todos_funcionarios':
             return list(filter(lambda x: x.funcionario.id == int(funcionario), lista))
     
@@ -200,7 +199,7 @@ def filtrar_cliente(requisicao, lista):
     return lista
 
 def filtrar_por_status(requisicao, lista):
-    if 'statustatus' in requisicao.POST:
+    if 'status' in requisicao.POST:
             status = requisicao.POST['status']
             if status == '0':
                  return lista
@@ -235,7 +234,6 @@ def filtrar_por_data_emissao(requisicao, lista):
 def filtrar_por_data_vencimento(requisicao, lista):
     data_inicial = None
     data_final = None
-    
         
     if 'data_inicial--vencimento' in requisicao.POST:
         if requisicao.POST['data_inicial--vencimento']:
