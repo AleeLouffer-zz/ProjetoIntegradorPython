@@ -1,5 +1,8 @@
 {% extends 'index.html' %}
-{% block content %} {% include 'menu.html'%}
+{% block content %}
+<div class="container">
+    {% include 'menu.html'%}
+    <div class="container_conteudo">
         <div class="corpo">
             <h1 class="titulo"> Contas a Receber </h1>
             <form action="{% url 'Contas_a_Receber:verifica_botoes_adicionar_conta' %}" method="POST">
@@ -65,7 +68,8 @@
                     <button class="btn btn__adicionar preencher negrito" name="adicionar" type="submit"> Adicionar </button>
                 </div>
             </form>
-            
+            {% include 'contas_a_receber/adicionar_forma_de_pagamento_modal.html' %}
         </div>
-        {% include 'contas_a_receber/adicionar_forma_de_pagamento_modal.html' %}                
+    </div>
+</div>        
 {% endblock %}

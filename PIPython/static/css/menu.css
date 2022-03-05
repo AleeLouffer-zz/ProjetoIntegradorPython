@@ -1,73 +1,101 @@
-  * {
-    margin: 0;
-    padding: 0;
-    border: none;
+* {
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+ul,
+ol,
+li {
+  list-style: none;
+}
+
+.btnMenu {
+  text-decoration: none;
+  color: black;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+}
+
+.btnMenu_abrir {
+  padding: 20px 15px;
+}
+
+.btnMenu_abrir svg,
+.btnMenu_fechar svg {
+  width: 32px;
+  height: 32px;
+}
+
+.btnMenu_fechar {
+  position: absolute;
+  top: 2px;
+  left: 200px;
+}
+
+.menu__cabecalho {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 16px 15px;
+  margin: 32px 0 8px 0;
+}
+
+.menu__item__acao {
+  text-decoration: none;
+  color: black;
+}
+
+a.menu__item__acao {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  font-size: 15px;
+  padding: 16px 15px;
+}
+
+a.menu__item__acao:hover {
+  background-color: antiquewhite;
+}
+
+.nome__empresa {
+  font-size: 20px;
+  font-weight: bolder;
+}
+
+@media screen and (min-width: 1115px){
+  .menu {
+    position: fixed;
+
+    width: 240px;
+    height: 100%;
+
+    transform: translateX(0);
+
+    background-color: rgb(245, 165, 60);
   }
   
-  ul,
-  ol,
-  li {
-    list-style: none;
-  }
-  
-  .menu__item__acao {
-    text-decoration: none;
-    color: black;
+  .btnMenu_abrir{
+    display: none;
   }
 
-  .btnMenu {
-    text-decoration: none;
-    color: black;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    border: none;
-    background-color: transparent;
+  .btnMenu_fechar{
+    display: none;
   }
-  
-  .btnMenu_abrir {
-    padding: 20px 15px;
-  }
-  
-  .btnMenu_abrir svg,
-  .btnMenu_fechar svg {
-    width: 32px;
-    height: 32px;
-  }
-  
-  .btnMenu_fechar {
-    position: absolute;
-    top: 2px;
-    left: 200px;
-  }
-  
-  .menu__cabecalho {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  
-    padding: 16px 15px;
-    margin: 32px 0 8px 0;
-  }
-  
-  a.menu__item__acao {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  
-    font-size: 15px;
-    padding: 16px 15px;
-  }
-  
-  a.menu__item__acao:hover {
-    background-color: antiquewhite;
-  }
-  
+}
+
+
+@media screen and (max-width: 1114.9px){
   .menu {
     position: absolute;
     top: 0;
     left: 0;
-    
+  
     background-color: rgb(245, 165, 60);
     width: 240px;
     height: 100%;
@@ -76,12 +104,8 @@
     transition: transform 1s ease;
     z-index: 1;
   }
-  
+
   .menu__aberto {
     transform: translateX(0);
   }
-  
-  .nome__empresa {
-    font-size: 20px;
-    font-weight: bolder;
-  }
+}

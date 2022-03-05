@@ -1,41 +1,43 @@
 {% extends 'index.html' %}
-{% block content %} {% include 'menu.html'%}
-
-<div class="corpo">
-    <h1 class="titulo centralizado">Adicionar agendamento</h1>
-<form action="{% url 'Agendador:verificar_botoes_adicionar_agendamento' %}" method="POST">
-    {% csrf_token %}
-        <div class="novo_agendamento">
-            <input name="data_agendamento" id="input__data__sem__label" type="date">
-            <input name="hora_agendamento" id="input__data__sem__label" type="time">
-            
-            <select class="select" name="cliente" required>
-                <option value="None">Selecionar Cliente</option> <!-- adicionar verificacao se ele nao selecionar uma opcao-->
-                {% for cliente in clientes %}
-                <option value="{{cliente.id}}">{{cliente.nome}}</option>
-                {% endfor %}
-            </select>
-            
-            <select class="select" name="funcionario" required>
-                <option value="None">Selecionar Funcionario</option> <!-- adicionar verificacao se ele nao selecionar uma opcao-->
-                {% for funcionario in funcionarios %}
-                <option value="{{funcionario.id}}">{{funcionario.nome}}</option>
-                {% endfor %}
-            </select>
-            
-            <select class="select" name="servico" required>
-                <option value="None">Selecionar Servico</option> <!-- adicionar verificacao se ele nao selecionar uma opcao-->
-                {% for servico in servicos %}
-                <option value="{{servico.id}}">{{servico.nome}}</option>
-                {% endfor %}
-            </select>
-            
-            <div class="acoes">
-                <button type="submit" class="btn btn__cancelar tamanho__preencher" name="cancelar" id="add-agend">Cancelar </button>
-                <button type="submit" class="btn btn__adicionar tamanho__preencher" name="adicionar" id="add-agend">Adicionar</button>
-            </div>
+{% block content %}
+<div class="container">
+    {% include 'menu.html'%}
+    <div class="container_conteudo">
+        <div class="corpo">
+            <h1 class="titulo centralizado">Adicionar agendamento</h1>
+            <form action="{% url 'Agendador:verificar_botoes_adicionar_agendamento' %}" method="POST"> {% csrf_token %}
+                <div class="novo_agendamento">
+                    <input name="data_agendamento" id="input__data__sem__label" type="date">
+                    <input name="hora_agendamento" id="input__data__sem__label" type="time">
+                    
+                    <select class="select" name="cliente" required>
+                        <option value="None">Selecionar Cliente</option> <!-- adicionar verificacao se ele nao selecionar uma opcao-->
+                        {% for cliente in clientes %}
+                        <option value="{{cliente.id}}">{{cliente.nome}}</option>
+                        {% endfor %}
+                    </select>
+                    
+                    <select class="select" name="funcionario" required>
+                        <option value="None">Selecionar Funcionario</option> <!-- adicionar verificacao se ele nao selecionar uma opcao-->
+                        {% for funcionario in funcionarios %}
+                        <option value="{{funcionario.id}}">{{funcionario.nome}}</option>
+                        {% endfor %}
+                    </select>
+                    
+                    <select class="select" name="servico" required>
+                        <option value="None">Selecionar Servico</option> <!-- adicionar verificacao se ele nao selecionar uma opcao-->
+                        {% for servico in servicos %}
+                        <option value="{{servico.id}}">{{servico.nome}}</option>
+                        {% endfor %}
+                    </select>
+                    
+                    <div class="acoes">
+                        <button type="submit" class="btn btn__cancelar tamanho__preencher" name="cancelar" id="add-agend">Cancelar </button>
+                        <button type="submit" class="btn btn__adicionar tamanho__preencher" name="adicionar" id="add-agend">Adicionar</button>
+                    </div>
+                </div>
+            </form>
         </div>
-    </form>
+    </div>
 </div>
-
 {% endblock %}

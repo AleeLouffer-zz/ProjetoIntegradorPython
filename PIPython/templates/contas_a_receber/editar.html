@@ -1,6 +1,9 @@
 {% extends 'index.html' %}
 
-{% block content %} {% include 'menu.html'%}
+{% block content %}
+<div class="container">
+    {% include 'menu.html'%}
+    <div class="container_conteudo">
         <div class="corpo">
             <h1 class="titulo"> Contas a Receber </h1>
             <form action="{% url 'Contas_a_Receber:verifica_botoes_tela_editar' %}" method="POST">
@@ -24,7 +27,7 @@
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lock-fill" viewBox="0 0 16 16">
                             <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/>
                         </svg>
-                        Valor: R$ {{conta.valor}}
+                        Valor: R$ {{conta.valor|floatformat:2}}
                     </p>
                     <div class="forma_de_pagamento">
                         <select class="select altura__32px" name="forma_de_pagamento">
@@ -36,15 +39,16 @@
                         <button class="btn btn__adicionar" onclick="abrirModal(event)">+</button>
                     </div>
                     <div class="data">
-                      <label for="data-inicio" class="label__input"> Data de Vencimento: </label>
-                      <input id="data-inicio" type="date" class="input__com__label" name="data_vencimento" value="{{data_de_vencimento}}">
+                        <label for="data-inicio" class="label__input"> Data de Vencimento: </label>
+                        <input id="data-inicio" type="date" class="input__com__label" name="data_vencimento" value="{{data_de_vencimento}}">
                     </div>  
                 <div class="botoes">
                     <button class="btn btn__cancelar preencher negrito" name='cancelar' type="submit"> Cancelar </button>
                     <button class="btn btn__adicionar preencher negrito" name='salvar' type="submit"> Salvar </button>
                 </div>
             </form>
+            {% include 'contas_a_receber/adicionar_forma_de_pagamento_modal.html' %}          
         </div>
-        {% include 'contas_a_receber/adicionar_forma_de_pagamento_modal.html' %}          
     </div>
+</div>
 {% endblock %}

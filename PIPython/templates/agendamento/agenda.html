@@ -1,109 +1,114 @@
 {% extends 'index.html' %} 
-{% block content %} {% include 'menu.html'%}
-<div class="corpo">
-  <h1 class="titulo"> Agendamentos </h1>
-  <form action="{% url 'Agendador:tela_agenda' %}" method="POST"> {% csrf_token %}
-    <div class="filtros__agendamento">
-      <input type="date" name="data" id="input__data__sem__label" />      
-      
-      <select id="funcionario" name="funcionario" class="select">
-        <option>Todos Funcionários</option>
-        {% for funcionario in funcionarios %}
-      	<option value="{{funcionario.id}}">{{funcionario.nome}}</option>
-        {% endfor %}
-      </select>
-      
-      <select id="servico" name="servico" class="select">
-        <option>Todos Servicos</option>
-        {% for servico in servicos %}
-      	<option value="{{servico.id}}">{{servico.nome}}</option>
-        {% endfor %}
-      </select>
-
-      <select id="status" name="status" class="select">
-        <option>Todos Status</option>
-        <option value="False">Aberto</option>
-        <option value="True">Concluido</option>
-      </select>
-
-      <button type="submit" class="btn btn__filtrar pequeno"> Filtrar </button>
-    </div>
-  </form>
-  <form action="{% url 'Agendador:tela_adicionar_agendamento' %}" method="POST"> {% csrf_token %}
-    <button type="submit" class="btn btn__adicionar tamanho__pequeno com__icon preencher"> 
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar-plus" viewBox="0 0 16 16">
-        <path d="M8 7a.5.5 0 0 1 .5.5V9H10a.5.5 0 0 1 0 1H8.5v1.5a.5.5 0 0 1-1 0V10H6a.5.5 0 0 1 0-1h1.5V7.5A.5.5 0 0 1 8 7z"/>
-        <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
-      </svg>
-      Adicionar Agendamento
-    </button>
-  </form>
-  <section class="agenda">
-    <h2 class="sub__titulo"> Agenda </h2>
-    {% if agendamentos %}
-    <div class="agendamentos">
-        {% for agendamento in agendamentos %}
-        <div class="agendamento">
-          <div class="agendamento__cabecalho">
-            <div class="agendamento__cabecalho__item">
-              <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar3" viewBox="0 0 16 16">
-                <path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z"/>
-                <path d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
-              </svg>
-              <h3 class="agendamento__titulo negrito"> {{agendamento.data}} </h3>
-            </div>
-            <div class="agendamento__cabecalho__item">
-              <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clock" viewBox="0 0 16 16">
-                <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/>
-                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/>
-              </svg>
-              <h3 class="agendamento__titulo">  {{agendamento.hora}} </h3>
-            </div>
-          </div>
-  
-          <h4 class="agendamento__servico"> {{agendamento.servico.nome}} </h4>
-          <div class="agendamento__informacao"> 
-            <p class="agendamento__paragrafo cinza"> Funcionário: </p>
-            <p class="agendamento__paragrafo"> {{agendamento.funcionario.nome}} </p>  
-          </div>
-          <div class="agendamento__informacao">
-            <p class="agendamento__paragrafo cinza"> Cliente: </p>
-            <p class="agendamento__paragrafo"> {{agendamento.cliente.nome}} </p>
-          </div>
+{% block content %}
+<div class="container">
+  {% include 'menu.html'%}
+  <div class="container_conteudo">
+    <div class="corpo">
+      <h1 class="titulo"> Agendamentos </h1>
+      <form action="{% url 'Agendador:tela_agenda' %}" method="POST"> {% csrf_token %}
+        <div class="filtros__agendamento">
+          <input type="date" name="data" id="input__data__sem__label" />      
           
-          <form action="{% url 'Agendador:verifica_botoes_agendamento' %}" method="POST"> {% csrf_token %}
-            <input type="hidden" name="id_agendamento" value="{{agendamento.id}}">
-            <div class="agendamento__botoes">
-              {% if not agendamento.completo %}
-              <button type="submit" name="excluir_agendamento" class="btn__icon">
-                <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-calendar-x" viewBox="0 0 16 16">
-                  <path d="M6.146 7.146a.5.5 0 0 1 .708 0L8 8.293l1.146-1.147a.5.5 0 1 1 .708.708L8.707 9l1.147 1.146a.5.5 0 0 1-.708.708L8 9.707l-1.146 1.147a.5.5 0 0 1-.708-.708L7.293 9 6.146 7.854a.5.5 0 0 1 0-.708z"/>
-                  <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
-                </svg>
-              </button>
-              <button type="submit" name="editar_agendamento" class="btn__icon">
-                <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
-                  <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-                  <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
-                </svg>
-              </button>
-                <button type="submit" name="editar_status" class="btn__icon">
-                  <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-calendar2-check" viewBox="0 0 16 16">
-                    <path d="M10.854 8.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
-                    <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM2 2a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1H2z"/>
-                    <path d="M2.5 4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5V4z"/>
-                  </svg>
-                </button>
-              {% endif %}
-            </div>
-          </form>   
-        </div>
-        {% endfor %}
-  
-      </div>
-      {% else %}
-        <p class="nao__encontrado"> Nenhum agendamento encontrado </p>
-      {% endif %}
-  </section>
+          <select id="funcionario" name="funcionario" class="select">
+            <option>Todos Funcionários</option>
+            {% for funcionario in funcionarios %}
+            <option value="{{funcionario.id}}">{{funcionario.nome}}</option>
+            {% endfor %}
+          </select>
+          
+          <select id="servico" name="servico" class="select">
+            <option>Todos Servicos</option>
+            {% for servico in servicos %}
+            <option value="{{servico.id}}">{{servico.nome}}</option>
+            {% endfor %}
+          </select>
 
+          <select id="status" name="status" class="select">
+            <option>Todos Status</option>
+            <option value="False">Aberto</option>
+            <option value="True">Concluido</option>
+          </select>
+
+          <button type="submit" class="btn btn__filtrar pequeno"> Filtrar </button>
+        </div>
+      </form>
+      <form action="{% url 'Agendador:tela_adicionar_agendamento' %}" method="POST"> {% csrf_token %}
+        <button type="submit" class="btn btn__adicionar tamanho__pequeno com__icon preencher"> 
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar-plus" viewBox="0 0 16 16">
+            <path d="M8 7a.5.5 0 0 1 .5.5V9H10a.5.5 0 0 1 0 1H8.5v1.5a.5.5 0 0 1-1 0V10H6a.5.5 0 0 1 0-1h1.5V7.5A.5.5 0 0 1 8 7z"/>
+            <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
+          </svg>
+          Adicionar Agendamento
+        </button>
+      </form>
+      <section class="agenda">
+        <h2 class="sub__titulo"> Agenda </h2>
+        {% if agendamentos %}
+        <div class="agendamentos">
+            {% for agendamento in agendamentos %}
+            <div class="agendamento">
+              <div class="agendamento__cabecalho">
+                <div class="agendamento__cabecalho__item">
+                  <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar3" viewBox="0 0 16 16">
+                    <path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z"/>
+                    <path d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+                  </svg>
+                  <h3 class="agendamento__titulo negrito"> {{agendamento.data}} </h3>
+                </div>
+                <div class="agendamento__cabecalho__item">
+                  <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clock" viewBox="0 0 16 16">
+                    <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/>
+                    <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/>
+                  </svg>
+                  <h3 class="agendamento__titulo">  {{agendamento.hora}} </h3>
+                </div>
+              </div>
+      
+              <h4 class="agendamento__servico"> {{agendamento.servico.nome}} </h4>
+              <div class="agendamento__informacao"> 
+                <p class="agendamento__paragrafo cinza"> Funcionário: </p>
+                <p class="agendamento__paragrafo"> {{agendamento.funcionario.nome}} </p>  
+              </div>
+              <div class="agendamento__informacao">
+                <p class="agendamento__paragrafo cinza"> Cliente: </p>
+                <p class="agendamento__paragrafo"> {{agendamento.cliente.nome}} </p>
+              </div>
+              
+              <form action="{% url 'Agendador:verifica_botoes_agendamento' %}" method="POST"> {% csrf_token %}
+                <input type="hidden" name="id_agendamento" value="{{agendamento.id}}">
+                <div class="agendamento__botoes">
+                  {% if not agendamento.completo %}
+                  <button type="submit" name="excluir_agendamento" class="btn__icon">
+                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-calendar-x" viewBox="0 0 16 16">
+                      <path d="M6.146 7.146a.5.5 0 0 1 .708 0L8 8.293l1.146-1.147a.5.5 0 1 1 .708.708L8.707 9l1.147 1.146a.5.5 0 0 1-.708.708L8 9.707l-1.146 1.147a.5.5 0 0 1-.708-.708L7.293 9 6.146 7.854a.5.5 0 0 1 0-.708z"/>
+                      <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
+                    </svg>
+                  </button>
+                  <button type="submit" name="editar_agendamento" class="btn__icon">
+                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                      <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                      <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                    </svg>
+                  </button>
+                    <button type="submit" name="editar_status" class="btn__icon">
+                      <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-calendar2-check" viewBox="0 0 16 16">
+                        <path d="M10.854 8.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
+                        <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM2 2a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1H2z"/>
+                        <path d="M2.5 4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5V4z"/>
+                      </svg>
+                    </button>
+                  {% endif %}
+                </div>
+              </form>   
+            </div>
+            {% endfor %}
+      
+          </div>
+          {% else %}
+            <p class="nao__encontrado"> Nenhum agendamento encontrado </p>
+          {% endif %}
+      </section>
+    </div>
+  </div>
+</div>
 {% endblock %}

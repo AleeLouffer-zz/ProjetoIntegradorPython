@@ -18,7 +18,7 @@ body {
 .corpo {
   background-color: transparent;
   width: 90vw;
-  margin: 40px auto;
+  margin: 10px auto;
   padding: 10px;
   min-width: 300px;
 }
@@ -44,6 +44,7 @@ select.select {
   border-radius: 5px;
 
   padding: 5px;
+  min-width: 370px;
 }
 
 .altura__32px{
@@ -65,21 +66,39 @@ select.select {
   margin: 8px 0;
 }
 
-@media screen and (min-width: 950px) {
+@media screen and (min-width: 1115px) {
+  body{
+    background: white;
+  }
+
+  .container{
+    display: flex;
+    position: relative;
+  }
+
   .corpo {
-    width: 60vw;
-    max-width: 60vw;
+    max-width: 70vw;
     min-width: 850px;
+    
+    margin: 20px;
+    padding: 28px;
+  }
+  
+  .container_conteudo{
+    width: 100vw;
+    background-color: inherit;
+    
+    margin-left: 200px;
 
-    margin: 0px auto;
-    padding: 30px;
-
-    background-color: white;
-    border-radius: 30px;
-    box-shadow: 2px 2px 40px gray;
+    display: flex;
+    justify-content: center;
   }
 
   .nao__encontrado{
     background-color: whitesmoke;
+  }
+
+  select.select{
+    min-width: 150px;
   }
 }
