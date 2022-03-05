@@ -13,6 +13,11 @@ body {
   font-family: "Montserrat", sans-serif;
   background: whitesmoke;
   /* font-family: var(--fonte-Source-Sans-Pro); */
+
+  width: 100%;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
 }
 
 .corpo {
