@@ -12,7 +12,7 @@ li {
 
 .btnMenu {
   text-decoration: none;
-  color: black;
+  color:black;
   display: flex;
   align-items: center;
   cursor: pointer;
@@ -47,7 +47,7 @@ li {
 
 .menu__item__acao {
   text-decoration: none;
-  color: black;
+  color:black;
 }
 
 a.menu__item__acao {
@@ -65,7 +65,7 @@ a.menu__item__acao:hover {
 
 .nome__empresa {
   font-size: 20px;
-  font-weight: bolder;
+  font-weight: bold;
 }
 
 @media screen and (min-width: 1115px){
