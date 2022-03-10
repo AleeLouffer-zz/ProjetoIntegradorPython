@@ -12,6 +12,7 @@ const validadores = {
     texto:input=> validaInput(input),
     email:input=> validaInput(input),
     senha:input=> validaInput(input),
+    inputComLabel:input=>validaInputComLabel(input)
 }
 
 const inputs = document.querySelectorAll('input');
@@ -28,5 +29,14 @@ function validaInput(input){
     }
     else{
         input.classList.remove('invalido'); 
+    }
+}
+
+function validaInputComLabel(input){
+    if(input.value==""){
+        input.parentNode.classList.add('invalido');
+    }
+    else{
+        input.parentNode.classList.remove('invalido'); 
     }
 }
