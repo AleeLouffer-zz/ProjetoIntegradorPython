@@ -41,7 +41,7 @@
           <form action="{% url 'Agendador:criar_funcionario' %}" method="post">
             {% csrf_token %}
             <div id="checkBoxFunc" style="display: none" class="formulario__informacoes">
-              <input type="text" name="nome_funcionario" class="input__de__texto fundo__branco" placeholder="Nome Completo"/>
+              <input type="text" name="nome_funcionario" class="input__de__texto fundo__branco" required placeholder="Nome Completo"/>
               
               <button type="submit" class="btn btn__adicionar">Confirmar</button>
             </div>
@@ -79,9 +79,9 @@
             {% csrf_token %}
             <div id="checkBoxServ" style="display: none" class="formulario__informacoes">
 
-              <input type="text" name="servico_nome" class="input__de__texto fundo__branco" placeholder="Nome do Serviço"/>
-              <input type="number" name="servico_valor" step="0.01" min="0" class="input__de__texto fundo__branco" placeholder="Valor"/>
-              <input type="text" name="servico_descricao" class="input__de__texto fundo__branco" placeholder="Descrição"/>
+              <input type="text" name="servico_nome" class="input__de__texto fundo__branco" placeholder="Nome do Serviço" required/>
+              <input type="number" name="servico_valor" step="0.01" min="0" class="input__de__texto fundo__branco" placeholder="Valor" required/>
+              <input type="text" name="servico_descricao" class="input__de__texto fundo__branco" placeholder="Descrição" required/>
               <button type="submit" class="btn btn__adicionar">Confirmar</button>
             </div>
           </form>
@@ -116,7 +116,7 @@
           <form action="{% url 'Agendador:criar_cliente' %}" method="POST">
             {% csrf_token %}
             <div id="checkBoxCliente" style="display: none" class="formulario__informacoes">
-              <input type="text" class="input__de__texto fundo__branco" name="nome_cliente" placeholder="Nome Completo" />
+              <input type="text" class="input__de__texto fundo__branco" name="nome_cliente" placeholder="Nome Completo" required/>
               <button type="submit" class="btn btn__adicionar">Confirmar</button>
             </div>
           </form>
