@@ -39,7 +39,7 @@
                     <h1 class="titulo__informacoes com__margem negrito"> Informações de Pagamento </h1>
                     <div class="forma_de_pagamento">
                         <select class="select altura__32px" name="forma_de_pagamento">
-                            <option> Forma de Pagamento </option>
+                            <option value="None"> Forma de Pagamento </option>
                             {% for forma in forma_de_pagamentos %}
                             <option value="{{forma.id}}">{{forma.nome}}</option>
                             {% endfor %}
@@ -49,7 +49,7 @@
                     <div class="container__datas">
                         <div class="data">
                             <label for="data-fim" class="label__input"> Data de Vencimento: </label>
-                            <input id="data-fim" name="data_vencimento" type="date" class="input__com__label">
+                            <input id="data-fim" name="data_vencimento" type="date" data-tipo="inputComLabel" class="input__com__label">
                         </div>
                     </div>              
                     <p class="informacao__paragrafo">
@@ -61,7 +61,7 @@
                 </div>
                 <div class="botoes">
                     <button class="btn btn__cancelar preencher negrito" name="cancelar" type="submit"> Cancelar </button>
-                    <button class="btn btn__adicionar preencher negrito" name="adicionar" type="submit"> Adicionar </button>
+                    <button class="btn btn__adicionar preencher negrito" name="adicionar" id="adicionar" type="submit"> Adicionar </button>
                 </div>
             </form>
             {% include 'contas_a_receber/adicionar_forma_de_pagamento_modal.html' %}

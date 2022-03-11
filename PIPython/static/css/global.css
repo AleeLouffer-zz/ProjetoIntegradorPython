@@ -33,10 +33,9 @@ h1.titulo {
   margin: 8px;
 }
 
-.sub__titulo{
+.sub__titulo {
   font-size: 24px;
 }
-
 
 h1.titulo.centralizado {
   text-align: center;
@@ -52,17 +51,23 @@ select.select {
   min-width: 370px;
 }
 
-.altura__32px{
+.invalido {
+  color: #721c24 !important;
+  background-color: #f8d7da !important;
+  border-color: #f5c6cb !important;
+}
+
+.altura__32px {
   height: 32px;
 }
 
-.negrito{
+.negrito {
   font-weight: bold;
 }
 
-.nao__encontrado{
+.nao__encontrado {
   background-color: white;
-  
+
   border-radius: 5px;
   border: 1px solid var(--cinza-claro);
 
@@ -99,7 +104,7 @@ select.select {
     justify-content: center;
   }
 
-  .nao__encontrado{
+  .nao__encontrado {
     background-color: whitesmoke;
   }
 

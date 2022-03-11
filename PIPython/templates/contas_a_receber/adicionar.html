@@ -16,7 +16,7 @@
                     </div>
                     <div class="forma_de_pagamento">
                         <select class="select altura__32px" name="forma_de_pagamento">
-                            <option> Forma de Pagamento </option>
+                            <option value="None"> Forma de Pagamento </option>
                             {% for forma in formas_de_pagamento %}
                             <option value="{{forma.id}}">{{forma.nome}}</option>
                             {% endfor %}
@@ -26,13 +26,13 @@
                     <div class="container__datas">
                         <div class="data">
                             <label for="data-fim" class="label__input"> Data de Vencimento: </label>
-                            <input id="data-fim" name="data_vencimento" type="date" class="input__com__label">
+                            <input id="data-fim" name="data_vencimento" type="date" class="input__com__label" data-tipo="inputComLabel">
                         </div>
                     </div>
                     <div class="flex-row-item">
                         <div class="container__input__label">
                             <label for="valor" class="label__input"> Valor: </label>
-                            <input id="valor" name="valor" type="number" class="input__com__label placeholder__cinza" placeholder="R$ -">
+                            <input id="valor" name="valor" type="number" step="0.01" min="0" class="input__com__label placeholder__cinza" data-tipo="inputComLabel" placeholder="R$ -">
                         </div>
                     </div>
                 </div>
@@ -42,21 +42,21 @@
                     </div>      
                     <div class="selecoes">
                         <select id="servico" name="id_servico" class="select altura__32px">
-                            <option>Todos Servicos</option>
+                            <option value="None">Todos Servicos</option>
                             {% for servico in servicos %}
                               <option value="{{servico.id}}">{{servico.nome}}</option>
                             {% endfor %}
                         </select>
                         
                         <select id="funcionario" name="id_funcionario" class="select altura__32px">
-                            <option>Todos Funcionários</option>
+                            <option value="None">Todos Funcionários</option>
                             {% for funcionario in funcionarios %}
                                 <option value="{{funcionario.id}}">{{funcionario.nome}}</option>
                             {% endfor %}
                         </select>
     
                         <select id="cliente" name="id_cliente" class="select altura__32px">
-                            <option>Todos Clientes</option>
+                            <option value="None">Todos Clientes</option>
                             {% for cliente in clientes %}
                               <option value="{{cliente.id}}">{{cliente.nome}}</option>
                             {% endfor %}
@@ -65,7 +65,7 @@
                 </div>
                 <div class="botoes">
                     <button class="btn btn__cancelar preencher negrito" name="cancelar" type="submit"> Cancelar </button>
-                    <button class="btn btn__adicionar preencher negrito" name="adicionar" type="submit"> Adicionar </button>
+                    <button class="btn btn__adicionar preencher negrito" name="adicionar" id="adicionar" type="submit"> Adicionar </button>
                 </div>
             </form>
             {% include 'contas_a_receber/adicionar_forma_de_pagamento_modal.html' %}

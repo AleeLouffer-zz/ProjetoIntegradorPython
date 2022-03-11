@@ -8,22 +8,22 @@
             <div class="info__cadastro">
                 <h1 class="titulo__box">Registrar-se</h1>
                 <label for="nome_fantasia" class="label_tela_cadastro"> Nome Fantasia </label>
-                <input id="nome_fantasia" class="input__texto" name="nome_cadastro" type="text" placeholder="Digite o Nome Fantasia" required/>
+                <input id="nome_fantasia" class="input__texto" name="nome_cadastro" type="text" placeholder="Digite o Nome Fantasia" data-tipo="texto" required/>
                 
                 <label for="razao_social" class="label_tela_cadastro"> Razão Social </label>
-                <input id="razao_social" class="input__texto" name="razao_social_cadastro" type="text" placeholder="Digite a Razão social" required/>
+                <input id="razao_social" class="input__texto" name="razao_social_cadastro" type="text" placeholder="Digite a Razão social" data-tipo="texto" required/>
                 
                 <label for="cnpj" class="label_tela_cadastro"> CNPJ </label>
-                <input id="cnpj" class="input__texto" name="cnpj_cadastro" type="text" placeholder="Digite o CNPJ" required/>
+                <input id="cnpj" class="input__texto" name="cnpj_cadastro" type="text" placeholder="Digite o CNPJ" maxlength="18" onkeypress="aplicaMascara()" data-tipo="texto"  required/>
                 
                 <label for="email" class="label_tela_cadastro"> Email </label>
-                <input id="email" class="input__texto" name="email_cadastro" type="email" placeholder="Digite seu e-mail" required/>
+                <input id="email" class="input__texto" name="email_cadastro" type="email" placeholder="Digite seu e-mail" data-tipo="email" required/>
                 
                 <label for="senha" class="label_tela_cadastro"> Senha </label>
-                <input id="senha" class="input__texto" name="senha_cadastro" type="password" placeholder="Digite sua senha" required/>
+                <input id="senha" class="input__texto" name="senha_cadastro" type="password" placeholder="Digite sua senha" data-tipo="senha" required/>
             </div>
             <div class="btn__continuar">
-                <button type="submit" class="btn btn__azul negrito"> Registrar-se </button>
+                <button type="submit" class="btn btn__azul negrito" id="adicionar"> Registrar-se </button>
             </div>
         </div>
     </form>

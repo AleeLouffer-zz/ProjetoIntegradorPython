@@ -6,10 +6,10 @@
       {% csrf_token %}
       <div class="fomulario__login">
         <label for="email" class="label_tela_login"> Email </label>
-        <input id="email" class="input__texto" type="email" name="email" placeholder="Digite seu email" />
+        <input id="email" class="input__texto" type="email" name="email" placeholder="Digite seu email" data-tipo="email" required/>
         <label for="senha" class="label_tela_login"> Senha </label>
-        <input id="senha" class="input__texto" type="password" name="senha" placeholder="Digite sua senha" />
-        <button class="btn btn__azul negrito botao__login" type="submit" id="Entrar"> Entrar </button>
+        <input id="senha" class="input__texto" type="password" name="senha" placeholder="Digite sua senha" data-tipo="senha" required/>
+        <button class="btn btn__azul negrito botao__login" type="submit" id="adicionar"> Entrar </button>
       </div>
     </form>
     <p class="cadastro"> Não tem uma conta? <a href="{% url 'Login:cadastro_empresa' %}"> Cadastre-se </a></p>

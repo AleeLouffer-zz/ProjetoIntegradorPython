@@ -10,7 +10,7 @@
                     </button>
                 </div>
                 <form action="{% url 'Contas_a_Receber:adicionar_forma_de_pagamento' %}" method="POST">  {% csrf_token %}
-                    <input type="text" name="forma_pagamento" class="input__de__texto fundo__branco" placeholder="Forma de Pagamento"/>
+                    <input type="text" name="forma_pagamento" class="input__de__texto fundo__branco" placeholder="Forma de Pagamento" required/>
                     <button type="submit" class="btn btn__adicionar">Confirmar</button>
                 </form>
             </div>
