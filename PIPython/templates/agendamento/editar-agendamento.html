@@ -1,40 +1,45 @@
 {% extends 'index.html' %}
-{% block content %} {% include 'menu.html'%}
-	<div class="corpo">
-        <h1 class="titulo centralizado">Editar agendamento</h1>
-		<form action="{% url 'Agendador:verificar_botoes_editar_agendamento' %}" method="POST"> {% csrf_token %}
-			<div class="novo_agendamento">
-				<input type="hidden" name="id_agendamento" value="{{agendamento.id}}">
-				
-				<input name="data" type="date" id="input__data__sem__label" value="{{data_agendamento}}">
-				<input name="hora_agendamento" type="time" id="input__data__sem__label" value="{{agendamento.hora}}">
-				
-				<select class="select" name="id_cliente"> <!-- alterar para editar cliente -->
-					<option value="{{agendamento.cliente.id}}">{{agendamento.cliente.nome}}</option>
-					{% for cliente in clientes %}
-						<option value="{{cliente.id}}">{{cliente.nome}}</option>
-					{% endfor %}
-				</select>
-				
-				<select class="select"	 name="id_funcionario">
-					<option value="{{agendamento.funcionario.id}}">{{agendamento.funcionario.nome}}</option>
-					{% for funcionario in funcionarios %}
-						<option value="{{funcionario.id}}">{{funcionario.nome}}</option>
-					{% endfor %}
-				</select>
+{% block content %}
+<div class="container">
+	{% include 'menu.html'%}
+	<div class="container_conteudo">
+		<div class="corpo">
+			<h1 class="titulo centralizado">Editar agendamento</h1>
+			<form action="{% url 'Agendador:verificar_botoes_editar_agendamento' %}" method="POST"> {% csrf_token %}
+				<div class="novo_agendamento">
+					<input type="hidden" name="id_agendamento" value="{{agendamento.id}}">
+					
+					<input name="data" type="date" id="input__data__sem__label" value="{{data_agendamento}}">
+					<input name="hora_agendamento" type="time" id="input__data__sem__label" value="{{agendamento.hora}}">
+					
+					<select class="select" name="id_cliente"> <!-- alterar para editar cliente -->
+						<option value="{{agendamento.cliente.id}}">{{agendamento.cliente.nome}}</option>
+						{% for cliente in clientes %}
+							<option value="{{cliente.id}}">{{cliente.nome}}</option>
+						{% endfor %}
+					</select>
+					
+					<select class="select"	 name="id_funcionario">
+						<option value="{{agendamento.funcionario.id}}">{{agendamento.funcionario.nome}}</option>
+						{% for funcionario in funcionarios %}
+							<option value="{{funcionario.id}}">{{funcionario.nome}}</option>
+						{% endfor %}
+					</select>
 
-				<select class="select" name="id_servico">
-					<option value="{{agendamento.servico.id}}">{{agendamento.servico.nome}}</option>
-					{% for servico in servicos %}
-						<option value="{{servico.id}}">{{servico.nome}}</option>
-					{% endfor %}
-				</select>
-				
-				<div class="acoes">
-					<button type="submit" class="btn btn__cancelar tamanho__preencher" id="add-agend" name="cancelar">Cancelar </button>
-					<button type="submit" class="btn btn__adicionar tamanho__preencher" name='editar'>Salvar </button> 
+					<select class="select" name="id_servico">
+						<option value="{{agendamento.servico.id}}">{{agendamento.servico.nome}}</option>
+						{% for servico in servicos %}
+							<option value="{{servico.id}}">{{servico.nome}}</option>
+						{% endfor %}
+					</select>
+					
+					<div class="acoes">
+						<button type="submit" class="btn btn__cancelar tamanho__preencher" id="add-agend" name="cancelar">Cancelar </button>
+						<button type="submit" class="btn btn__adicionar tamanho__preencher" name='editar'>Salvar </button> 
+					</div>
 				</div>
-			</div>
 			</form>
+		</div>
 	</div>
+</div>
 {% endblock %}

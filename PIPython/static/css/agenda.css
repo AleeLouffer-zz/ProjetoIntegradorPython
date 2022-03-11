@@ -19,7 +19,7 @@
 	border: 1px solid var(--cinza-claro);
 	border-radius: 5px;
 	
-	min-width: 350px;
+	min-width: 300px;
 	max-width: 500px;
 	
 	padding: 16px;
@@ -87,7 +87,7 @@
 	width: 100%;
 }
 
-@media screen and (min-width: 950px) {
+@media screen and (min-width: 1115px) {
 	.filtros__agendamento{
 		flex-direction: row;
 	}

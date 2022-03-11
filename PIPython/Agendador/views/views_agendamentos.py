@@ -75,7 +75,6 @@ def cadastrar_agendamento(requisicao):
     
     data_agendamento = requisicao.POST['data_agendamento']
     hora_agendamento = requisicao.POST['hora_agendamento'] 
-    ##ADICIONAR VERIFICACAO
     
     criar_agendamento(requisicao, servico, cliente, funcionario, data_agendamento, hora_agendamento, id_empresa)
 

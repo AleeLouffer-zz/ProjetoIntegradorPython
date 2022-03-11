@@ -20,7 +20,7 @@ class Empresa(AbstractUser):
     id = models.AutoField(primary_key=True)
     razao_social = models.CharField(max_length=100, null=True)
     nome_fantasia = models.CharField(max_length=100)
-    cnpj = models.CharField(unique=True, max_length=14)
+    cnpj = models.CharField(unique=True, max_length=18)
     email = models.EmailField(unique=True)
     password = models.CharField(max_length=20)
 
