@@ -57,6 +57,8 @@ def editar_empresa(requisicao):
     email_empresa = requisicao.POST['email_empresa']
     senha_empresa = requisicao.POST['senha_empresa']
 
+    requisicao.session['nome_empresa'] = nome_empresa
+
     atualizar_empresa(requisicao, id_empresa, nome_empresa, email_empresa, senha_empresa)
 
 
