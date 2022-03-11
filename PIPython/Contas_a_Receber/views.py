@@ -108,7 +108,7 @@ def tela_adicionar_conta_agendamento(requisicao):
 def verifica_botoes_conta_agendamento(requisicao):
     if 'cancelar' in requisicao.POST:
         del requisicao.session['id_agendamento']
-        return redirect('Contas_a_Receber:tela_contas_a_receber')
+        return redirect('Agendador:tela_agenda')
 
     elif 'adicionar' in requisicao.POST:
         adicionar_conta(requisicao)
