@@ -7,14 +7,17 @@
         <div class="informacoes__geral">
             <div class="info__cadastro">
                 <h1 class="titulo__box">Registrar-se</h1>
-                <label for="nome_fantasia" class="label_tela_cadastro"> Nome Fantasia </label>
-                <input id="nome_fantasia" class="input__texto" name="nome_cadastro" type="text" placeholder="Digite o Nome Fantasia" data-tipo="texto" required/>
                 
-                <label for="razao_social" class="label_tela_cadastro"> Razão Social </label>
-                <input id="razao_social" class="input__texto" name="razao_social_cadastro" type="text" placeholder="Digite a Razão social" data-tipo="texto" required/>
+                <div class="botoes__usuarios">
+                    <button class="btn laranja negrito" onclick="pessoaFisica(event)"> Pessoa Física </button>
+                    <button class="btn laranja negrito" onclick="pessoaJuridica(event)"> Pessoa Juridica </button>
+                </div>
+
+                <label for="nome" class="label_tela_cadastro"> Nome </label>
+                <input id="nome" class="input__texto" name="nome_cadastro" type="text" placeholder="Digite o Nome da Pessoa Fisica" data-tipo="texto" required/>
                 
-                <label for="cnpj" class="label_tela_cadastro"> CNPJ </label>
-                <input id="cnpj" class="input__texto" name="cnpj_cadastro" type="text" placeholder="Digite o CNPJ" maxlength="18" onkeypress="aplicaMascara()" data-tipo="texto"  required/>
+                <label for="cnpj_cpf" class="label_tela_cadastro" id="label_cnpj_cpf"> CPF </label>
+                <input id="cnpj_cpf" class="input__texto" name="cnpj_cadastro" type="text" placeholder="Digite o CPF" maxlength="14" onkeypress="aplicaMascara()" data-tipo="texto"  required/>
                 
                 <label for="email" class="label_tela_cadastro"> Email </label>
                 <input id="email" class="input__texto" name="email_cadastro" type="email" placeholder="Digite seu e-mail" data-tipo="email" required/>
