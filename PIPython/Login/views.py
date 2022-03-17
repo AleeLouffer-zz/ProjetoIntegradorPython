@@ -1,8 +1,10 @@
+from django.db import IntegrityError
 from django.shortcuts import redirect, render
 from Agendador.views import *
 from django.contrib.auth import authenticate, login, logout
 from Agendador.views import *
 from Login.repo import *
+from django.contrib import messages
 
 def tela_login(requisicao):
     return render(requisicao, '../templates/login/login.html')
@@ -17,9 +19,13 @@ def cadastrar_empresa(requisicao):
     email = requisicao.POST['email_cadastro']
     senha = requisicao.POST['senha_cadastro']
 
-    criar_empresa_usuario(requisicao, email, senha, cnpj, nome_fantasia, razao_social)
-
-    return redirect('Login:tela_login')
+    try:
+        criar_empresa_usuario(requisicao, email, senha, cnpj, nome_fantasia, razao_social)
+        messages.success(requisicao, "Cadastro concluido com sucesso!")
+        return redirect('Login:tela_login')
+    except IntegrityError:
+        messages.error(requisicao, "Empresa já cadastrada no sistema, por favor verifique o Email e CNPJ.")
+        return redirect('Login:cadastro_empresa')
   
 def realizar_login(requisicao):
     email = requisicao.POST['email']
@@ -27,16 +33,16 @@ def realizar_login(requisicao):
     
     user = authenticate(requisicao, username=email, password=senha)
 
-    empresa = obter_empresa_por_id(requisicao, user.id)
-
     if user is not None:
         if user.is_active:
             login(requisicao, user)
+            empresa = obter_empresa_por_id(requisicao, user.id)
             requisicao.session["id_empresa"] = user.id
             requisicao.session["nome_empresa"] = empresa.nome_fantasia
             return redirect("/empresa/")
         
     else:
+        messages.error(requisicao, "Verifique seus dados e tente novamente!")
         return redirect('Login:tela_login')
     
 def editar_empresa(requisicao):
