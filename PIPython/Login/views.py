@@ -19,7 +19,7 @@ def cadastrar_empresa(requisicao):
     senha = requisicao.POST['senha_cadastro']
 
     try:
-        criar_empresa_usuario(requisicao, email, senha, cnpj, nome_fantasia, razao_social)
+        criar_empresa_usuario(requisicao, email, senha, cnpj_cpf, nome)
         messages.success(requisicao, "Cadastro concluido com sucesso!")
         return redirect('Login:tela_login')
     except IntegrityError:
