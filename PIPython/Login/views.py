@@ -13,9 +13,8 @@ def renderizar_tela_cadastro(requisicao):
     return render(requisicao, 'telaCadastro.html')
 
 def cadastrar_empresa(requisicao):
-    razao_social = requisicao.POST['razao_social_cadastro']
-    nome_fantasia = requisicao.POST['nome_cadastro']
-    cnpj = requisicao.POST['cnpj_cadastro']
+    nome = requisicao.POST['nome_cadastro']
+    cnpj_cpf = requisicao.POST['cnpj_cpf_cadastro']
     email = requisicao.POST['email_cadastro']
     senha = requisicao.POST['senha_cadastro']
 
@@ -38,7 +37,7 @@ def realizar_login(requisicao):
             login(requisicao, user)
             empresa = obter_empresa_por_id(requisicao, user.id)
             requisicao.session["id_empresa"] = user.id
-            requisicao.session["nome_empresa"] = empresa.nome_fantasia
+            requisicao.session["nome_empresa"] = empresa.nome
             return redirect("/empresa/")
         
     else:
@@ -54,7 +53,6 @@ def editar_empresa(requisicao):
     atualizar_empresa(requisicao, id_empresa, nome_empresa, email_empresa, senha_empresa)
 
     return redirect('Agendador:tela_inicial_prestador')
-
 
 def deslogar(requisicao):
     logout(requisicao)
