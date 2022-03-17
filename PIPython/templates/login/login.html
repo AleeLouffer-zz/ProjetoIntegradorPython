@@ -2,6 +2,7 @@
 <div class="container__fundo">
   <div class="container__login">
     <h2 class="titulo__login"> Bem-vindo! </h2>
+    {% include 'message.html' %}
     <form action="{% url 'Login:realizar_login' %}" method="POST" class="formulario__login">
       {% csrf_token %}
       <div class="fomulario__login">

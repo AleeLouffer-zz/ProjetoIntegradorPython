@@ -3,6 +3,7 @@
 {% block content %}
 <div class="container__fundo">
     <form action="{% url 'Login:cadastrar_empresa' %}" method="post">
+        {% include 'message.html' %}
         {% csrf_token %}
         <div class="informacoes__geral">
             <div class="info__cadastro">
