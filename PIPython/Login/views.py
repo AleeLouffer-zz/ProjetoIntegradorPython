@@ -43,7 +43,7 @@ def realizar_login(requisicao):
     else:
         messages.error(requisicao, "Verifique seus dados e tente novamente!")
         return redirect('Login:tela_login')
-    
+
 def editar_empresa(requisicao):
     id_empresa = requisicao.session["id_empresa"]
     nome_empresa = requisicao.POST['nome_empresa']
@@ -53,6 +53,7 @@ def editar_empresa(requisicao):
     atualizar_empresa(requisicao, id_empresa, nome_empresa, email_empresa, senha_empresa)
 
     return redirect('Agendador:tela_inicial_prestador')
+
 
 def deslogar(requisicao):
     logout(requisicao)
