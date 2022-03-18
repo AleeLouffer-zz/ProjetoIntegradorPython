@@ -1,0 +1,62 @@
+{% extends 'index.html' %}
+{% block content %}
+<div class="container">
+    {% include 'menu.html'%}
+    <div class="container_conteudo">
+        <div class="corpo">
+            <div class="container_informacoes">
+                <img src="../static/Imagens/logo.png" alt="logo Service Scheduler">
+                <div class="informacoes">
+                    <h1 class="sobre_titulo"> Sobre o Service Scheduler </h1>
+                    <p class="sobre_paragrafo"> Versão 1.0 </p>
+
+                    <h2 class="sobre_titulo"> Recomendações com base na LGPD: </h2>
+                    
+                    <p class="sobre_paragrafo">
+                        <a href="http://www.planalto.gov.br/ccivil_03/_Ato2015-2018/2018/Lei/L13709compilado.htm" target="blank">
+                            A Lei Geral de Proteção de Dados Pessoais (LGPD), Lei nº 13.709, de 14 de agosto de 2018
+                        </a> 
+                        , dispõe sobre o tratamento de dados pessoais, inclusive nos meios digitais, por pessoa natural ou por pessoa jurídica de direito público ou privado.
+                    </p>
+                    <p class="sobre_paragrafo">
+                        Recomenda-se o uso de senhas fortes, mínimo 8 caracteres, contendo dígitos, caracteres especiais e letras maiusculas e minusculas. Além da troca periodica da senha, a cada 60 dias.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<style>
+    .container_informacoes {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .informacoes {        
+        margin: 8px 0;
+        padding: 10px;
+
+        border-radius: 5px;
+
+        background-color: whitesmoke;
+        border: 1px solid var(--cinza-claro);
+    }
+
+    .container_informacoes img {
+        width: 500px;
+    }
+
+    .sobre_titulo {
+        font-size: 18px;
+        font-weight: bold;
+        margin: 8px 0;
+    }
+
+    .sobre_paragrafo{
+        font-size: 14px;
+    }
+</style>
+{% endblock %}

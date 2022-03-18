@@ -58,3 +58,7 @@ def editar_empresa(requisicao):
 def deslogar(requisicao):
     logout(requisicao)
     return redirect('Login:tela_login')
+
+
+def sobre(requisicao):
+    return render(requisicao, 'telaSobre.html')
