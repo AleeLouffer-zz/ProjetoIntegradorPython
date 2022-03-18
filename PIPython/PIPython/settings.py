@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'Contas_a_Receber',
     'Agendador',
     'Login',
+    'dbbackup',  # django-dbbackup
 ]
 
 MIDDLEWARE = [
@@ -127,4 +128,7 @@ MESSAGE_TAGS = {
         messages.SUCCESS: 'alerta-sucesso',
         messages.WARNING: 'alerta-aviso',
         messages.ERROR: 'alerta-erro',
- }
+}
+
+DBBACKUP_STORAGE = 'django.core.files.storage.FileSystemStorage'
+DBBACKUP_STORAGE_OPTIONS = {'location': 'backup/'}
