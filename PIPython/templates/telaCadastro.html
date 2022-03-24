@@ -18,7 +18,7 @@
                 <input id="nome" class="input__texto" name="nome_cadastro" type="text" placeholder="Digite o Nome da Pessoa Fisica" data-tipo="texto" required/>
                 
                 <label for="cnpj_cpf" class="label_tela_cadastro" id="label_cnpj_cpf"> CPF </label>
-                <input id="cnpj_cpf" class="input__texto" name="cnpj_cpf_cadastro" type="text" placeholder="Digite o CPF" maxlength="14" onkeypress="aplicaMascara()" data-tipo="texto"  required/>
+                <input id="cnpj_cpf" class="input__texto" name="cnpj_cpf_cadastro" type="text" placeholder="Digite o CPF" minlength="14" maxlength="14" onkeypress="aplicaMascara()" data-tipo="texto"  required/>
                 
                 <label for="email" class="label_tela_cadastro"> Email </label>
                 <input id="email" class="input__texto" name="email_cadastro" type="email" placeholder="Digite seu e-mail" data-tipo="email" required/>
