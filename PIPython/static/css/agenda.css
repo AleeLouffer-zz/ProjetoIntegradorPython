@@ -87,7 +87,59 @@
 	width: 100%;
 }
 
+.filtros__select--agendamento{
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+
+	width: 100%;
+}
+.aviso-filtro-agendamento{
+	font-size: 12px;
+	text-align: justify;
+	width: 90%;
+}
+.filtro--datas--agendamento{
+	display: flex;
+	flex-direction: column;
+  
+	padding: 8px;
+  
+	max-width: 98%;
+    min-width: 370px;
+  
+	color: black;
+  
+	background-color: whitesmoke;
+  
+	border-radius: 5px;
+	border: 1px solid var(--cinza-claro);
+  
+	cursor: pointer;
+}
+
+.filtro--datas--inputs--agendamento{
+	width: 100%;
+ 
+	display: flex;
+	flex-direction: column;
+	align-items: left;
+  
+	cursor: initial;
+}
+
+.filtro--datas--input--agendamento {
+	width: 90%;
+  
+	margin: 8px;
+	padding: 4px;
+	border-radius: 5px;
+}
+
 @media screen and (min-width: 1115px) {
+	.filtro--datas--agendamento{
+		width: 30%;
+	}
 	.filtros__agendamento{
 		flex-direction: row;
 	}

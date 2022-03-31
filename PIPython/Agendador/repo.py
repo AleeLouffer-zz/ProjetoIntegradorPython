@@ -4,6 +4,9 @@ from Login.repo import *
 def filtrar_agendamentos_ativos_por_data_e_id_empresa(requisicao, id_empresa, data):
     return Agendamento.objects.filter(empresa=id_empresa).filter(data=data).filter(ativo=True).order_by('hora')
 
+def filtrar_agendamentos_ativos_por_periodo_data_e_id_empresa(requisicao, id_empresa, data_inicial, data_final):   
+    return Agendamento.objects.filter(empresa=id_empresa, data__gte=data_inicial, data__lte=data_final, ativo=True).order_by('hora')
+
 def filtrar_funcionarios_ativos_por_id_empresa(requisicao, id_empresa):
     return list(Funcionario.objects.filter(empresa=id_empresa).filter(ativo=True))
 

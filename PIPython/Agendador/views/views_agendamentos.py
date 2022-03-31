@@ -1,42 +1,72 @@
 from django.shortcuts import render, redirect
-from datetime import date
+from datetime import date, datetime
 from Agendador.repo import *
 from Contas_a_Receber.repo import *
 from Login.repo import *
 
 def tela_agenda(requisicao):
     id_empresa = requisicao.session['id_empresa']
+    
+   
+    agendamentos = filtrar_periodo_datas(requisicao, id_empresa)
+    agendamentos = filtrar_funcionario(requisicao, agendamentos)
+    agendamentos = filtrar_servico(requisicao, agendamentos)
+    agendamentos = filtrar_status(requisicao, agendamentos)
+
     funcionarios = filtrar_funcionarios_ativos_por_id_empresa(requisicao, id_empresa)
     servicos = filtrar_servicos_ativos_por_id_empresa(requisicao, id_empresa)
     
-    if 'data' not in requisicao.POST:
-        data = date.today()
-        agendamentos = filtrar_agendamentos_ativos_por_data_e_id_empresa(requisicao, id_empresa, data)
-        
-    else:
-        data = requisicao.POST['data']
-        if data == "":
-            data = date.today()
-        agendamentos = list(filtrar_agendamentos_ativos_por_data_e_id_empresa(requisicao, id_empresa, data))
-
-    if 'funcionario' in requisicao.POST:
-        id_funcionario = requisicao.POST['funcionario']
-        if id_funcionario != 'Todos Funcionários':
-            agendamentos = list(filter(lambda x: x.funcionario.id == int(id_funcionario), agendamentos))
-
-    if 'servico' in requisicao.POST:
-        id_servico = requisicao.POST['servico']
-        if id_servico != 'Todos Servicos':
-            agendamentos = list(filter(lambda x: x.servico.id == int(id_servico), agendamentos))
-        
-    if 'status' in requisicao.POST:
-        status = requisicao.POST['status']
-        if status != 'Todos Status':
-            agendamentos = list(filter(lambda x: x.completo == converter_para_bool(status), agendamentos))
-
     resposta = make_resposta(id_empresa, agendamentos, funcionarios, servicos)
     return render(requisicao, '../templates/agendamento/agenda.html', resposta)
 
+
+def obter_data_filtro(requisicao, data):
+    if data in requisicao.POST and requisicao.POST[data] != "":
+        return datetime.strptime(requisicao.POST[data], '%Y-%m-%d').date()
+    return None
+
+def filtrar_periodo_datas(requisicao, id_empresa):
+    data_inicial = obter_data_filtro(requisicao, 'data_inicial--agendamento')
+    data_final = obter_data_filtro(requisicao, 'data_final--agendamento')
+
+    if data_inicial and data_final:
+        return filtrar_agendamentos_ativos_por_periodo_data_e_id_empresa(requisicao, id_empresa, data_inicial, data_final)
+
+    elif data_inicial:
+        return filtrar_agendamentos_ativos_por_data_e_id_empresa(requisicao, id_empresa, data_inicial)
+
+    elif data_final:
+        return filtrar_agendamentos_ativos_por_data_e_id_empresa(requisicao, id_empresa, data_final)
+    
+    elif data_inicial == None and data_final == None:
+        data_inicial = date.today()
+        data_final = date.today()
+
+        return filtrar_agendamentos_ativos_por_periodo_data_e_id_empresa(requisicao, id_empresa, data_inicial, data_final)
+    
+def filtrar_funcionario(requisicao, agendamentos):
+    if 'funcionario' in requisicao.POST:
+        id_funcionario = requisicao.POST['funcionario']
+        if id_funcionario != 'Todos Funcionários':
+            return list(filter(lambda x: x.funcionario.id == int(id_funcionario), agendamentos))
+
+    return agendamentos
+
+def filtrar_servico(requisicao, agendamentos):
+    if 'servico' in requisicao.POST:
+        id_servico = requisicao.POST['servico']
+        if id_servico != 'Todos Servicos':
+            return list(filter(lambda x: x.servico.id == int(id_servico), agendamentos))
+
+    return agendamentos
+
+def filtrar_status(requisicao, agendamentos):
+    if 'status' in requisicao.POST:
+        status = requisicao.POST['status']
+        if status != 'Todos Status':
+            return list(filter(lambda x: x.completo == converter_para_bool(status), agendamentos))
+
+    return agendamentos
 
 def make_resposta(id_empresa, agendamentos, funcionarios, servicos):
     resposta = {

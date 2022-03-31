@@ -6,30 +6,39 @@
     <div class="corpo">
       <h1 class="titulo"> Agendamentos </h1>
       <form action="{% url 'Agendador:tela_agenda' %}" method="POST"> {% csrf_token %}
+        <p class="aviso-filtro-agendamento"> *caso não seja informada uma data, os agendamentos serão filtrados pela data do dia atual</p>
         <div class="filtros__agendamento">
-          <input type="date" name="data" id="input__data__sem__label" />      
-          
-          <select id="funcionario" name="funcionario" class="select">
-            <option>Todos Funcionários</option>
-            {% for funcionario in funcionarios %}
-            <option value="{{funcionario.id}}">{{funcionario.nome}}</option>
-            {% endfor %}
-          </select>
-          
-          <select id="servico" name="servico" class="select">
-            <option>Todos Servicos</option>
-            {% for servico in servicos %}
-            <option value="{{servico.id}}">{{servico.nome}}</option>
-            {% endfor %}
-          </select>
+          <div class="filtro--datas--agendamento">
+            <div class="filtro--datas--inputs--agendamento">
+                <h3>Data inicial:</h3>
+                <input type="date" class="filtro--datas--input--agendamento" name="data_inicial--agendamento">
+                <h3>Data final:</h3>
+                <input type="date" class="filtro--datas--input--agendamento" name="data_final--agendamento">
+            </div>
+          </div>
+          <div class="filtros__select--agendamento">
+            <select id="funcionario" name="funcionario" class="select">
+              <option>Todos Funcionários</option>
+              {% for funcionario in funcionarios %}
+              <option value="{{funcionario.id}}">{{funcionario.nome}}</option>
+              {% endfor %}
+            </select>
+            
+            <select id="servico" name="servico" class="select">
+              <option>Todos Servicos</option>
+              {% for servico in servicos %}
+              <option value="{{servico.id}}">{{servico.nome}}</option>
+              {% endfor %}
+            </select>
 
-          <select id="status" name="status" class="select">
-            <option>Todos Status</option>
-            <option value="False">Aberto</option>
-            <option value="True">Concluido</option>
-          </select>
+            <select id="status" name="status" class="select">
+              <option>Todos Status</option>
+              <option value="False">Aberto</option>
+              <option value="True">Concluido</option>
+            </select>
 
-          <button type="submit" class="btn btn__filtrar pequeno"> Filtrar </button>
+            <button type="submit" class="btn btn__filtrar pequeno"> Filtrar </button>
+          </div>
         </div>
       </form>
       <form action="{% url 'Agendador:tela_adicionar_agendamento' %}" method="POST"> {% csrf_token %}
