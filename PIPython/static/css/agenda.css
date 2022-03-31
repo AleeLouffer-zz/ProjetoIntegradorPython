@@ -101,7 +101,8 @@
   
 	padding: 8px;
   
-	width: 100%;
+	max-width: 98%;
+    min-width: 370px;
   
 	color: black;
   
