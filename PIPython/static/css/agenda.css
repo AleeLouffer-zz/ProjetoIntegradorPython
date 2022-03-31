@@ -94,7 +94,11 @@
 
 	width: 100%;
 }
-
+.aviso-filtro-agendamento{
+	font-size: 12px;
+	text-align: justify;
+	width: 90%;
+}
 .filtro--datas--agendamento{
 	display: flex;
 	flex-direction: column;

@@ -6,6 +6,7 @@
     <div class="corpo">
       <h1 class="titulo"> Agendamentos </h1>
       <form action="{% url 'Agendador:tela_agenda' %}" method="POST"> {% csrf_token %}
+        <p class="aviso-filtro-agendamento"> *caso não seja informada uma data, os agendamentos serão filtrados pela data do dia atual</p>
         <div class="filtros__agendamento">
           <div class="filtro--datas--agendamento">
             <div class="filtro--datas--inputs--agendamento">
