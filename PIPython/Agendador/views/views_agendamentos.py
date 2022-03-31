@@ -6,8 +6,6 @@ from Login.repo import *
 
 def tela_agenda(requisicao):
     id_empresa = requisicao.session['id_empresa']
-    funcionarios = filtrar_funcionarios_ativos_por_id_empresa(requisicao, id_empresa)
-    servicos = filtrar_servicos_ativos_por_id_empresa(requisicao, id_empresa)
     
     if 'data' not in requisicao.POST:
         data = date.today()
@@ -19,24 +17,39 @@ def tela_agenda(requisicao):
             data = date.today()
         agendamentos = list(filtrar_agendamentos_ativos_por_data_e_id_empresa(requisicao, id_empresa, data))
 
-    if 'funcionario' in requisicao.POST:
-        id_funcionario = requisicao.POST['funcionario']
-        if id_funcionario != 'Todos Funcionários':
-            agendamentos = list(filter(lambda x: x.funcionario.id == int(id_funcionario), agendamentos))
+    agendamentos = filtrar_funcionario(requisicao, agendamentos)
+    agendamentos = filtrar_servico(requisicao, agendamentos)
+    agendamentos = filtrar_status(requisicao, agendamentos)
 
-    if 'servico' in requisicao.POST:
-        id_servico = requisicao.POST['servico']
-        if id_servico != 'Todos Servicos':
-            agendamentos = list(filter(lambda x: x.servico.id == int(id_servico), agendamentos))
-        
-    if 'status' in requisicao.POST:
-        status = requisicao.POST['status']
-        if status != 'Todos Status':
-            agendamentos = list(filter(lambda x: x.completo == converter_para_bool(status), agendamentos))
-
+    funcionarios = filtrar_funcionarios_ativos_por_id_empresa(requisicao, id_empresa)
+    servicos = filtrar_servicos_ativos_por_id_empresa(requisicao, id_empresa)
+    
     resposta = make_resposta(id_empresa, agendamentos, funcionarios, servicos)
     return render(requisicao, '../templates/agendamento/agenda.html', resposta)
 
+def filtrar_funcionario(requisicao, agendamentos):
+    if 'funcionario' in requisicao.POST:
+        id_funcionario = requisicao.POST['funcionario']
+        if id_funcionario != 'Todos Funcionários':
+            return list(filter(lambda x: x.funcionario.id == int(id_funcionario), agendamentos))
+
+    return agendamentos
+
+def filtrar_servico(requisicao, agendamentos):
+    if 'servico' in requisicao.POST:
+        id_servico = requisicao.POST['servico']
+        if id_servico != 'Todos Servicos':
+            return list(filter(lambda x: x.servico.id == int(id_servico), agendamentos))
+
+    return agendamentos
+
+def filtrar_status(requisicao, agendamentos):
+    if 'status' in requisicao.POST:
+        status = requisicao.POST['status']
+        if status != 'Todos Status':
+            return list(filter(lambda x: x.completo == converter_para_bool(status), agendamentos))
+
+    return agendamentos
 
 def make_resposta(id_empresa, agendamentos, funcionarios, servicos):
     resposta = {
